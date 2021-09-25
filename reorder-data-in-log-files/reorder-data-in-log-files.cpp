@@ -1,19 +1,26 @@
 class Solution {
+
 public:
-    vector<string> reorderLogFiles(vector<string>& logs) {
-        vector<string> digitLogs, ans;
-        vector<pair<string, string>> letterLogs;
-        for (string &s : logs) {
-            int i = 0;
-            while (s[i] != ' ') ++i;
-            if (isalpha(s[i + 1])) letterLogs.emplace_back(s.substr(0, i), s.substr(i + 1));
-            else digitLogs.push_back(s);
+    static int comparator(const string& string1,const string& string2) {
+        auto substr1 = string1.substr(string1.find_first_of(' ')+1);
+        auto substr2 = string2.substr(string2.find_first_of(' ')+1);
+        if(substr1 == substr2) {
+            return string1 < string2;
         }
-        sort(letterLogs.begin(), letterLogs.end(), [&](auto& a, auto& b) {
-            return a.second == b.second ? a.first < b.first : a.second < b.second;
-        });
-        for (auto &p : letterLogs) ans.push_back(p.first + " " + p.second);
-        for (string &s : digitLogs) ans.push_back(s);
-        return ans;
+        return substr1 < substr2;
+        }
+    vector<string> reorderLogFiles(vector<string>& logs) {
+        vector<string> stringVal;
+        vector<string> digits;
+        for(int i=0;i<logs.size();i++){
+            if(isalpha(logs[i][logs[i].find_first_of(' ')+1])){
+                stringVal.push_back(logs[i]);
+            }else {
+                digits.push_back(logs[i]);
+            }
+        }
+        sort(stringVal.begin(),stringVal.end(),comparator);
+        for(string dig:digits) stringVal.push_back(dig);
+        return stringVal;
     }
 };
