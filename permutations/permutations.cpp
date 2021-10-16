@@ -10,14 +10,16 @@ public:
         return result;
     }
     
-    void backtrack(vector<int> nums, int first,vector<vector<int>>& result){
-        if(first == nums.size()){
+    void backtrack(vector<int>& nums, int pos,vector<vector<int>>& result){
+        if(pos == nums.size()){
             result.push_back(nums);
         }
         
-        for(int i=first;i<nums.size();i++){
-            swap(nums[first],nums[i]);
-            backtrack(nums,first+1,result);
+        for(int i=pos;i<nums.size();i++){
+            swap(nums[pos],nums[i]);
+            backtrack(nums, pos+1,result);
+            // Backtrack the same number
+            swap(nums[pos],nums[i]);
         }
     }
 };
