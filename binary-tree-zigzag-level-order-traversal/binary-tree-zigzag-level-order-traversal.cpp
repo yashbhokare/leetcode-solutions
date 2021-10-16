@@ -13,8 +13,8 @@ class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         if(root == NULL) return {};
-        deque<TreeNode*> dq;
-        dq.push_back(root);
+        queue<TreeNode*> dq;
+        dq.push(root);
         vector<vector<int>> result;
         bool zigzag = true;
         while(!dq.empty()){
@@ -28,17 +28,16 @@ public:
                     level.push_back(current->val);
                 }
                 else {
-                    auto it = level.begin();
-                    level.insert(it,current->val);
+                    level.insert(level.begin(),current->val);
                 }
                 
                 if(current->left !=NULL){
-                    dq.push_back(current->left);
+                    dq.push(current->left);
                 }
                 if(current->right !=NULL){
-                    dq.push_back(current->right);
+                    dq.push(current->right);
                 }
-                dq.pop_front();
+                dq.pop();
             }
             zigzag = !zigzag;
             result.push_back(level);
