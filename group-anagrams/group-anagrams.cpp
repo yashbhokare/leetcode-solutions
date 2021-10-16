@@ -1,28 +1,26 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        int index = 0;
-        unordered_map<string,int> strMap;
+        unordered_map<string,int> mapper;
         vector<vector<string>> result;
+        int index = 0;
         for(int i=0;i<strs.size();i++){
-            string value = strs[i];
-            // char charArray[value.length()+1];
-            // strcpy(charArray,value.c_str());
-            // sort(charArray,charArray+strlen(charArray));
-            // cout<<charArray;
-            sort(value.begin(),value.end());
-            const auto it = strMap.find(value);
-            if(it == strMap.end()){
-                strMap.insert({value,index});
+            string val = strs[i];
+            sort(val.begin(),val.end());
+            
+            auto it = mapper.find(val);
+            // Value found
+            if(it != mapper.end()){
+                int indexVal = it->second;
+                result[indexVal].push_back(strs[i]);
+            }else {
+                mapper.insert({val,index});
                 result.push_back({strs[i]});
                 index++;
-            } else{
-                const int fecthIndex = it->second;
-                result[fecthIndex].push_back(strs[i]);
             }
-            
-            // cout<<value;
         }
         return result;
+        
+        // return result;
     }
 };
