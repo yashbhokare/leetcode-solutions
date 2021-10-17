@@ -19,9 +19,9 @@ public:
     
     int rec(TreeNode* root, int &d) {
         if(root == NULL) return 0;
-        int ld = rec(root->left, d);
-        int rd = rec(root->right, d);
-        d=max(d,ld+rd);
-        return max(ld,rd)+1;
+        int leftDepth = rec(root->left,d);
+        int rightDepth = rec(root->right,d);
+        d = max(d,leftDepth+rightDepth);
+        return max(leftDepth,rightDepth)+1;
     }
 };
