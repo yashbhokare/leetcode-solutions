@@ -10,17 +10,17 @@
  * };
  */
 class Solution {
-
 public:
     int maxDepth(TreeNode* root) {
-        return maxDepthCal(root,0);
+        return depthCal(root,0);
     }
     
-    int maxDepthCal(TreeNode* root,int depth) {
-        if(root==NULL) return depth;
-        
-        int leftDepth = maxDepthCal(root->left,depth+1);
-        int rightDepth = maxDepthCal(root->right,depth+1);
-        return max(leftDepth,rightDepth);
+    int depthCal(TreeNode* root,int depth){
+        if(root==NULL){
+            return depth;
+        }
+        int leftVal = depthCal(root->left,depth+1);
+        int rightVal = depthCal(root->right,depth+1);
+        return max(leftVal,rightVal);
     }
 };
