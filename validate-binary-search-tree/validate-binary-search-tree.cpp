@@ -10,25 +10,26 @@
  * };
  */
 class Solution {
-    
 public:
-    bool ans = true;
-    TreeNode* prev = NULL;
+    int prevNode = -50;
+    bool result = true;
     bool isValidBST(TreeNode* root) {
-
-        isValidBSTCal(root);
-        return ans;
+        rec(root);
+        return result;
     }
     
-    void isValidBSTCal(TreeNode* root) {
-        if(root == NULL)
+    void rec(TreeNode* root){
+        if(root==NULL){
             return;
-        isValidBSTCal(root->left);
-        if(prev!=NULL && root->val <= prev->val){
-            ans = false;
         }
-       
-        prev = root;
-        isValidBSTCal(root->right);
+        
+        rec(root->left);
+        if(prevNode!=-50 && root->val <= prevNode){
+            result = false;
+            return;
+        }
+        prevNode = root->val;
+        rec(root->right);
+        
     }
 };
