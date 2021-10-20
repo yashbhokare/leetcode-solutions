@@ -7,31 +7,29 @@ public:
     
     bool isValidSudokuCalculations(vector<vector<char>>& board){
         
-        vector<vector<bool>> row(10,vector<bool>(10));
-        vector<vector<bool>> col(10,vector<bool>(10));
-        vector<vector<bool>> box(10,vector<bool>(10));
+        vector<vector<bool>> row(9,vector<bool>(9,false));
+        vector<vector<bool>> col(9,vector<bool>(9,false));
+        vector<vector<bool>> box(9,vector<bool>(9,false));
         
         
-        for(int i =0;i<10;i++){
-            for(int j =0;j<10;j++){
-            row[i][j] = false;
-            col[i][j] = false;
-             box[i][j] = false ; 
-            }
-        }
+        // for(int i =0;i<9;i++){
+        //     for(int j =0;j<9;j++){
+        //     row[i][j] = false;
+        //     col[i][j] = false;
+        //      box[i][j] = false ; 
+        //     }
+        // }
         
         for(int r =0;r<9;r++){
             for(int c =0;c<9;c++){
                 if(board[r][c] == '.') continue;
-                int val = board[r][c]-'0';
+                int val = board[r][c]-'1';
                     if(row[r][val]){
-                        cout<<"Row";
                         return false;
                     } else {
                         row[r][val] = true;
                     }
                     if(col[c][val]){
-                        cout<<"Col";
                         return false;
                     } else {
                         col[c][val] = true;
