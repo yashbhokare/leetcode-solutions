@@ -29,6 +29,7 @@ public:
         if(check.find(course) != check.end() ){
             return false;
         }
+        
         if(visited.find(course) != visited.end()){
             return true;
         }
@@ -36,7 +37,6 @@ public:
         if(mapper.find(course) == mapper.end()){
             return false;
         }
-        
         
         bool ret =false;
         visited.insert(course);
@@ -50,7 +50,6 @@ public:
         }
         
         visited.erase(course);
-        
         return ret;
 
     }
