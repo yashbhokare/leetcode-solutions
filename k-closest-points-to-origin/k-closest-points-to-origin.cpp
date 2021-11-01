@@ -1,23 +1,25 @@
 class Solution {
 public:
-    static bool comp(const vector<int>& a,const vector<int>& b){
-        return a[0] < b[0];
-    }
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        vector<vector<int>> pointsVector;
+        priority_queue<pair<int,int>> pq;
         vector<vector<int>> result;
-        int calculate = 0;        
         for(int i=0;i<points.size();i++){
-            calculate = pow(points[i][0],2) + pow(points[i][1],2);
-            pointsVector.push_back({calculate,points[i][0],points[i][1]});
+            int dist = (pow(points[i][0],2) + pow(points[i][1],2));
+            if(pq.size() == k && pq.top().first > dist){
+                pq.pop();
+            } else if(pq.size() == k && pq.top().first <= dist){
+                continue;
+            }
+            pq.push({dist,i});
+            // cout<<pq.top().first<<endl;
+            // cout<<dist<<endl;
         }
-        sort(pointsVector.begin(),pointsVector.end());
+        
         for(int i=0;i<k;i++){
-            result.push_back({pointsVector[i][1],pointsVector[i][2]});
+            result.push_back(points[pq.top().second]);
+            pq.pop();
         }
-                
         return result;
         
-
     }
 };
