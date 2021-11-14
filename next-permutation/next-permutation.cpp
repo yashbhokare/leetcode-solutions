@@ -1,27 +1,27 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int swapIndex = -1;
-        int minElement = INT_MAX;
-        int minElementIndex = 0;
-        for(int i=nums.size()-1;i>0;i--){
+        int index = -1;
+        
+        for(int i=nums.size()-1;i>=1;i--){
             if(nums[i] > nums[i-1]){
-                swapIndex = i-1;
+                index = i-1;
                 break;
             }
         }
-        if(swapIndex >=0){
-            int givenValue = nums[swapIndex];
-            for(int i=swapIndex+1;i<nums.size();i++){
-                if(nums[i] > givenValue && nums[i]<minElement){
-                    minElement = nums[i];
-                    minElementIndex = i;
+        cout<<index<<endl;
+        if(index!=-1){
+            int minValue = INT_MAX;
+            int swapIndex = 0;
+            for(int i=index+1;i<nums.size();i++){
+                if(nums[i]>nums[index] && minValue>=nums[i] ){
+                    minValue = nums[i];
+                    swapIndex = i;
                 }
             }
-            swap(nums[swapIndex],nums[minElementIndex]);
-        }
+            swap(nums[index],nums[swapIndex]);
+        } 
 
-
-        sort(nums.begin()+swapIndex+1,nums.end());
+        reverse(nums.begin()+index+1,nums.end());
     }
 };
