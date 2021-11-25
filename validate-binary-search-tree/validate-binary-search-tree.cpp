@@ -11,25 +11,19 @@
  */
 class Solution {
 public:
-    int prevNode = -50;
-    bool result = true;
     bool isValidBST(TreeNode* root) {
-        rec(root);
-        return result;
+        TreeNode* prev = NULL;
+        return isValidBST(root,prev);
     }
-    
-    void rec(TreeNode* root){
-        if(root==NULL){
-            return;
+    bool isValidBST(TreeNode* root, TreeNode*& prev){
+        if(root==NULL) return true;
+        if(!isValidBST(root->left,prev)){
+            return false;
         }
-        
-        rec(root->left);
-        if(prevNode!=-50 && root->val <= prevNode){
-            result = false;
-            return;
+        if(prev && prev->val>=root->val){
+            return false;
         }
-        prevNode = root->val;
-        rec(root->right);
-        
+        prev = root;
+        return isValidBST(root->right,prev);
     }
 };
