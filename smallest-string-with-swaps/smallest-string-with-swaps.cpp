@@ -1,37 +1,98 @@
-class Solution {
-public:
-    vector<int> indices;                                                 //Stores indices of same group.
-    vector<bool> visited;
-    vector<vector<int>> adjList;
-    string indiceString;                                                 //Stores  string formed by indices in the same group.
-    void dfs(string &s,int n)                                             //DFS to get all indices in same group.
-    {
-        visited[n]=true;
-        indices.push_back(n);
-        indiceString+=s[n];
-        for(int &i:adjList[n])
-            if(!visited[i])
-               dfs(s,i);
+class UnionFind {
+    public:
+    int n;
+    vector<int> root;
+    UnionFind(int size){
+        int n = size;
+        for(int i=0;i<size;i++){
+            root.push_back(i);
+        }
     }
-    string smallestStringWithSwaps(string s, vector<vector<int>>& pairs) 
-    {
-        adjList.resize(s.length());
-        visited.resize(s.length(),false);
-        for(vector<int> &v:pairs)                               //Create adjacency list using the indice pairs
-            adjList[v[0]].push_back(v[1]),adjList[v[1]].push_back(v[0]);
-        for(int i=0;i<s.length();i++)
-            if(!visited[i])
-            {
-                indiceString="";                              //Clear string formed by one group of indices before finding next group.
-                indices.clear();                             //Clear indices vector before finding another group.
-                dfs(s,i);
-                sort(indiceString.begin(),indiceString.end());                    //Sort the characters in the same group.
-                sort(indices.begin(),indices.end());                                  //Sort the indices in the same group.            
-                for(int i=0;i<indices.size();i++)          //Replace all the indices in the same group with the sorted characters.
-                    s[indices[i]]=indiceString[i];
-            }
-        return s;
+    
+    int find(int x){
+        if(root[x]==x) return x;
+        return root[x]=find(root[x]);
+    }
+    
+    void unionSet(int x,int y){
+        int rootX = find(x);
+        int rootY = find(y);
+        if(rootX!=rootY){
+            root[rootY] = rootX;
+        }
     }
 };
 
-//https://leetcode.com/problems/smallest-string-with-swaps/discuss/387536/C%2B%2B-O(nlogn)-Simple-DFS-Solution
+class Solution {
+public:
+    string smallestStringWithSwaps(string s, vector<vector<int>>& pairs) {
+        UnionFind uf(s.size());
+        for(int i=0;i<pairs.size();i++){
+            uf.unionSet(pairs[i][0],pairs[i][1]);
+        }
+        
+        vector<vector<int>> maps(s.size());
+        for(int i=0;i<s.size();i++){
+            maps[uf.find(i)].push_back(i);
+        }
+        
+        for(auto &indexes:maps){
+            string newString = "";
+            for(auto &index: indexes){
+                newString+=s[index];
+            }
+            sort(newString.begin(),newString.end());
+            for(int i=0;i<newString.size();i++){
+                s[indexes[i]] = newString[i];
+            }
+        }
+        return s;
+        
+    }
+};
+
+
+// class Solution {
+// public:
+//     vector<bool> visited;
+//     vector<int> newStringIndexes;
+//     string smallestStringWithSwaps(string s, vector<vector<int>>& pairs) {
+//         unordered_map<int,vector<int>> adjList;
+//         for(int i=0;i<pairs.size();i++){
+//             int x = pairs[i][0];
+//             int y = pairs[i][1];
+//             adjList[x].push_back(y);
+//             adjList[y].push_back(x);
+//         }
+//          visited.resize(s.size(),false);
+        
+
+//         for(int i=0;i<s.size();i++){
+//             if(!visited[i]){
+//                 string newString = "";
+//                 newStringIndexes.clear();
+//                 dfs(i,s,newString,newStringIndexes,adjList);
+                
+//                 sort(newString.begin(),newString.end());
+//                 sort(newStringIndexes.begin(),newStringIndexes.end());
+                
+//                 for(int i=0;i<newStringIndexes.size();i++){
+//                     s[newStringIndexes[i]] = newString[i];
+//                 }
+//             }
+//         }
+//         return s;
+//     }
+    
+//     void dfs(int index,string& ipString,string& newString,vector<int>& newStringIndexes, unordered_map<int,vector<int>>& adjList ){
+//         newString+=ipString[index];
+//         newStringIndexes.push_back(index);
+//         visited[index]=true;
+//         for(auto listVal:adjList[index]){
+//             if(!visited[listVal]){
+//                 dfs(listVal,ipString,newString,newStringIndexes,adjList);
+//             }
+//         }
+        
+//     }
+// };
