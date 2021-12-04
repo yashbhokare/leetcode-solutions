@@ -1,20 +1,22 @@
 class Solution {
 public:
+    int result= 0;
+    
     int climbStairs(int n) {
         vector<int> memo(n+1);
-        return climb_Stairs(0, n, memo);
+        return rec(0,n,memo);
+        // return result;
     }
-    int climb_Stairs(int i, int n, vector<int>& memo) {
-        if (i > n) {
-            return 0;
-        }
-        if (i == n) {
+    
+    int rec(int number,int max,vector<int>& memo){
+        if(number==max){
             return 1;
         }
-        if (memo[i] > 0) {
-            return memo[i];
+        if(number > max){
+            return 0;
         }
-        memo[i] = climb_Stairs(i + 1, n, memo) + climb_Stairs(i + 2, n, memo);
-        return memo[i];
+        if(memo[number]) return memo[number];  
+        memo[number] = rec(number+1,max,memo) + rec(number+2,max,memo);
+        return memo[number];
     }
 };
