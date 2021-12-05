@@ -6,11 +6,7 @@ public:
          string newWord = "";
         for(string word:wordList){
             for(int i=0;i<word.size();i++){
-                if(word.size() == 1){
-                    newWord = "*";
-                }else {
-                     newWord = word.substr(0,i) + '*' + word.substr(i+1);
-                }
+                newWord = word.substr(0,i) + '*' + word.substr(i+1);
                 wordSet[newWord].push_back(word);
                 cout<<newWord<<" ";
             }
@@ -27,11 +23,7 @@ public:
             for(int i=0;i<qSize;i++){
                 string word = q.front();
                 for(int i=0;i<word.size();i++){
-                     if(word.size() == 1){
-                        newWord = "*";
-                    }else {
-                        newWord = word.substr(0,i) + '*' + word.substr(i+1);
-                    }
+                    newWord = word.substr(0,i) + '*' + word.substr(i+1);
                     auto it = wordSet.find(newWord);
                     if(it != wordSet.end()){
                         vector<string> wordValues = it->second;
@@ -51,8 +43,6 @@ public:
                 q.pop();
             }
             result++;
-            cout<<result;
-           
         }
         return 0;
 
