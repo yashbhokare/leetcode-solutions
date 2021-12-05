@@ -4,7 +4,6 @@ public:
         return v1[0] < v2[0];
     }
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        int total = 8;
         vector<vector<int>> result;
         sort(intervals.begin(),intervals.end());
         int start = intervals[0][0];
