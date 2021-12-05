@@ -1,7 +1,29 @@
 class Solution {
 public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        return kSum(4,0,nums,target);
+    }
     
-vector<vector<int>> twoSum(vector<int>& nums, int target,int index){
+    vector<vector<int>> kSum(int k,int pos,vector<int>& nums,int target){
+        if(k==2) return twoSum(pos,nums,target);
+        vector<vector<int>> result;
+        for(int i=pos;i<nums.size();i++){
+            if(i==pos || nums[i]!=nums[i-1]){
+                int newtarget = target-nums[i];
+                vector<vector<int>> givenKSum = kSum(k-1,i+1,nums,newtarget);
+                for(auto &array:givenKSum){
+                    array.insert(array.begin(),nums[i]);
+                    result.push_back(array);
+                }
+            }
+
+        }
+        return result;
+    }
+    
+    
+    vector<vector<int>> twoSum(int index,vector<int>& nums,int target){
         vector<vector<int>> result;
         int start = index;
         int last = nums.size()-1;
@@ -19,35 +41,5 @@ vector<vector<int>> twoSum(vector<int>& nums, int target,int index){
             }
         }
         return result;
-        
     }
-    
-    vector<vector<int>> kSum(vector<int>& nums, int target, int k,int start){
-        if(k==2){
-            return twoSum(nums,target,start);
-        }
-        vector<vector<int>> result;
-        for(int i=start;i<nums.size();i++){
-            if(i == start || nums[i] != nums[i-1] ){
-                int newTarget = target - nums[i];
-                vector<vector<int>> response = kSum(nums,newTarget,k-1,i+1);
-                for(int j = 0 ; j<response.size();j++){
-                    response[j].insert(response[j].begin(),nums[i]);
-                    result.push_back(response[j]);
-                }  
-            }
-
-        }
-        return result;
-    }
-    
-    
-    
-    vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        sort(nums.begin(),nums.end());
-        
-        return kSum(nums,target,4,0);
-    }
-    
-
 };
