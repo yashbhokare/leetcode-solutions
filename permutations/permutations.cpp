@@ -1,25 +1,20 @@
 class Solution {
 public:
+    vector<vector<int>> result;
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> result;
-        if(nums.size() < 2) {
-            result.push_back(nums);
-            return result;
-        } 
-        backtrack(nums,0,result);
+        rec(0,nums);
         return result;
     }
     
-    void backtrack(vector<int>& nums, int pos,vector<vector<int>>& result){
-        if(pos == nums.size()){
+    void rec(int index,vector<int>& nums){
+        if(index==nums.size()-1){
             result.push_back(nums);
+            return;
         }
-        
-        for(int i=pos;i<nums.size();i++){
-            swap(nums[pos],nums[i]);
-            backtrack(nums, pos+1,result);
-            // Backtrack the same number
-            swap(nums[pos],nums[i]);
+        for(int i=index;i<nums.size();i++){
+            swap(nums[i],nums[index]);
+            rec(index+1,nums);
+            swap(nums[i],nums[index]);
         }
     }
 };
