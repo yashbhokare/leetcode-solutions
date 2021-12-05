@@ -1,11 +1,11 @@
 class Solution {
 public:
+    stack<int> ans;
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         unordered_map<int,vector<int>> mapper;
         for(int i=0;i<prerequisites.size();i++){
             mapper[prerequisites[i][0]].push_back(prerequisites[i][1]);
         }
-        
         unordered_set<int> visited;
         unordered_set<int> memo;
         for(int i=0;i<numCourses;i++){
@@ -14,6 +14,10 @@ public:
             }
         }
 
+        while(!ans.empty()){
+            cout<<ans.top()<<" ";
+            ans.pop();
+        }
         return true;
         
     }
@@ -26,9 +30,10 @@ public:
             return false;
         }
         
-        if(mapper.find(numCourse)==mapper.end()){
-            return false;
-        }
+        // if(mapper.find(numCourse)==mapper.end()){
+        //     // ans.push(numCourse);
+        //     return false;
+        // }
         
         visited.insert(numCourse);
         vector<int> childs = mapper[numCourse];
@@ -42,6 +47,9 @@ public:
         
         visited.erase(numCourse);
         memo.insert(numCourse);
+        if(res==false){
+            ans.push(numCourse);
+        }
         return res;
         
     }
