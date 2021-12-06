@@ -1,28 +1,45 @@
+
 class Solution {
 public:
-    bool backspaceCompare(string s, string t) {
-        return trimString(s) == trimString(t);
-    }
-    
-    string trimString(string s){
-        for(int i=0;i<s.size()-1;){
-            if(!s.size()){
-                break;
-            }
-            if(isalpha(s[i]) && s[i+1]=='#'){
-               
-                s.erase(i,2);
-                i = i-1 < 0 ? 0 : i-1;
-                // cout<<i<<endl;
-                continue;
-            }else if(s[i]=='#'){
-                s.erase(i,1);
-                i = i-1 < 0 ? 0 : i-1;
-                continue;
-            }
-            i++;
-        }
-        cout<<s;
-        return s;
+    bool backspaceCompare(string S, string T) {
+            
+         stack <int> s1,s2;
+         string str1,str2; 
+            
+         for(int i = 0; i < S.size(); i++){
+                 
+                 if(S[i] == '#' && !s1.empty())
+                         s1.pop();
+                 
+                 else if(S[i] != '#')
+                         s1.push(S[i]);
+                 
+         }
+         
+         for(int i = 0; i < T.size(); i++){
+                 
+                 if(T[i] == '#' && !s2.empty())
+                         s2.pop();
+                 
+                 else if(T[i] != '#')
+                         s2.push(T[i]);
+                 
+         }
+            
+         while(!s1.empty()){
+                 
+                 str1.push_back(s1.top());
+                 s1.pop();
+                 
+         }
+            
+         while(!s2.empty()){
+                 
+                 str2.push_back(s2.top());
+                 s2.pop();
+                 
+         }      
+            
+         return str1 == str2;   
     }
 };
