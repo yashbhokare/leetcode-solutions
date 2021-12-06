@@ -38,7 +38,9 @@ public:
         visited.insert(pair);
         robot.clean();
         for(int i=0;i<4;i++){
+            
             int newD = (d + i)%4;
+            cout<<newD<<" "<<i<<endl;
             int newRow = r + dir[newD][0];
             int newCol = c + dir[newD][1];
             string pair = to_string(newRow) + ","+to_string(newCol);
