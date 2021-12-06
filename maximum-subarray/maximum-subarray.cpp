@@ -10,25 +10,25 @@ public:
         int curIndex = 0;
         int maxIndex = 0;
         for(int i=1;i<nums.size();i++){
-//             if(nums[i]> nums[i]+current){
+            if(nums[i]> nums[i]+current){
 
-//                 curIndex = i;
-//                 current = nums[i];
-//             } else {
-//                 current = nums[i]+current;
-//             }
-                current = max(nums[i],nums[i]+current);
+                curIndex = i;
+                current = nums[i];
+            } else {
+                current = nums[i]+current;
+            }
+                // current = max(nums[i],nums[i]+current);
             
 
-//             if(current > maxVal){
-//                 maxVal = current;
-//                 maxIndex = i;
-//             }
-                maxVal = max(current,maxVal);
+            if(current > maxVal){
+                maxVal = current;
+                maxIndex = i;
+            }
+                // maxVal = max(current,maxVal);
            } 
         
-         // cout<<"Cur Val Index:"<<curIndex<<endl;
-         // cout<<"Max Val Index:"<<maxIndex<<endl;
+         cout<<"Cur Val Index:"<<curIndex<<endl;
+         cout<<"Max Val Index:"<<maxIndex<<endl;
         
         // return maxVal;
         // BRUTE FORCE
