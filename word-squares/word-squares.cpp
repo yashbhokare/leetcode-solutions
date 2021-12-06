@@ -6,23 +6,18 @@ public:
    
     vector<vector<string>> wordSquares(vector<string>& words) {
     
-    storePrefixStrings(words);
-        
-    for(string word:words){
-        vector<string> wordArray;
-        vector<string> result;
-        wordArray.push_back(word);
-        backTrack(1,wordArray,result);
-        // if()
-        // ans.push_back(result);
-    }
-    return ans;
+        storePrefixStrings(words);
+        for(string word:words){
+            vector<string> wordArray;
+            wordArray.push_back(word);
+            backTrack(1,wordArray);
+        }
+
+        return ans;
     }
     
-    void backTrack(int step,vector<string>& words,vector<string>& result){
+    void backTrack(int step,vector<string>& words){
         if(step==n){
-            cout<<"Yessssssssss"<<result.size();
-            // result = words;
             ans.push_back(words);
             return;
         }
@@ -32,11 +27,9 @@ public:
             prefix+= word[step];
         }
         
-        for(string newword:fetchPrefixWord(prefix)){
+        for(string newword:prefixSet[prefix]){
             words.push_back(newword);
-            
-            backTrack(step+1,words,result);
-            
+            backTrack(step+1,words);
             words.pop_back();
         }
     }
