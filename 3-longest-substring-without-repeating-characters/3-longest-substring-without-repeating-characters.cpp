@@ -20,7 +20,7 @@ public:
             mapper[s[i]]= i;
             
         }
-        cout<<s.substr(startingIndex,maxLen);
+        // cout<<s.substr(startingIndex,maxLen);
         return maxLen;
     }
 };
