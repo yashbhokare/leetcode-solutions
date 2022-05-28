@@ -1,7 +1,9 @@
 class Solution {
 public:
     vector<int> replaceElements(vector<int>& arr) {
-        return replaceElementsWithNewArray(arr);
+        // return replaceElementsWithNewArray(arr);
+        
+        // Replace inside same array
         int prev=arr[arr.size()-1];
         arr[arr.size()-1]=-1;
         for(int i=arr.size()-2;i>=0;i--){
