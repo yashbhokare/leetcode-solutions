@@ -19,7 +19,6 @@ public:
             nums1[num2Point] = nums2[num2Point];
             num2Point--;
         }
-        // return nums1;
     }
     
         //    int i=m-1,j=n-1,k=m+n-1;
