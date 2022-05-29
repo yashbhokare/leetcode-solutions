@@ -7,9 +7,16 @@ public:
     }
     
     void rotate(vector<int>& nums, int k) {
-        
+        // reverse(nums.begin(),nums.end());
+        // reverse(nums.begin(),nums.begin()+k);
+        // reverse(nums.begin()+k,nums.end());
+        cyclicReplacements(nums,k);
+        // reverseApproach(nums,k);
+    }
+    
+    void cyclicReplacements(vector<int>& nums, int k){
+        //Using Cyclic Replacements
             k = k % nums.size();
-
             int count = 0;
             for(int start=0; count <nums.size(); start++){
                 int currrentPosition = start;
@@ -22,16 +29,23 @@ public:
                     currrentPosition = nextPosition;
                     count++;
                 }while(currrentPosition!=start);
-            }        
+            }   
     }
     
-    void display(vector<int>& nums){
-       for(int i=0; i< nums.size(); i++){
-           cout<<" "<<nums[i];
-       }
-        cout<<endl;
+    void reverseApproach(vector<int>& nums, int k){
+        // Using Reverse
+        k = k % nums.size();
+        reverseNumbers(nums,0,nums.size()-1);
+        reverseNumbers(nums,0,k-1);
+        reverseNumbers(nums,k,nums.size()-1);
     }
-
     
-
+    void reverseNumbers(vector<int>& nums, int start, int end ){
+        while(start<end){
+            swap(nums,start,end);
+            start++;
+            end--;
+        }
+    }
+    
 };
