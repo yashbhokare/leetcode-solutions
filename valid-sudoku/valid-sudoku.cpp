@@ -11,15 +11,6 @@ public:
         vector<vector<bool>> col(9,vector<bool>(9,false));
         vector<vector<bool>> box(9,vector<bool>(9,false));
         
-        
-        // for(int i =0;i<9;i++){
-        //     for(int j =0;j<9;j++){
-        //     row[i][j] = false;
-        //     col[i][j] = false;
-        //      box[i][j] = false ; 
-        //     }
-        // }
-        
         for(int r =0;r<9;r++){
             for(int c =0;c<9;c++){
                 if(board[r][c] == '.') continue;
