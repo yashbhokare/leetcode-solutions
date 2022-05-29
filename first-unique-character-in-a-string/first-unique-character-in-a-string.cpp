@@ -9,7 +9,8 @@ public:
     int firstUniqCharCalculation(string s){
         vector<int> nums(26,0);
         for(int i=0;i<s.length();i++){
-            int pos = s[i] - 'a';
+            int pos = s[i]-'a';
+            cout<<pos;
             nums[pos]++;    
         }
         for(int i=0;i<s.length();i++){
