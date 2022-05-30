@@ -9,19 +9,13 @@ public:
                 continue;
             }
             int target = -nums[i];
-            
-            // for(int j=i+1;j<nums.size();j++){
-                // cout<<nums[j]<<endl;         
-                // cout<<"TWO SUM:"<<nums[j]<<":"<<target<<endl;
-                vector<vector<int>> res = twoSum(nums,i+1,target);
-                for(int k=0;k<res.size();k++){
-                    // Append the target to given result
-                    cout<<res[k][0]<<" "<<res[k][1]<<endl;
-                    res[k].push_back(nums[i]);
-                    // Append the total pair to final ans array
-                    ans.push_back(res[k]);
-                }
-            // }
+            vector<vector<int>> res = twoSum(nums,i+1,target);
+            for(int k=0;k<res.size();k++){
+                // Append the target to given result
+                res[k].push_back(nums[i]);
+                // Append the total pair to final ans array
+                ans.push_back(res[k]);
+            }
         }
         return ans;
     }
