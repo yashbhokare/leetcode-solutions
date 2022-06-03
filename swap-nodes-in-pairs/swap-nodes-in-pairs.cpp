@@ -18,21 +18,39 @@ public:
         ListNode* third = NULL;
         if(head== NULL || head->next==NULL){
             return head;
+        }else {
+            third = recSwapPairs(head->next->next);
         }
-        // else {
-        //     third = recSwapPairs(head->next->next);
-        // }
         
-        
+        ListNode* first = head;
         ListNode* second = head->next;
-        
-        head->next = recSwapPairs(head->next->next);;
-        
+          
         // Swap first and second
         second->next= head;
-        // first->next = third;
+        first->next = third;
         
         return second;
         
     }
+    
+//         ListNode* recSwapPairs(ListNode* head) {
+//         ListNode* third = NULL;
+//         if(head== NULL || head->next==NULL){
+//             return head;
+//         }
+//         // else {
+//         //     third = recSwapPairs(head->next->next);
+//         // }
+        
+        
+//         ListNode* second = head->next;
+        
+//         head->next = recSwapPairs(head->next->next);;
+        
+//         // Swap first and second
+//         second->next= head;
+//         // first->next = third;
+        
+//         return second;
+        
 };
