@@ -18,15 +18,19 @@ public:
         ListNode* third = NULL;
         if(head== NULL || head->next==NULL){
             return head;
-        }else {
-            third = recSwapPairs(head->next->next);
         }
-        ListNode* first = head;
+        // else {
+        //     third = recSwapPairs(head->next->next);
+        // }
+        
+        
         ListNode* second = head->next;
         
+        head->next = recSwapPairs(head->next->next);;
+        
         // Swap first and second
-        second->next= first;
-        first->next = third;
+        second->next= head;
+        // first->next = third;
         
         return second;
         
