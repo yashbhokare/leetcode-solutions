@@ -21,25 +21,23 @@ public:
 
 class Solution {
 public:
-    
     unordered_map<int,Node*> mapper;
-    Node* cloneGraph(Node* node) {
-        if(node == NULL) return NULL;
-        return cloneGraphCal(node);
-    }
-    
-    Node* cloneGraphCal(Node* node){
-        auto it = mapper.find(node->val);
-        if(it != mapper.end()){
+    Node* recCloneGraph(Node* node){
+        if(node==NULL) return node;
+        auto it= mapper.find(node->val);
+        if(it!=mapper.end()){
             return it->second;
         }
-        Node* newVal = new Node(node->val);
-        mapper.insert({node->val,newVal});
-        for(auto neighbour: node->neighbors){
-            newVal->neighbors.push_back(cloneGraphCal(neighbour));
+        Node* newNode=new Node(node->val);
+        mapper[node->val]=newNode;
+        
+        for(auto& neighbor:node->neighbors){
+            newNode->neighbors.push_back(recCloneGraph(neighbor));
         }
-        return newVal;
+        return newNode;
     }
     
-    
+    Node* cloneGraph(Node* node) {
+        return recCloneGraph(node);
+    }
 };
