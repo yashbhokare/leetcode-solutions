@@ -6,16 +6,29 @@ public:
 
         while(bottom>=0 && right<matrix[0].size()){
             while(right<matrix[0].size() && bottom>=0 && matrix[bottom][right] > target){
-                // cout<<matrix[bottom][right]<<" ";
                 bottom--;
             }
-            
             if(bottom<0) return false;
-            // cout<<matrix[bottom][right]<<" ";
+
             if(matrix[bottom][right]==target) return true;
-            // if(matrix[bottom][right] > target) return false;
+           
             right++;
         }
         return false;
+        
+//         // start our "pointer" in the bottom-left
+//         int row = matrix.length-1;
+//         int col = 0;
+//         while (row >= 0 && col < matrix[0].length) {
+//             if (matrix[row][col] > target) {
+//                 row--;
+//             } else if (matrix[row][col] < target) {
+//                 col++;
+//             } else { // found it
+//                 return true;
+//             }
+//         }
+
+//         return false;
     }
 };
