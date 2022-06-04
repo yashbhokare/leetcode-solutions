@@ -12,15 +12,28 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        return depthCal(root,0);
+        return depthCal(root);
     }
     
-    int depthCal(TreeNode* root,int depth){
+    int depthCal(TreeNode* root){
         if(root==NULL){
-            return depth;
+            return 0;
         }
-        int leftVal = depthCal(root->left,depth+1);
-        int rightVal = depthCal(root->right,depth+1);
-        return max(leftVal,rightVal);
+        int leftVal = depthCal(root->left);
+        int rightVal = depthCal(root->right);
+        return max(leftVal,rightVal)+1;
     }
+    
+//     int maxDepth(TreeNode* root) {
+//         return depthCal(root,0);
+//     }
+    
+//     int depthCal(TreeNode* root,int depth){
+//         if(root==NULL){
+//             return depth;
+//         }
+//         int leftVal = depthCal(root->left,depth+1);
+//         int rightVal = depthCal(root->right,depth+1);
+//         return max(leftVal,rightVal);
+//     }
 };
