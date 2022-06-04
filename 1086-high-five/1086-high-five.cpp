@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> highFive(vector<vector<int>>& items) {
-        unordered_map<int, priority_queue<int,vector<int>,greater<int>>> mapper;
+        map<int, priority_queue<int,vector<int>,greater<int>>> mapper;
         for(auto& item:items){
             mapper[item[0]].push(item[1]); 
             
@@ -22,7 +22,7 @@ public:
             }
             res.push_back({id,sum/totalNums});
         }
-        sort(res.begin(),res.end());
+        // sort(res.begin(),res.end());
         return res;
     }
 };
