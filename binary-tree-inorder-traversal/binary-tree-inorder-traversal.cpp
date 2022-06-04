@@ -27,19 +27,18 @@ public:
         
     }
     
-    void inorderTraverseUsingStack(TreeNode* root,vector<int>& result){
-        
-        stack<TreeNode*> stackVal;
+    void inorderTraverseUsingStack(TreeNode* root,vector<int>& result){ 
+        stack<TreeNode*> stk;
         TreeNode* cur = root;
-        while(cur!=NULL || !stackVal.empty()){
+        while(!stk.empty() || cur != NULL){
             while(cur!=NULL){
-                stackVal.push(cur);
-                cur= cur->left;
+                stk.push(cur);
+                cur=cur->left;
             }
-            TreeNode* temp = stackVal.top();
-            stackVal.pop();
-            result.push_back(temp->val);
-            cur = temp->right;
+            TreeNode* node = stk.top();
+            stk.pop();
+            result.push_back(node->val);
+            cur = node->right;
         }
     }
     
