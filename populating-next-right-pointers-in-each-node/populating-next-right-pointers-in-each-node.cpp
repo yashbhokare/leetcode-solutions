@@ -27,7 +27,6 @@ public:
             int qSize = q.size();
             while(qSize){
                 Node* node = q.front();
-                cout<<node->val<<" ";
                 q.pop();
                 if(qSize>1){
                     node->next = q.front();
