@@ -17,13 +17,10 @@ public:
                     number=to_string(count);
                     for(int j=0;j<number.size();j++){
                         chars[index++]=number[j];
-    
-                        // if(index<chars.size()) index++;
                     }
                 }
                 if(i<chars.size())  prev=chars[i];
                 count=1;
-                cout<<i<<endl;
             }
         }
         return index;
