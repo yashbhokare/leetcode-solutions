@@ -21,13 +21,13 @@ class UnionFind{
         bool unionSet(int x,int y){
             int rootX = find(x);
             int rootY = find(y);
-            if(rootX==rootY){
-               return false;
-            } else {
+            if(rootX!=rootY){
                 root[rootY] = rootX;
                 count--;
+                return true;
+            }else {
+                return false;
             }
-            return true;
         }
     
         int getCount(){
