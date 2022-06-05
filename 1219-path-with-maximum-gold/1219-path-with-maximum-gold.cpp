@@ -18,9 +18,7 @@ public:
     int dfs(vector<vector<int>>& grid,int r,int c){
         int nr=grid.size();
         int nc=grid[0].size();
-        // if(r<0 && c<0 && r>=nr && c>=nc){
-        //     return 0;
-        // }
+        
         int temp=grid[r][c];
         // Mark as Visited
         grid[r][c]=0;
