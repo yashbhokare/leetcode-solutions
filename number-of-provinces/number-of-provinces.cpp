@@ -11,10 +11,10 @@ public:
                 }
             }
         }
-        unordered_set<int> res;
-        for(int i=0;i<isConnected.size();i++){
-            res.insert(root[i]);
-        }
+        // unordered_set<int> res;
+        // for(int i=0;i<isConnected.size();i++){
+        //     res.insert(root[i]);
+        // }
         return count;
     }
     
@@ -36,11 +36,7 @@ public:
         int rootX = find(x);
         int rootY = find(y);
         if(rootX!=rootY){
-            for(int i=0;i<root.size();i++){
-                if(root[i] == rootY){
-                    root[i] = rootX;
-                }
-            }
+            root[rootY]=rootX;
             count--;
         }
     }
