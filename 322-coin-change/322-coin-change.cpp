@@ -1,23 +1,30 @@
 class Solution {
 public:
-    unordered_map<int,int> memo;
+    unordered_map<int,int> mapperMemo;
     int coinChange(vector<int>& coins, int amount) {
         return rec(coins,amount);
     }
     
-    int rec(vector<int>& coins, int rem){
-        if(rem==0) return 0;
-        if(rem<0) return -1;
-        if(memo.find(rem)!=memo.end()) return memo[rem];
+    int rec(vector<int>& coins,int remaining){
+        if(remaining==0){
+            // result++;
+            return 0;
+        }
+        if(remaining<0){
+            return -1;
+        }
         
+        if(mapperMemo.find(remaining)!=mapperMemo.end()) return mapperMemo[remaining];
         int min=INT_MAX;
+        
         for(auto& coin:coins){
-            int res=rec(coins,rem-coin);
+            int res=rec(coins,remaining-coin);
             if(res>=0 && res<min){
-                min=1+res;
+                min=res+1;
             }
         }
-        memo[rem] = min == INT_MAX ? -1 : min;
-        return memo[rem];
+        min = min==INT_MAX ? -1:min;
+        mapperMemo[remaining]=min;
+        return mapperMemo[remaining];
     }
 };
