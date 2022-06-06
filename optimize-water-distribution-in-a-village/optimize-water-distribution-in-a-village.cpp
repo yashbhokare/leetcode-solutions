@@ -19,7 +19,7 @@ class UnionFind {
         return root[x]=find(root[x]);
     }
     
-    bool unionSet(int x,int y,int costing){
+    bool unionSet(int x,int y){
         int rootX = find(x);
         int rootY  = find(y);
         if(rootX!=rootY){
@@ -34,7 +34,7 @@ class UnionFind {
     
     void display(){
         for(int i=0;i<n;i++){
-                cout<<root[i]<<" "<<cost[i]<<endl;
+                cout<<root[i]<<" ";
         }
         cout<<endl;
     }
@@ -60,16 +60,17 @@ public:
         }
         sort(orderedEdges.begin(),orderedEdges.end(),comparator);
         UnionFind uf(n+1);
-        // int min = *min_element(wells.begin(),wells.end());
         int ans = 0;
         for(int i=0;i<orderedEdges.size();i++){
             int x = orderedEdges[i][0];
             int y = orderedEdges[i][1];
             int cost = orderedEdges[i][2];
-            if(uf.unionSet(x,y,cost)){
+            if(uf.unionSet(x,y)){
                  ans+=cost;
             }
         }
+        // uf.display();
+        cout<<uf.getCount();
         return ans;
         
     }
