@@ -1,6 +1,6 @@
 class Solution {
 public:
-    unordered_map<int,int> mapper;
+    map<int,int> mapper;
     unordered_map<int,int> memo;
     int deleteAndEarn(vector<int>& nums) {
         int maxNum=0;
