@@ -1,4 +1,4 @@
-<h2>1770. Maximum Score from Performing Multiplication Operations</h2><h3>Medium</h3><hr><div><p>You are given two integer arrays <code>nums</code> and <code>multipliers</code><strong> </strong>of size <code>n</code> and <code>m</code> respectively, where <code>n &gt;= m</code>. The arrays are <strong>1-indexed</strong>.</p>
+<h2>  Maximum Score from Performing Multiplication Operations</h2><hr><div><p>You are given two integer arrays <code>nums</code> and <code>multipliers</code><strong> </strong>of size <code>n</code> and <code>m</code> respectively, where <code>n &gt;= m</code>. The arrays are <strong>1-indexed</strong>.</p>
 
 <p>You begin with a score of <code>0</code>. You want to perform <strong>exactly</strong> <code>m</code> operations. On the <code>i<sup>th</sup></code> operation <strong>(1-indexed)</strong>, you will:</p>
 
