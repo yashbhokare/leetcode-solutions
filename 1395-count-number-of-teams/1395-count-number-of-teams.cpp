@@ -18,6 +18,7 @@ public:
                 }
             }
             
+            // Loop for right side of given element
             for(int rightSide=index+1;rightSide<rating.size();rightSide++){
                 if(rating[rightSide]>rating[index]){
                     rightGreater++;
