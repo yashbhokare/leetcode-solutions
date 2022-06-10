@@ -10,17 +10,17 @@ public:
             for(int c=nc;c>=0;c--){
                 // Lowest row in the grid excluding the bottom last value
                 if(r==nr && c!=nc){
-                    dp[r][c] = grid[r][c]+dp[r][c+1];
+                    grid[r][c] = grid[r][c]+grid[r][c+1];
                 }else if(c==nc && r!=nr){
                 // Right most column in the grid excluding the bottom last value
-                    dp[r][c] = grid[r][c] + dp[r+1][c];
+                    grid[r][c] = grid[r][c] + grid[r+1][c];
                 }else if(c!=nc && r!=nr){
-                    dp[r][c] = grid[r][c] + min(dp[r+1][c],dp[r][c+1]);
+                    grid[r][c] = grid[r][c] + min(grid[r+1][c],grid[r][c+1]);
                 }else {
-                    dp[r][c] = grid[r][c];
+                    grid[r][c] = grid[r][c];
                 }
             }
         }
-        return dp[0][0];
+        return grid[0][0];
     }
 };
