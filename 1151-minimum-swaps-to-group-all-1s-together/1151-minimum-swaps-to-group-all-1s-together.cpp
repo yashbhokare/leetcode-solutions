@@ -13,8 +13,6 @@ public:
             }
             maxOnesWindow = max(maxOnesWindow,count);
         }
-        
-        
         return totalOnes-maxOnesWindow;
     }
 };
