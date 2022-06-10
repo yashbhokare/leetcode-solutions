@@ -4,7 +4,7 @@ public:
         int nr = grid.size()-1;
         int nc= grid[0].size()-1;
         
-        vector<vector<int>> dp(nr+1,vector<int>(nc+1,0));
+        // vector<vector<int>> dp(nr+1,vector<int>(nc+1,0));
         
         for(int r=nr;r>=0;r--){
             for(int c=nc;c>=0;c--){
