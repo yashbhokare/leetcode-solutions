@@ -87,7 +87,6 @@ int myAtoi(string str) {
     int indicator = 1;
     if(str.empty()) return 0;
     int i = str.find_first_not_of(' ');
-    cout<<i;
     if(i==-1) return 0;
     if(str[i] == '-' || str[i] == '+')
         indicator = (str[i++] == '-')? -1 : 1;
