@@ -1,47 +1,47 @@
 class Solution {
 public:
-    int myAtoi(string s) {
-        return myAtoiLogic(s);
-    }
+//     int myAtoi(string s) {
+//         return myAtoiLogic(s);
+//     }
     
-    int myAtoiLogic(string s) {
-        int signOfInteger = 0;
-        int number = 0;
-        bool isDigit = false;
-        for(int i=0;i<s.length();i++){
-            if(isDigit && !isdigit(s[i])) break;
-            if(s[i] == ' ') continue;
-            if(s[i] == '-') {
-                signOfInteger = -1;
-                isDigit = true;
-                continue;
-            }
-             if(s[i] == '+') {
-                signOfInteger = 1;
-                isDigit = true;
-                continue;
-             }
+//     int myAtoiLogic(string s) {
+//         int signOfInteger = 0;
+//         int number = 0;
+//         bool isDigit = false;
+//         for(int i=0;i<s.length();i++){
+//             if(isDigit && !isdigit(s[i])) break;
+//             if(s[i] == ' ') continue;
+//             if(s[i] == '-') {
+//                 signOfInteger = -1;
+//                 isDigit = true;
+//                 continue;
+//             }
+//              if(s[i] == '+') {
+//                 signOfInteger = 1;
+//                 isDigit = true;
+//                 continue;
+//              }
             
-            if(isalpha(s[i])) break;
-            if(s[i] == '.') break;
-            if(isdigit(s[i])){
-                isDigit = true;
-                int digit = s[i] - '0';
-                if((number > INT_MAX/10) || ( number == INT_MAX/10 && digit > 7 )) {
-                    if(signOfInteger == -1){
-                        return INT_MIN;
-                    }
-                    return INT_MAX;
+//             if(isalpha(s[i])) break;
+//             if(s[i] == '.') break;
+//             if(isdigit(s[i])){
+//                 isDigit = true;
+//                 int digit = s[i] - '0';
+//                 if((number > INT_MAX/10) || ( number == INT_MAX/10 && digit > 7 )) {
+//                     if(signOfInteger == -1){
+//                         return INT_MIN;
+//                     }
+//                     return INT_MAX;
 
-                }
-                number = number*10 + digit;
-            }
-        }
-        if(signOfInteger) return signOfInteger*number;
-        return number;
-    }
+//                 }
+//                 number = number*10 + digit;
+//             }
+//         }
+//         if(signOfInteger) return signOfInteger*number;
+//         return number;
+//     }
     
-};
+// };
 
 // 0 ms time
 // class Solution {
@@ -82,20 +82,23 @@ public:
 //     }
 // };
 
-// int myAtoi(string str) {
-//     long long int result = 0;
-//     int indicator = 1;
-
-//     int i = str.find_first_not_of(' ');
-//     if(str[i] == '-' || str[i] == '+')
-//         indicator = (str[i++] == '-')? -1 : 1;
+int myAtoi(string str) {
+    long long int result = 0;
+    int indicator = 1;
+    if(str.empty()) return 0;
+    int i = str.find_first_not_of(' ');
+    cout<<i;
+    if(i==-1) return 0;
+    if(str[i] == '-' || str[i] == '+')
+        indicator = (str[i++] == '-')? -1 : 1;
         
-//     while('0'<= str[i] && str[i] <= '9') 
-//     {
-//         result = result*10 + (str[i++]-'0');
-//         if(result*indicator >= INT_MAX) return INT_MAX;
-//         if(result*indicator <= INT_MIN) return INT_MIN;                
-//     }
+    while('0'<= str[i] && str[i] <= '9') 
+    {
+        result = result*10 + (str[i++]-'0');
+        if(result*indicator >= INT_MAX) return INT_MAX;
+        if(result*indicator <= INT_MIN) return INT_MIN;                
+    }
         
-//     return result*indicator;
-//     }
+    return result*indicator;
+    }
+};
