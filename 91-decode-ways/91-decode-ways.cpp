@@ -17,7 +17,7 @@ public:
             return 1; 
         }
         
-        string newS = s.substr(index);
+        string newS = s.substr(0,index);
         cout<<newS<<endl;
         if(mapper.find(newS)!=mapper.end()){
             return mapper[newS];
