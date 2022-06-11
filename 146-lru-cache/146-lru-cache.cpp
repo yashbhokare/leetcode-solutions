@@ -1,6 +1,6 @@
 class LRUCache {
 public:
-    int maxCapacity;
+    int maxCapacity=0;
     unordered_map<int,list<pair<int,int>>::iterator> mapper;
     list<pair<int,int>> listMap;
     LRUCache(int capacity) {
@@ -10,27 +10,27 @@ public:
     int get(int key) {
         if(mapper.find(key)==mapper.end()){
             return -1;
+        }else {
+            auto it=mapper[key];
+            listMap.splice(listMap.begin(),listMap,it);
+            return it->second;
         }
-        auto it=mapper[key];
-        listMap.splice(listMap.begin(),listMap,it);
-        return it->second;
     }
     
     void put(int key, int value) {
         if(mapper.find(key)!=mapper.end()){
             auto it=mapper[key];
-            it->second=value;
             listMap.splice(listMap.begin(),listMap,it);
+            it->second=value;
             return;
-        }
-        if(maxCapacity==mapper.size()){
-            auto it=listMap.back();
-            mapper.erase(it.first);
+        }else if(maxCapacity==mapper.size()){
+            int key = listMap.back().first;
             listMap.pop_back();
+            mapper.erase(key);
         }
         listMap.push_front({key,value});
         mapper[key]=listMap.begin();
-            
+        
     }
 };
 
