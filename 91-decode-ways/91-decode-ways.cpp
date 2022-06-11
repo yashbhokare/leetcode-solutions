@@ -8,7 +8,6 @@ public:
             set.insert(to_string(i));
         }
         return recursion(0,s);
-        // return result;
     }
     
     int recursion(int index,string s){
@@ -31,7 +30,6 @@ public:
         int val2 =0;
         if(index+1<s.size()){
             string s2 {s[index],s[index+1]};
-            // cout<<s2<<" ";
             if(set.find(s2)!=set.end()){
                 val2 = recursion(index+2,s);
             }
