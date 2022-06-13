@@ -18,17 +18,11 @@ public:
     TreeNode* rec(TreeNode* root){
         if(root==NULL) return NULL;
         
-        TreeNode* tempRoot= new TreeNode(root->val);
-        
-        if(root->right!=NULL){
-            tempRoot->left=rec(root->right);
-        }
-       
-        if(root->left!=NULL){
-            tempRoot->right = rec(root->left);
-        }
-
-        
-        return tempRoot;
+        TreeNode* left  =  rec(root->right);
+        TreeNode* right = rec(root->left);
+        root->left = left;
+        root->right=right;
+    
+        return root;
     }
 };
