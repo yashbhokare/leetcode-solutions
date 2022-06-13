@@ -11,9 +11,7 @@ public:
             for(int i=0,j=index;i<=index && j>=0;i++,j--){
                 if(changeDir && i<iMax && j<jMax){
                     res.push_back(mat[i][j]);
-                     // cout<<mat[i][j]<<" ";
                 }else if(!changeDir && j<iMax && i<jMax){
-                    // cout<<mat[j][i]<<" ";
                     res.push_back(mat[j][i]);
                 }
             }
