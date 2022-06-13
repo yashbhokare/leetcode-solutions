@@ -6,9 +6,9 @@ public:
         for(int i=rowN;i>=0;i--){
             for(int j=0;j<=i;j++){
                 dp[i][j] = min(dp[i+1][j],dp[i+1][j+1])+triangle[i][j];
-                cout<<dp[i][j]<<" ";
+                // cout<<dp[i][j]<<" ";
             }
-            cout<<endl;
+            // cout<<endl;
         }
         return dp[0][0];
     }
