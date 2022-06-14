@@ -2,19 +2,19 @@ class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> result;
-        for(int r=0;r<numRows;r++){
-            vector<int> row;
-            for(int c=0;c<=r;c++){
-                if(c==0 || c==r){
-                    row.push_back(1);
-                }else{
-                    row.push_back(result[r-1][c-1]+result[r-1][c]);
+        for(int i=0;i<numRows;i++){
+            vector<int> rows;
+            for(int j=0;j<=i;j++){
+                if(j==0 || j==i){
+                    rows.push_back(1);
+                }else {
+                    // cout<<result[i-1][j+1];
+                    rows.push_back(result[i-1][j]+result[i-1][j-1]);
                 }
             }
-            result.push_back(row);
+            result.push_back(rows);
+            cout<<rows.size()<<endl;
         }
         return result;
     }
-    
-
 };
