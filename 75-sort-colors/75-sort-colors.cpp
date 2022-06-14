@@ -6,13 +6,13 @@ public:
         int mid=0;
         while(mid<=two){
             if(nums[mid]==0){
-                swap(nums[mid],nums[zero++]);
+                swap(nums[mid++],nums[zero++]);
             }else if(nums[mid]==2){
                 swap(nums[mid],nums[two--]);
             }else {
                 mid++;
             }
-            mid = max(mid,zero);
+            // mid = max(mid,zero);
         }
     }
 };
