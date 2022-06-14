@@ -12,6 +12,7 @@ public:
             }else {
                 mid++;
             }
+            mid = max(mid,zero);
         }
     }
 };
