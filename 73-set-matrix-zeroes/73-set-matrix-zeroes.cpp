@@ -5,6 +5,7 @@ public:
         
         for(int r=0;r<matrix.size();r++){
             
+            //Check if first column has 0 or not
             if(matrix[r][0]==0) isfirstCol=true;
             
             for(int c=1;c<matrix[0].size();c++){
