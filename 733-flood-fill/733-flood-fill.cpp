@@ -12,11 +12,7 @@ public:
     }
     
     void dfs(vector<vector<int>>& image, int r, int c, int color){
-        // if(image[r][c]==color || image[r][c]!=0){
-        //     return;
-        // }
         image[r][c] = color;
-        // cout<<r<<" "<<c<<endl;
         for(int i=0;i<4;i++){
             int newR = r+dir[i][0];
             int newC = c+dir[i][1];
