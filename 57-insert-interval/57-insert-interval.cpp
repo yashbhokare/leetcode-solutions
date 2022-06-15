@@ -5,12 +5,10 @@ public:
         int endNew = newInterval[1];
         vector<vector<int>> result;
         bool pushed =false;
-        
-        // int start = intervals[0][0];
-        // int end = intervals[0][1];
+
         for(int i=0;i<intervals.size();i++){
             
-            if((startNew>=intervals[i][0] && startNew<=intervals[i][1]) || (endNew>=intervals[i][0] && endNew<=intervals[i][1]) ||(intervals[i][0]>=startNew && intervals[i][1]<=endNew) ){
+            if(!pushed &&(startNew>=intervals[i][0] && startNew<=intervals[i][1]) || (endNew>=intervals[i][0] && endNew<=intervals[i][1]) ||(intervals[i][0]>=startNew && intervals[i][1]<=endNew) ){
                 startNew = min(startNew,intervals[i][0]);
                 endNew = max(endNew,intervals[i][1]);
                 continue;
