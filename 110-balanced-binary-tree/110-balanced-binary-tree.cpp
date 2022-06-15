@@ -13,6 +13,7 @@ class Solution {
 public:
     bool result= true;
     bool isBalanced(TreeNode* root) {
+        if(root==NULL) return true;
         depth(root);
         return result;
     }
