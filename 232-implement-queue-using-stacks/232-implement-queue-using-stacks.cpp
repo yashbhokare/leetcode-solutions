@@ -9,19 +9,19 @@ public:
     
     void push(int x) {
         if(s1.empty()){
-            front=x;
+            front = x;
         }
         s1.push(x);
     }
     
     int pop() {
-        if(s2.empty()) {
+        if(s2.empty()){
             while(!s1.empty()){
                 s2.push(s1.top());
                 s1.pop();
             }
         }
-        int temp= s2.top();
+        int temp = s2.top();
         s2.pop();
         return temp;
     }
@@ -32,7 +32,7 @@ public:
     }
     
     bool empty() {
-        return s1.empty() && s2.empty(); 
+        return s1.empty() && s2.empty();
     }
 };
 
