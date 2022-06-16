@@ -23,10 +23,10 @@ public:
                 continue;
             }
             
-            if(right!=end && nums[right]==nums[right+1]){
-                right--;
-                continue;
-            }
+            // if(right!=end && nums[right]==nums[right+1]){
+            //     right--;
+            //     continue;
+            // }
             
             int sum = nums[left]+nums[right];
             
