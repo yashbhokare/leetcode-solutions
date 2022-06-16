@@ -4,18 +4,12 @@
 class Solution {
 public:
     int firstBadVersion(int n) {
-        int left=1;
-        int right=n;
-        while(left<right){
-            int mid=left+(right-left)/2;
-            cout<<mid<<endl;
-            bool res = isBadVersion(mid);
-            if(!res){
-                left=mid+1;
-            }else {
-                right=mid;
-            }
+        int lower = 1, upper = n, mid;
+        while(lower < upper) {
+            mid = lower + (upper - lower) / 2;
+            if(!isBadVersion(mid)) lower = mid + 1;   /* Only one call to API */
+            else upper = mid;
         }
-        return right;
+        return upper;   /* Because there will alway be a bad version, return lower here */
     }
 };
