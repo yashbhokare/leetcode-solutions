@@ -1,29 +1,26 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        return expandingFromMiddle(s);
-    }
-    
-    string expandingFromMiddle(string s){
-        string result = "";
+        int maxString=0;
+        int startIndex = 0;
         for(int i=0;i<s.size();i++){
-            string s1 = expandFromMiddle(i,i,s);
-            string s2 = expandFromMiddle(i,i+1,s);
-            if(s1.size() > s2.size() && s1.size() > result.size()){
-                result = s1;
-            }else if(s2.size() > result.size()){
-                result=s2;
+            int len1=expandFromMiddle(i,i,s);
+            int len2=expandFromMiddle(i,i+1,s);
+            int maxLen = max(len1,len2);
+            cout<<maxLen<<endl;
+            if(maxLen > maxString){
+                maxString = maxLen;
+                startIndex = i -(maxLen-1)/2;
             }
         }
-        return result;
+        return s.substr(startIndex,maxString);
     }
     
-    string expandFromMiddle(int left,int right,string s){
+    int expandFromMiddle(int left,int right,string s){
         while(left>=0 && right<s.size() && s[left]==s[right]){
             left--;
             right++;
         }
-        return s.substr(left+1,right-left-1);
-        // return right-left-1;
+        return right-left-1;
     }
 };
