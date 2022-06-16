@@ -10,6 +10,6 @@ public:
             if(!isBadVersion(mid)) lower = mid + 1;   /* Only one call to API */
             else upper = mid;
         }
-        return upper;   /* Because there will alway be a bad version, return lower here */
+        return lower;   /* Because there will alway be a bad version, return lower or higher here */
     }
 };
