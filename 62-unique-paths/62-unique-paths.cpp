@@ -5,9 +5,8 @@ public:
     int maxC=0;
     int result = 0;
     int uniquePaths(int m, int n) {
-        
-       
         return uniquePathsUsingDp(m,n);
+        // return uniquePathsUsingRec(m,n);
     }
     
     int uniquePathsUsingDp(int m,int n){
