@@ -6,12 +6,6 @@ class Trie
         public:
             Node *child[27];
             int endIdx;
-
- 
-            void putNode(char &ch, Node *newNode)
-            {
-                child[ch - 'a'] = newNode;
-            }
         
             Node *getNext(char &ch)
             {                
@@ -48,8 +42,8 @@ class Trie
                 temp->child[ch - 'a']= new Node();
             }
             
-            temp = temp -> getNext(ch);
-            temp -> setIdx(idx);
+            temp = temp->child[ch - 'a'];
+            temp->endIdx = idx;
         }
         
     }
@@ -65,10 +59,10 @@ class Trie
                 return -1;
             }
             
-            temp = temp -> getNext(ch);
+            temp = temp->child[ch - 'a'];
         }
         
-        return temp -> getIdx();
+        return temp->endIdx;
     }
 };
 
