@@ -16,6 +16,9 @@ public:
     
     
     bool backTrack(int course){
+          // If course already in memo return result;
+        if(memo.find(course)!=memo.end()) return memo[course];
+        
         //Course not found return true
         if(mapper.find(course)==mapper.end()){
             return true;
@@ -24,8 +27,7 @@ public:
         //Course already visited return false as cycle detected
         if(visited.find(course)!=visited.end()) return false;
 
-        // If course already in memo return result;
-        if(memo.find(course)!=memo.end()) return memo[course];
+      
         
 
         cout<<course;
