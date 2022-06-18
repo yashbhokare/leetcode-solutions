@@ -1,22 +1,18 @@
 class Solution {
 public:
-    int result= 0;
     
+    vector<int> dp;
     int climbStairs(int n) {
-        vector<int> memo(n+1);
-        return rec(0,n,memo);
-        // return result;
+        dp.resize(n+1,-1);
+        return rec(n);
     }
     
-    int rec(int number,int max,vector<int>& memo){
-        if(number==max){
-            return 1;
-        }
-        if(number > max){
-            return 0;
-        }
-        if(memo[number]) return memo[number];  
-        memo[number] = rec(number+1,max,memo) + rec(number+2,max,memo);
-        return memo[number];
+    int rec(int n){
+        if(n==0) return 0;
+        if(n==1) return 1;
+        if(n==2) return 2;
+        if(dp[n]!=-1) return dp[n];
+        dp[n] = rec(n-1)+rec(n-2);
+        return dp[n];
     }
 };
