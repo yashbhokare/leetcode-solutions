@@ -5,12 +5,16 @@ public:
         int result = 0;
         for(auto c:s){
             mapper[c]++;
-            if(mapper[c]==2){
-                result+=2;
-                mapper.erase(c);
-            }
         }
-        if(mapper.size()>0) result++;
+        
+        bool isOdd = false;
+        for(auto it=mapper.begin();it!=mapper.end();it++){
+            
+            int total = it->second;
+            if(!isOdd && total%2!=0) isOdd=true;
+            result = result + total/2*2;
+        }
+        if(isOdd) result++;
         return result;
     }
 };
