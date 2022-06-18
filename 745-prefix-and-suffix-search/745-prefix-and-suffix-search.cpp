@@ -3,16 +3,11 @@ class Trie
     public:
     struct Node
     {
-        private:
+        public:
             Node *child[27];
             int endIdx;
-        
-        public:
-            bool contains(char &ch)
-            {                    
-                return (child[ch - 'a'] != NULL);
-            } 
-        
+
+ 
             void putNode(char &ch, Node *newNode)
             {
                 child[ch - 'a'] = newNode;
@@ -48,9 +43,9 @@ class Trie
         
         for(auto &ch : word)
         {
-            if(!temp -> contains(ch))
+            if(temp ->child[ch - 'a'] == NULL)
             {
-                temp -> putNode(ch, new Node());
+                temp->child[ch - 'a']= new Node();
             }
             
             temp = temp -> getNext(ch);
@@ -65,7 +60,7 @@ class Trie
         
         for(auto &ch : word)
         {
-            if(!temp -> contains(ch))
+            if(temp ->child[ch - 'a'] == NULL)
             {
                 return -1;
             }
