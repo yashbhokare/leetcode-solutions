@@ -1,40 +1,48 @@
 class Solution {
 public:
     unordered_map<int,vector<int>> mapper;
-    unordered_set<int> memo;
+    unordered_map<int,bool> memo;
+    unordered_set<int> visited;
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        for(auto& preq:prerequisites){
-            mapper[preq[0]].push_back(preq[1]);
+        for(auto pre:prerequisites){
+            mapper[pre[0]].push_back(pre[1]);
         }
-        unordered_set<int> visited;
+        
         for(int i=0;i<numCourses;i++){
-            if(!rec(i,visited)) return false;
+            if(!backTrack(i)) return false;
         }
         return true;
     }
     
-    bool rec(int course,unordered_set<int>& visited){
-
-        // Already visited so cycle detected
-        if(visited.find(course)!=visited.end()) return false;
-        
-        // No cycle as already visited
-        if(memo.find(course)!=memo.end()) return true;
-        
-        // Course doesn't have any prereq
-        if(mapper.find(course)==mapper.end()) return true;
-        
-        visited.insert(course);
-        bool result=true;
-        vector<int> neighbours=mapper[course];
-        for(auto& neighbour:neighbours){
-            result= rec(neighbour,visited);
-            if(!result) break;;
+    
+    bool backTrack(int course){
+        //Course not found return true
+        if(mapper.find(course)==mapper.end()){
+            return true;
         }
         
-        //Backtrack and unvist the node
+        //Course already visited return false as cycle detected
+        if(visited.find(course)!=visited.end()) return false;
+
+        // If course already in memo return result;
+        if(memo.find(course)!=memo.end()) return memo[course];
+        
+
+        cout<<course;
+        // Mark course as visited
+        visited.insert(course);
+        bool res = true;
+        
+        for(auto child:mapper[course]){
+            res = backTrack(child);
+            if(res==false) break;
+        }
+        
+        cout<<res;
         visited.erase(course);
-        memo.insert(course);
-        return result;
+        
+        memo[course] = res;
+        
+        return res;
     }
 };
