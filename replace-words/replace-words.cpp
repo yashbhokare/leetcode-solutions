@@ -13,10 +13,7 @@ public:
         for(auto c:word){
             if(current->child.count(c)<=0) current->child[c]=new Trie();
             current = current->child[c];
-            // cout<<c;
         }
-        // cout<<endl;
-        // cout<<word<<endl;
         current->isWord=true;
     }
     
@@ -26,7 +23,6 @@ public:
          for(auto c:word){
              if(current->child.count(c)<=0) return word;
              result = result + c;
-             // cout<<result<<endl;
              if(current->child[c]->isWord) return result;
              current = current->child[c];
          }
