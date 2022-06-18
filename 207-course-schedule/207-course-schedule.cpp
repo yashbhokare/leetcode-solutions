@@ -43,6 +43,6 @@ public:
         
         memo[course] = res;
         
-        return res;
+        return memo[course];
     }
 };
