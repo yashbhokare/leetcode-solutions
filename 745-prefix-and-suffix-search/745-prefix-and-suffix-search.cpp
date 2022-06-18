@@ -1,26 +1,9 @@
 class Trie
 {
-    public:
     struct Node
     {
-        public:
-            Node *child[27];
-            int endIdx;
-        
-            Node *getNext(char &ch)
-            {                
-                return child[ch - 'a'];
-            }
-            
-            void setIdx(int &i)
-            {
-                endIdx = i;
-            }
-        
-            int getIdx()
-            {
-                return endIdx;
-            }
+        Node *child[27];
+        int endIdx;
     };
     
     Node *root;
@@ -34,14 +17,12 @@ class Trie
     void insert(string &word, int &idx)
     {
         Node *temp = root;
-        
         for(auto &ch : word)
         {
             if(temp ->child[ch - 'a'] == NULL)
             {
                 temp->child[ch - 'a']= new Node();
             }
-            
             temp = temp->child[ch - 'a'];
             temp->endIdx = idx;
         }
