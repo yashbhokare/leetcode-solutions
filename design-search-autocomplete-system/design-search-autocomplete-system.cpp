@@ -41,11 +41,8 @@ class Trie{
         int size = ans.size();
         int minVal = min(size,3);
         for(int i=0;i<minVal;i++){
-            // cout<<ans[i].second<<" ";
-            // cout<<ans[i].first<<"\n";
             result.push_back(ans[i].first);
         }
-        // cout<<endl;
         return result;
     }
     
@@ -84,7 +81,7 @@ public:
         prefix+=c;
         
         
-        cout<<prefix<<endl;
+        // cout<<prefix<<endl;
         return trie->findString(prefix);
     }
 };
