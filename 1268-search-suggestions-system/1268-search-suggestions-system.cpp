@@ -33,8 +33,6 @@ class Trie{
     
     void dfs(TrieNode* curr,string prefix, vector<string>& result){
         if(result.size()==3) return;
-        // cout<<prefix<<endl;
-        // cout<<curr[]<<endl;
         if(curr->isWord){
             result.push_back(prefix);
         }
@@ -42,7 +40,6 @@ class Trie{
         for(int i=0;i<26;i++){
             if(curr->child[i]!=0){
                 prefix.push_back(i +'a');
-                // cout<<prefix;
                 dfs(curr->child[i],prefix,result);
                 prefix.pop_back();
             }
