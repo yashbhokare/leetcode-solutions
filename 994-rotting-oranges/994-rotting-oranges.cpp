@@ -23,8 +23,9 @@ public:
                 }
             }
         }
+        
+        if(totalFreshOranges==0) return 0;
         int result=0;
-        if(totalFreshOranges==0) return result;
         while(!q.empty()){
             int size = q.size();
             while(size--){
