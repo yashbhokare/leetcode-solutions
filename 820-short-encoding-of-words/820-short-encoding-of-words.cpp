@@ -1,12 +1,12 @@
 class Solution {
 public:
     int minimumLengthEncoding(vector<string>& words) {
-        unordered_set<string> set;
+        set<string> set;
         for(auto word:words){
             set.insert(word);
         }
         
-        for(auto it=set.begin();it!=set.end();it++){
+        for(auto it=set.rbegin();it!=set.rend();it++){
             string word = *it;
             for(int i=1;i<word.length();i++){
                 set.erase(word.substr(i));
