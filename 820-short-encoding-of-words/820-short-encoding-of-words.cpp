@@ -6,7 +6,8 @@ public:
             set.insert(word);
         }
         
-        for(auto word:words){
+        for(auto it=set.begin();it!=set.end();it++){
+            string word = *it;
             for(int i=1;i<word.length();i++){
                 set.erase(word.substr(i));
             }
