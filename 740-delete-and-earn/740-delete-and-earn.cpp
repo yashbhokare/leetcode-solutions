@@ -16,7 +16,14 @@ public:
         if(num==1) return mapper[num];
         if(memo.find(num)!=memo.end()) return memo[num];
         int gain=mapper[num];
-        int maxVal = max(gain+rec(num-2),rec(num-1));
+        
+        int maxVal;
+        // If previous element exists
+        if(mapper.find(num-1)!=mapper.end()){
+             maxVal = max(gain+rec(num-2),rec(num-1));
+        }else {
+            maxVal = gain+rec(num-2); 
+        }
         memo[num]= maxVal;
         return maxVal;
     }
