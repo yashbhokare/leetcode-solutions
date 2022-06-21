@@ -1,17 +1,16 @@
 class Solution {
 public:
     int consecutiveNumbersSum(int n) {
-        int res=0;
-        int div=1;
-        int constant = 0;
-        while(constant<n){
-            if((n-constant)%div==0){
-                cout<<n<<" "<<constant<<"  "<<div<<endl;
-                res++;
+        int constantSum = 1;
+        int index=1;
+        int result=0;
+        while(constantSum<=n){
+            if((n-constantSum)%index==0){
+                result++;
             }
-            constant= constant + div;
-            div++;
+            index++;
+            constantSum+=index;
         }
-        return res;
+        return result;
     }
 };
