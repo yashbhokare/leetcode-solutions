@@ -23,7 +23,7 @@ public:
         
         if((leftTree && rightTree) || ((rightTree ||leftTree) && (root==p || root==q))) {
             result = root;
-            return false;
+            return true;
         }
         
         if(root==p || root==q ) return true;
