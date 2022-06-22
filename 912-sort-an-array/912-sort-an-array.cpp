@@ -8,7 +8,7 @@ public:
     void quickSort(vector<int>& nums,int start,int end){
         if(start>=end) return;
         int pivotElement = nums[start];
-        cout<<pivotElement<<" ";
+        // cout<<pivotElement<<" ";
         int low  = start;
         int high = end;
         while(low<high){
@@ -20,7 +20,7 @@ public:
                 high--;
             }
         }
-        cout<<"Low:"<<low<<endl;
+        // cout<<"Low:"<<low<<endl;
         quickSort(nums,start,low-1);
         quickSort(nums,low+1,end);
     }
