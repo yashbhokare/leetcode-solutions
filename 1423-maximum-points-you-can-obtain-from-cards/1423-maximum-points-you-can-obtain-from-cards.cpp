@@ -1,23 +1,22 @@
 class Solution {
 public:
     int maxScore(vector<int> &cardPoints, int k) {
+        int frontScore = 0;
+        int rearScore = 0;
         int n = cardPoints.size();
 
-        int frontSetOfCards[k + 1];
-        int rearSetOfCards[k + 1];
-
-        //Intialize 0th index in both the arrays
-        frontSetOfCards[0] = rearSetOfCards[0] = 0;
-
         for (int i = 0; i < k; i++) {
-            frontSetOfCards[i + 1] = cardPoints[i] + frontSetOfCards[i];
-            rearSetOfCards[i + 1] = cardPoints[n - i - 1] + rearSetOfCards[i];
+            frontScore += cardPoints[i];
         }
 
-        int maxScore = 0;
-        // Each i represents the number of cards we take from the front.
-        for (int i = 0; i <= k; i++) {
-            int currentScore = frontSetOfCards[i] + rearSetOfCards[k - i];
+        // take all k cards from the beginning
+        int maxScore = frontScore;
+
+        // take i from the beginning and k - i from the end
+        for (int i = k - 1; i >= 0; i--) {
+            rearScore += cardPoints[n - (k - i)];
+            frontScore -= cardPoints[i];
+            int currentScore = rearScore + frontScore;
             maxScore = max(maxScore, currentScore);
         }
 
