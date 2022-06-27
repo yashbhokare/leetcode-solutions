@@ -1,25 +1,33 @@
 class Solution {
 public:
     int maxScore(vector<int> &cardPoints, int k) {
-        int frontScore = 0;
-        int rearScore = 0;
+        int startingIndex = 0;
+        int presentSubarrayScore = 0;
         int n = cardPoints.size();
+        int requiredSubarrayLength = n - k;
+        int minSubarrayScore;
+        int totalScore = 0;
 
-        for (int i = 0; i < k; i++) {
-            frontScore += cardPoints[i];
+        // Total score obtained on selecting all the cards.
+        for (int i : cardPoints) {
+            totalScore += i;
+        }
+        
+        minSubarrayScore = totalScore;
+
+        if (k == n) {
+            return totalScore;
         }
 
-        // take all k cards from the beginning
-        int maxScore = frontScore;
-
-        // take i from the beginning and k - i from the end
-        for (int i = k - 1; i >= 0; i--) {
-            rearScore += cardPoints[n - (k - i)];
-            frontScore -= cardPoints[i];
-            int currentScore = rearScore + frontScore;
-            maxScore = max(maxScore, currentScore);
+        for (int i = 0; i < n; i++) {
+            presentSubarrayScore += cardPoints[i];
+            int presentSubarrayLength = i - startingIndex + 1;
+            // If a valid subarray (having size cardsPoints.size() - k) is possible.
+            if (presentSubarrayLength == requiredSubarrayLength) {
+                minSubarrayScore = min(minSubarrayScore, presentSubarrayScore);
+                presentSubarrayScore -= cardPoints[startingIndex++];
+            }
         }
-
-        return maxScore;
+        return totalScore - minSubarrayScore;
     }
 };
