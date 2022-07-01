@@ -7,15 +7,10 @@ public:
         sort(boxTypes.begin(),boxTypes.end(),comparator);
         int result = 0;
         for(auto box:boxTypes){
-            if(truckSize-box[0] >= 0){
-                result+=box[0]*box[1];
-                truckSize-=box[0];
-            }else if(truckSize!=0){
-                result+=truckSize*box[1];
-                break;
-            }
-            
-            if(truckSize==0) return result;
+            int boxCount = min(truckSize, box[0]);
+            result += boxCount * box[1];
+            truckSize -= boxCount;
+            if (truckSize == 0) break;
         }
         return result;
     }
