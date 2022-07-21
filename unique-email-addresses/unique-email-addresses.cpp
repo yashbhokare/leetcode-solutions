@@ -1,22 +1,24 @@
 class Solution {
 public:
     int numUniqueEmails(vector<string>& emails) {
-        int count = 0;
-        unordered_set <string> set;
-        for(int i=0;i<emails.size();i++){
-            int signIndex = emails[i].find_first_of('@');
-            if(signIndex == -1) continue;
-            string localName = emails[i].substr(0,signIndex);
-            string domainName = emails[i].substr(signIndex);
-            string resultLocalName = "";
-            for(int j=0;j<localName.size();j++){
-                if(localName[j]=='+') break;
-                if(localName[j]=='.') continue;
-                resultLocalName +=localName[j];
-            }
-            set.insert(resultLocalName+domainName);
-            
+        unordered_set<string> set;
+        for(auto email:emails){
+            int domainIndex = email.find_first_of('@');
+            string domain = email.substr(domainIndex);
+            string localName = email.substr(0,domainIndex);
+            string formattedLocalName = formatLocalName(localName);
+            set.insert(formattedLocalName+domain);
         }
         return set.size();
+    }
+    
+    string formatLocalName(string localName){
+        string newLocalName = "";
+        for(auto c:localName){
+            if(c=='+') return newLocalName;
+            if(c=='.') continue;
+            newLocalName+=c;
+        }
+        return newLocalName;
     }
 };
