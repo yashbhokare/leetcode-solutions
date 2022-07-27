@@ -18,7 +18,7 @@ public:
     
     void preorder(TreeNode* root){
         if(root==NULL) return;
-        cout<<root->val<<" ";
+        // cout<<root->val<<" ";
         tempRoot->right = root;
         tempRoot->left = NULL;
         tempRoot = tempRoot->right;
