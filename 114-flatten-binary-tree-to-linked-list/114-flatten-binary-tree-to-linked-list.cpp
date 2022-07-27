@@ -18,13 +18,11 @@ public:
     
     void preorder(TreeNode* root){
         if(root==NULL) return;
-        // cout<<root->val<<" ";
         tempRoot->right = root;
         tempRoot->left = NULL;
         tempRoot = tempRoot->right;
         TreeNode* rightRoot=root->right;
         preorder(root->left);
-
         preorder(rightRoot);
     }
 };
