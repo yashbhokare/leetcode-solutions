@@ -2,14 +2,14 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         if(s.size()!=t.size()) return false;
-        vector<int> totalChars(26,0);
+
+        vector<int> chars(26,0);
         for(int i=0;i<s.size();i++){
-            totalChars[s[i]-'a']++;
-            totalChars[t[i]-'a']--;
+            chars[s[i]-'a']++;
+            chars[t[i]-'a']--;
         }
-        
-        for(auto count:totalChars){
-            if(count!=0) return false;
+        for(int i=0;i<26;i++){
+            if(chars[i]!=0) return false;
         }
         return true;
     }
