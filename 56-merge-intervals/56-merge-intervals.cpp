@@ -1,10 +1,11 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+
         sort(intervals.begin(),intervals.end());
-        vector<vector<int>> result;
         int start = intervals[0][0];
-        int end = intervals[0][1];
+        int end =  intervals[0][1];
+        vector<vector<int>> result;
         for(int i=1;i<intervals.size();i++){
             if(end>=intervals[i][0]){
                 start = min(start,intervals[i][0]);
@@ -15,7 +16,7 @@ public:
                 end = intervals[i][1];
             }
         }
-        result.push_back({start,end});
+         result.push_back({start,end});
         return result;
     }
 };
