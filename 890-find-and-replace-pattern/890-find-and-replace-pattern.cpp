@@ -16,7 +16,7 @@ public:
 
         vector<string> ans;
         for(auto word:words){
-            if(isPatternEqual(word,newPattern)){
+            if(word.size()==pattern.size() && isPatternEqual(word,newPattern)){
                 ans.push_back(word);
             }
         }
