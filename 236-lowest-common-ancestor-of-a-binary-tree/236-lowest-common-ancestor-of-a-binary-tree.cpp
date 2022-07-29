@@ -11,7 +11,7 @@ class Solution {
 public:
     TreeNode* result;
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        recursion(root,p,q);
+        recursionWithCount(root,p,q);
         return result;
     }
     
