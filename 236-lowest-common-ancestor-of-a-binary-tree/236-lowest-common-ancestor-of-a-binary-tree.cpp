@@ -15,7 +15,26 @@ public:
         return result;
     }
     
-    bool recursion(TreeNode* root, TreeNode* p, TreeNode* q){
+    bool recursionWithCount(TreeNode* root, TreeNode* p, TreeNode* q){
+        if(root==NULL) return false;
+        
+        int left = recursion(root->left,p,q) ? 1 : 0;
+        int right = recursion(root->right,p,q)? 1 : 0;
+        
+        int mid = ((root==p) || (root==q)) ? 1 : 0 ;
+        
+        if(left+right+mid>1){
+            result = root;
+        }
+        
+        return (left+right+mid>0);
+//         if((root==p) || (root==q)) return true;
+        
+//         if(leftTree || rightTree) return true;
+        
+//         return false;
+    }
+        bool recursion(TreeNode* root, TreeNode* p, TreeNode* q){
         if(root==NULL) return false;
         
         bool leftTree = recursion(root->left,p,q);
