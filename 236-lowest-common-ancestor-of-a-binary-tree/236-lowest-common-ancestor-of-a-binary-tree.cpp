@@ -11,26 +11,26 @@ class Solution {
 public:
     TreeNode* result;
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        rec(root,p,q);
+        recursion(root,p,q);
         return result;
     }
     
-    bool rec(TreeNode* root, TreeNode* p, TreeNode* q){
+    bool recursion(TreeNode* root, TreeNode* p, TreeNode* q){
         if(root==NULL) return false;
         
-        bool leftTree = rec(root->left,p,q);
-        bool rightTree = rec(root->right,p,q);
+        bool leftTree = recursion(root->left,p,q);
+        bool rightTree = recursion(root->right,p,q);
         
-        if((leftTree && rightTree) || ((rightTree ||leftTree) && (root==p || root==q))) {
+        if((leftTree && rightTree) || ((leftTree || rightTree) && ((root==p) || (root==q)))){
             result = root;
-            return true;
+            return false;
         }
         
-        if(root==p || root==q ) return true;
-        
+        if((root==p) || (root==q)){
+            return true;
+        }
         if(leftTree || rightTree) return true;
         
         return false;
-        
     }
 };
