@@ -26,9 +26,8 @@ public:
             return false;
         }
         
-        if((root==p) || (root==q)){
-            return true;
-        }
+        if((root==p) || (root==q)) return true;
+        
         if(leftTree || rightTree) return true;
         
         return false;
