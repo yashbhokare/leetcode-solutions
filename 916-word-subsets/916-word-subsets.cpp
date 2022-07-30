@@ -20,7 +20,6 @@ public:
         unordered_map<char,int> word1mapper;
             for(auto ch:word){
                 word1mapper[ch]++;
-                 // cout<<ch<<" "<<word1mapper[ch]<<endl;
                 if(word2mapper.find(ch)!=word2mapper.end() && word1mapper[ch]==word2mapper[ch]){
                     size++;
                 }
