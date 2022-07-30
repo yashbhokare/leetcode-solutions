@@ -7,13 +7,10 @@ public:
             unordered_map<char,int> tempMapper;
             for(auto ch:word){
                 tempMapper[ch]++;
-                // cout<<ch<<" "<<word2mapper[ch]<<endl;
             }
             for(auto it=tempMapper.begin();it!=tempMapper.end();it++){
-                // cout<<it->first<<" "<<word2mapper[it->first]<<endl;
                 if(word2mapper[it->first]<tempMapper[it->first]){
                     word2mapper[it->first] = tempMapper[it->first];
-                    // cout<<it->first<<" "<<word2mapper[it->first]<<endl;
                 }
             }
         }
