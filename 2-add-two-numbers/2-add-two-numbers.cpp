@@ -15,7 +15,7 @@ public:
         ListNode* temp = head;
         
         int carry = 0;
-        while(l1!=NULL || l2!=NULL){
+        while(l1!=NULL || l2!=NULL || carry!=0){
             int l1Value = l1==NULL ? 0 : l1->val;
             int l2Value = l2==NULL ? 0 : l2->val;
             int sum = l1Value + l2Value + carry;
@@ -29,7 +29,7 @@ public:
             l2 = l2==NULL ? NULL : l2->next;
         }
         
-        if(carry==1) temp->next= new ListNode(1);
+        // if(carry==1) temp->next= new ListNode(1);
         return head->next;
     }
 };
