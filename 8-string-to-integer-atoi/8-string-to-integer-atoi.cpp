@@ -2,7 +2,7 @@ class Solution {
 public:
     int myAtoi(string s) {
         int index = s.find_first_not_of(' ');
-        if(index==-1) index=0; 
+        if(index==-1) return 0; 
         int sign = 1;
         long int result = 0;
         if(s[index]=='+'|| s[index]=='-'){
