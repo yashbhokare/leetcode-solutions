@@ -14,15 +14,15 @@ public:
         ListNode* newList = new ListNode(0);
         ListNode* head = newList;
         while(list1 && list2){
-            int temp;
+            ListNode* temp;
             if(list1->val <= list2->val){
-                temp = list1->val;
+                temp = list1;
                 list1=list1->next;
             }else {
-                temp = list2->val;
+                temp = list2;
                 list2=list2->next;
             }
-            newList->next =  new ListNode(temp);
+            newList->next = temp;
             newList = newList->next;
         }
         
