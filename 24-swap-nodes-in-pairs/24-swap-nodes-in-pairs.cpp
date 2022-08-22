@@ -35,7 +35,8 @@ public:
             prev=prev->next;
             head = thirdPointer;
         }
-        prev->next = NULL;
+        
+        prev->next = NULL; //Always end with NULL else it gets stuck in a cycle
         return newHead->next;
         
     }
