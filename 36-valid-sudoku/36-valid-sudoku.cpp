@@ -11,13 +11,9 @@ public:
                 int val = board[r][c]-'1';
                 int boxCal =((r/3)*3)+c/3;
                 // cout<<val;
-                if(row[r][val]) return false;
-                if(col[c][val]) return false;
-                if(box[boxCal][val]) return false;
-                
-                row[r][val]++;
-                col[c][val]++;
-                box[boxCal][val]++;
+                if(row[r][val]++) return false;
+                if(col[c][val]++) return false;
+                if(box[boxCal][val]++) return false;
             }
         }
         return true;
