@@ -8,7 +8,6 @@ public:
                 break;
             }
         }
-        // cout<<swapIndex;
         if(swapIndex>=0){
             int minVal = INT_MAX;
             int minIndex = swapIndex;
@@ -18,7 +17,6 @@ public:
                     minIndex = i;
                 }
             }
-            // cout<<minIndex;
             swap(nums[minIndex],nums[swapIndex]);
         }
         reverse(nums.begin()+swapIndex+1,nums.end());
