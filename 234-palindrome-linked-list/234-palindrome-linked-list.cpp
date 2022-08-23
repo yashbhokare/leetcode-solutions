@@ -14,9 +14,7 @@ public:
         ListNode* p1 = head;
         ListNode* midValue = midPoint(head);
         ListNode* p2 = reverse(midValue->next);
-        // cout<<p2->val;
         while(p2!=NULL){
-            // cout<<p2->val<<" ";
             if(p1->val!=p2->val) return false;
             p1 = p1->next;
             p2 = p2->next;
@@ -46,8 +44,7 @@ public:
             
             temp->next = start;
             start = temp;
-    
-            // curr = curr->next;
+
         }
         return start;
     }
