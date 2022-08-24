@@ -1,7 +1,7 @@
 class Solution {
 public:
     double myPow(double x, int n) {
-        long long int N=n;
+        long long N=n;
         if(n<0){
             N=abs(n);
             x=1/x;
