@@ -11,41 +11,25 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        // Temp head for edge cases
-        ListNode* new_head = new ListNode(0);
-        new_head->next = head;
+        ListNode* newHead = new ListNode(0);
+        newHead->next=head;
+        head = newHead;
+        for(int i=1;i<left;i++){
+            head = head->next;
+        }
+        head->next = reverseLinkedList(head->next,right-left);
+        return newHead->next;
         
-        // Get the start node after which we need to reverse it 
-        ListNode* startN = startNode(new_head,left);
-        
-        // Reverse the given list and connect to the start node
-        startN->next =reverseLinkedList(startN->next,right-left);
-        
-        // Return the head
-        return new_head->next;
     }
     
-    ListNode* reverseLinkedList(ListNode* head,int count){
-        ListNode* temp = head;
-        while(count){
-            // Remove node
-            ListNode* node = temp->next;
-            temp->next=temp->next->next;
-            
-            // Add to the top
-            node->next=head;
-            head=node;
-            cout<<head->val;
-            count--;
+     ListNode* reverseLinkedList(ListNode* head, int right){
+        ListNode* curr = head;
+        while(right--){
+            ListNode* temp=curr->next;
+            curr->next=curr->next->next;
+            temp->next=head;
+            head=temp;
         }
-        return head;
-    }
-    
-    ListNode* startNode(ListNode* head, int left){
-        while(left>1){
-            head=head->next;
-            left--;
-        }
-        return head;
+         return head;
     }
 };
