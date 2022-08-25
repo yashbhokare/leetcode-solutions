@@ -10,7 +10,7 @@ public:
         if(dp[index]) return dp[index];
         if(index==s.size()) return 1;
         if(s[index]=='0') return 0;
-        if(index==s.size()-1) return 1;
+        if(index==s.size()-1) return 1; 
         
         int res = rec(s,index+1);
         if(stoi(s.substr(index,2))<=26){
