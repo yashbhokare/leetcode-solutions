@@ -19,11 +19,11 @@ public:
             if(targetMapper.find(s[right])!=targetMapper.end()){
                 subStringMapper[s[right]]++;
                 if(subStringMapper[s[right]]==targetMapper[s[right]]){
-                    subStringMapSize++;
+                    targetMapSize--;
                 }
             }
             
-            while(subStringMapSize==targetMapSize && left<maxLen){
+            while(targetMapSize==0 && left<maxLen){
                 if(right-left+1<resultSize){
                     resultSize = right-left+1;
                     resultPos = left;
@@ -32,7 +32,7 @@ public:
                 if(targetMapper.find(s[left])!=targetMapper.end()){
                     subStringMapper[s[left]]--;
                     if(subStringMapper[s[left]]<targetMapper[s[left]]){
-                        subStringMapSize--;
+                        targetMapSize++;
                     }
                 }
                 left++;
