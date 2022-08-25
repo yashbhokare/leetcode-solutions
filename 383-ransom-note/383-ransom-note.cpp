@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
+        if(magazine.size()<ransomNote.size()) return false;
         vector<int> charArray(26,0);
         for(auto letter:magazine){
             charArray[letter-'a']++;
