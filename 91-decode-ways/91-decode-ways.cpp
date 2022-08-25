@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> dp;
-    map<int, int> memo;
+    unordered_map<int, int> memo;
     int numDecodings(string s) {
         dp.resize(s.size()+1,0);
         return rec(s,0);
