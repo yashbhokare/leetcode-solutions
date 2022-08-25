@@ -9,6 +9,7 @@ public:
         
         for(auto letter:ransomNote){
             charArray[letter-'a']--;
+            if(charArray[letter-'a']<0) return false;
         }
         
         for(int i=0;i<26;i++){
