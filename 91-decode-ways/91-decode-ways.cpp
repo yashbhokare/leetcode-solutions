@@ -3,17 +3,17 @@ public:
     vector<int> dp;
     unordered_map<int, int> memo;
     int numDecodings(string s) {
-        dp.resize(s.size()+1,0);
+        dp.resize(s.size()+1,-1);
         return rec(s,0);
     }
     
     int rec(string s,int index){
-        //  if (memo.find(index) != memo.end()) {
-        //      cout<<index<<endl;
-        //     return memo[index];
-        // }
+//          if (memo.find(index) != memo.end()) {
+//              cout<<index<<endl;
+//             return memo[index];
+//         }
         
-        if(dp[index]!=0) {
+        if(dp[index]!=-1) {
             cout<<index<<endl;
             return dp[index];
         }
