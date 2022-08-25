@@ -1,16 +1,17 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        vector<int> totalChars(26,0);
-        for(auto letter:ransomNote){
-           totalChars[letter-'a']++;
-        }
+        vector<int> charArray(26,0);
         for(auto letter:magazine){
-            totalChars[letter-'a']--;
+            charArray[letter-'a']++;
+        }
+        
+        for(auto letter:ransomNote){
+            charArray[letter-'a']--;
         }
         
         for(int i=0;i<26;i++){
-            if(totalChars[i]>0) return false;
+            if(charArray[i]<0) return false;
         }
         return true;
     }
