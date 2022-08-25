@@ -12,9 +12,9 @@ public:
             if(charArray[letter-'a']<0) return false;
         }
         
-        for(int i=0;i<26;i++){
-            if(charArray[i]<0) return false;
-        }
+        // for(int i=0;i<26;i++){
+        //     if(charArray[i]<0) return false;
+        // }
         return true;
     }
 };
