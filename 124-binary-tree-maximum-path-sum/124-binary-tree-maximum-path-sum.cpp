@@ -13,8 +13,8 @@ class Solution {
 public:
     int res = INT_MIN;
     int maxPathSum(TreeNode* root) {
-        int val = rec(root);
-        return max(res,val);
+        rec(root);
+        return res;
     }
     
     int rec(TreeNode* root){
