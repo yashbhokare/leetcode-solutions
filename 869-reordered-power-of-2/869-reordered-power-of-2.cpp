@@ -1,5 +1,6 @@
 class Solution {
 public:
+    
     bool reorderedPowerOf2(int n) {
         string val = to_string(n);
         return permutations(val,0);
@@ -10,7 +11,6 @@ public:
         if(s[0]=='0') return false;
 
         if(index==s.size()){
-            // cout<<s<<endl;
             if(isPowerOfTwo(stoi(s))==1){
                 return true;
             }
