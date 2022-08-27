@@ -44,8 +44,8 @@ public:
             sortedSum.insert(sum);
         }
     }
+    
     int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
-        if (matrix[0].size() > matrix.size()) {
             // Stores the 1D representation of the matrix row wise.
             vector<int> rowSum(matrix[0].size());
             for (int i = 0; i < matrix.size(); i++) {
@@ -67,28 +67,6 @@ public:
                         return result;
                 }
             }
-        } else {
-            // Stores the 1D representation of the matrix column wise.
-            vector<int> colSum(matrix.size());
-            for (int i = 0; i < matrix[0].size(); i++) {
-                // Initialize the 1D representation with 0s.
-                fill(colSum.begin(), colSum.end(), 0);
-
-                // We convert the matrix between columns i..col inclusive to 1D array
-                for (int col = i; col < matrix[0].size(); col++) {
-                    // Add the current column to the previous column.
-                    for (int row = 0; row < matrix.size(); row++)
-                        colSum[row] += matrix[row][col];
-
-                    // Run the 1D algorithm for `colSum`
-                    updateResult(colSum, k);
-
-                    // If Max is k, this is the best possible answer, so return.
-                    if (result == k)
-                        return result;
-                }
-            }
-        }
         return result;
     }
 };
