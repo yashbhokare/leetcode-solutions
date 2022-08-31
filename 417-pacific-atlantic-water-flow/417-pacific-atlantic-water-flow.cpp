@@ -93,7 +93,6 @@ public:
             if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && heights[newR][newC]<=heights[r][c]&& isAtlantic[newPos]!=-2 ) {
                 int val = recAtlantic(newR,newC,isAtlantic,heights);
                 if(val==1){
-                    // cout<<pos;
                     result = 1;
                     break;
                 }else if(val==-1){
