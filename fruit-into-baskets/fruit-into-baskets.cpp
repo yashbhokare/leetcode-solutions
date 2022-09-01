@@ -1,29 +1,24 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-        unordered_map<int,int> mapper;
-        int count = 0;
-        int pos =0;
-        int result = INT_MIN;
-        for(int i=0;i<fruits.size();i++){
+        unordered_map<int,int> map;
+        int left=0;
+        int maxVal = 1;
+        for(int right=0;right<fruits.size();right++){
+            int curFruit = fruits[right];
+            map[curFruit]++;
             
-            if(mapper.find(fruits[i]) == mapper.end()){
-                count++;
-                mapper.insert({fruits[i],1});
-            }else {
-                mapper[fruits[i]]++;
+            while(map.size()>2){
+                int oldFruit = fruits[left];
+                map[oldFruit]--;
+                if(map[oldFruit]==0) map.erase(oldFruit);
+                // maxVal= max(maxVal,right-left+1);
+                // cout<<left<<" "<<right<<endl;
+                left++;
             }
+            maxVal= max(maxVal,right-left+1);
             
-            while(count>2){
-                mapper[fruits[pos]]--;
-                if(mapper[fruits[pos]]==0){
-                    count--;
-                    mapper.erase(fruits[pos]);
-                }
-                pos++;
-            }
-            result = max(result,i-pos+1);
         }
-        return result;
+        return maxVal;
     }
 };
