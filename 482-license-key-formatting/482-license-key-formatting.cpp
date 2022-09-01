@@ -6,7 +6,10 @@ public:
         
         for(auto ch:s){
             if(ch=='-') continue;
-            formatS+=toupper(ch);
+            else{
+                if(ch>96) ch-=32;
+                formatS+=ch;
+            }
         }
         
         int count=0;
