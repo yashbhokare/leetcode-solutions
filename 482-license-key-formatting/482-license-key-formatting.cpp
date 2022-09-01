@@ -1,7 +1,6 @@
 class Solution {
 public:
     string licenseKeyFormatting(string s, int k) {
-        string result = "";
         string formatS = "";
         
         for(auto ch:s){
@@ -13,19 +12,19 @@ public:
         }
         
         int count=0;
-        
+        s = "";
         reverse(formatS.begin(),formatS.end());
         
         for(int i=0;i<formatS.size();i++){
             if(count==k){
-                result.push_back('-');
+                s.push_back('-');
                 count=0;
             }
-           result.push_back(formatS[i]);
+           s.push_back(formatS[i]);
            count++;
         }
-        reverse(result.begin(),result.end());
-        return result;
+        reverse(s.begin(),s.end());
+        return s;
     }
 
 };
