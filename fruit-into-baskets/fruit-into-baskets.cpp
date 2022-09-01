@@ -8,7 +8,7 @@ public:
             int curFruit = fruits[right];
             map[curFruit]++;
             
-            if(map.size()>2){
+            while(map.size()>2){
                 int oldFruit = fruits[left];
                 map[oldFruit]--;
                 if(map[oldFruit]==0) map.erase(oldFruit);
