@@ -2,16 +2,19 @@ class Solution {
 public:
     string licenseKeyFormatting(string s, int k) {
         string result = "";
-        int count = 0;
-        for(int i=s.size()-1;i>=0;i--){
+        int index = s.size()-1;
+        int count=0;
+        reverse(s.begin(),s.end());
+        for(int i=0;i<s.size();i++){
             if(s[i]=='-') continue;
             if(count==k){
+                result.push_back('-');
                 count=0;
-                result.insert(result.begin(),'-');
             }
-           result.insert(result.begin(),toupper(s[i]));
-            count++;
+           result.push_back(toupper(s[i]));
+           count++;
         }
+        reverse(result.begin(),result.end());
         return result;
     }
 };
