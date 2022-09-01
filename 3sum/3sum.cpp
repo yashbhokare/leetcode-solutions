@@ -3,18 +3,18 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> ans;
         sort(nums.begin(),nums.end());
-        return kthSum(nums,3,0,0);
-//         for(int i=0;i<nums.size();i++){
-//             if(i==0 || nums[i]!=nums[i-1]){
-//                 vector<vector<int>> currRes = twoSumSorted(nums,i+1,-nums[i]);
-//                 for(auto val:currRes){
-//                     val.push_back(nums[i]);
-//                     ans.push_back(val);
-//                 }
-//             }
+        // return kthSum(nums,3,0,0);
+        for(int i=0;i<nums.size();i++){
+            if(i==0 || nums[i]!=nums[i-1]){
+                vector<vector<int>> currRes = twoSumSorted(nums,i+1,-nums[i]);
+                for(auto val:currRes){
+                    val.push_back(nums[i]);
+                    ans.push_back(val);
+                }
+            }
            
-//         }
-//         return ans;
+        }
+        return ans;
     }
     
     vector<vector<int>> kthSum(vector<int>& nums, int k, int index, int target){
