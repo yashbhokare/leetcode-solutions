@@ -1,45 +1,49 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        if(t.size() > s.size()) return "";
-        unordered_map<char,int> mapper;
-        for(int i=0;i<t.size();i++){
-            mapper[t[i]]++;
+        
+        unordered_map<char,int> targetMapper;
+        unordered_map<char,int> currMapper;
+        int left=0,right=0;
+        int n = s.size();
+        int minLen = INT_MAX;
+        int startIndex = -1;
+        int tMapSize = 0;
+        
+        if(t.size()==0) return "";
+        
+        for(auto c:t){
+            targetMapper[c]++;
         }
         
-        int minSize = INT_MAX;
-        int left =0;
-        int right=0;
-        int startPos = 0;
-        int req = mapper.size();
-        unordered_map<char,int> window;
-        while(right<s.size()){
-            if(mapper.find(s[right]) != mapper.end()){
-                window[s[right]]++;
-                if(window[s[right]] == mapper[s[right]]){
-                    req--;
-                }
+        tMapSize = targetMapper.size();
+        
+        while(right<n){
+            
+            char curr = s[right];
+            if(targetMapper.find(curr)!=targetMapper.end()){
+                currMapper[curr]++;
+                if(currMapper[curr]==targetMapper[curr]) tMapSize--;
             }
-            while(req==0){
-                //Store the result
-                if(right-left+1 < minSize){
-                    minSize = right-left+1;
-                    startPos = left;
-                }
+            while(tMapSize==0){
                 
-                if(mapper.find(s[left]) != mapper.end()){
-                    window[s[left]]--;
-                    if(window[s[left]] < mapper[s[left]]){
-                        req++;
-                    }
+                if(right-left+1<minLen){
+                    minLen = right-left+1;
+                    startIndex = left;
+                }
+                char leftCurr = s[left];
+                if(currMapper.find(leftCurr)!=currMapper.end()){
+                    currMapper[leftCurr]--;
+                    if(currMapper[leftCurr]<targetMapper[leftCurr]) tMapSize++;
                 }
                 left++;
-                
             }
             right++;
-            
         }
-        if(minSize == INT_MAX) return "";
-        return s.substr(startPos,minSize);
+        if(startIndex==-1) return "";
+        
+        return s.substr(startIndex,minLen);
+        
+        
     }
 };
