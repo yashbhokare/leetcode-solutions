@@ -10,24 +10,18 @@ public:
         
         for(int i=4;i>=0;i--){
             if(i==2) continue;
-            char ch = time[i];
             auto higher = upper_bound(nums.begin(),nums.end(),time[i]-'0');
             if(higher!=nums.end()){
-                char newV  = '0'+*higher;
-                time[i] = newV; 
-            
+                time[i] = '0'+*higher;; 
                 if(i>2){
-                    string newTime = to_string(time[3]-'0')+to_string(time[4]-'0');
+                    string newTime = time.substr(3,2);
                     if(stoi(newTime)<60) return time;
-                    else time[i] = nums[0]+'0';
                 }else {
-                    string newTime = to_string(time[0]-'0')+to_string(time[1]-'0');
+                    string newTime = time.substr(0,2);
                     if(stoi(newTime)<24) return time;
-                    else time[i] = nums[0]+'0';
                 }
-                // cout<<time<<endl;
             }
-            else time[i] = nums[0]+'0';
+            time[i] = nums[0]+'0';
             
         }
         return time;
