@@ -30,7 +30,7 @@ public:
         for(int i=0;i<n;i++){
             cout<<left[i]<<" "<<right[i]<<endl;
             int minVal = min(left[i],right[i]);
-            if(minVal==INT_MAX) continue;
+            // if(minVal==INT_MAX) continue;
             result = max(minVal,result);
         }
         return result;
