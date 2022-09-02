@@ -1,20 +1,23 @@
 class Solution {
 public:
-   int lengthOfLongestSubstringTwoDistinct(string str) {
-        int ans=0; 
-        unordered_map<char,int> count;
-        int l=0, r=0, N=str.length();
-        while (r<N) {
-          count[str[r]]++;
-          while (count.size()>2 && r>=l) {
-            count[str[l]]--;      
-            if (count[str[l]]==0)
-                count.erase(str[l]);
-            l++;
-          }  
-          ans=max(ans,r-l+1);  
-          r++;
+    int lengthOfLongestSubstringTwoDistinct(string s) {
+        unordered_map<char,int> umap;
+        int n =s.size();
+        int left = 0, right = 0;
+        int maxLen = 0;
+        while(right<n){
+            char currC = s[right];
+            umap[currC]++;
+            while(umap.size()>2 && left<n){
+                char tempC = s[left];
+                umap[tempC]--;
+                if(umap[tempC]==0) umap.erase(tempC);
+                left++;
+            }
+            maxLen = max(maxLen,right-left+1);
+            right++;
         }
-        return ans;
+        return maxLen;
+        
     }
 };
