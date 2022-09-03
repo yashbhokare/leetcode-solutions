@@ -3,7 +3,7 @@ public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         priority_queue<pair<double,int>> maxHeap;
         for(int i=0;i<points.size();i++){
-            double numSquare = sqrt(pow(points[i][0],2) + pow(points[i][1],2));
+            double numSquare = pow(points[i][0],2) + pow(points[i][1],2);
             maxHeap.push({numSquare,i});
             if(maxHeap.size()>k) maxHeap.pop();
         }
