@@ -26,20 +26,14 @@ public:
                  
          }
             
-         while(!s1.empty()){
+         while(!s1.empty() && !s2.empty()){
                  
-                 str1.push_back(s1.top());
-                 s1.pop();
+                if(s1.top()!=s2.top()) return false;
+                s1.pop();
+                s2.pop();
                  
          }
-            
-         while(!s2.empty()){
-                 
-                 str2.push_back(s2.top());
-                 s2.pop();
-                 
-         }      
-            
-         return str1 == str2;   
+  
+         return s1.empty() && s2.empty();   
     }
 };
