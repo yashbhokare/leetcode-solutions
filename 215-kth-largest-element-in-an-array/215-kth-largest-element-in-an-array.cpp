@@ -15,7 +15,7 @@ public:
         
         int left=0,right=n-1;
         int pivotIndex =-1;
-        display(nums);
+        // display(nums);
         while(pivotIndex!=smallestPos){
             pivotIndex = left;
             int tempLeft = left+1;
