@@ -1,25 +1,18 @@
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        priority_queue<pair<int,int>> pq;
-        vector<vector<int>> result;
+        priority_queue<pair<double,int>> maxHeap;
         for(int i=0;i<points.size();i++){
-            int dist = (pow(points[i][0],2) + pow(points[i][1],2));
-            if(pq.size() == k && pq.top().first > dist){
-                pq.pop();
-            } else if(pq.size() == k && pq.top().first <= dist){
-                continue;
-            }
-            pq.push({dist,i});
-            // cout<<pq.top().first<<endl;
-            // cout<<dist<<endl;
+            double numSquare = sqrt(pow(points[i][0],2) + pow(points[i][1],2));
+            maxHeap.push({numSquare,i});
+            if(maxHeap.size()>k) maxHeap.pop();
         }
         
-        for(int i=0;i<k;i++){
-            result.push_back(points[pq.top().second]);
-            pq.pop();
+        vector<vector<int>> result;
+        while(!maxHeap.empty()){
+            result.push_back(points[maxHeap.top().second]);
+            maxHeap.pop();
         }
         return result;
-        
     }
 };
