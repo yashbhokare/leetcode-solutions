@@ -15,8 +15,15 @@ public:
     char buf4[4];
     int read(char *buf, int n) {
         int i=0;
-        while(i<n && ((index4<n4)|| (index4=0) < (n4=read4(buf4)))){
-            buf[i++]=buf4[index4++];
+        while(i<n){
+            if(index4<n4){
+                buf[i++]=buf4[index4++];
+            }else {
+                index4 = 0;
+                n4=read4(buf4);
+            }
+            if(n4==0) break;
+            
         }
         return i;
         
