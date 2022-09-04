@@ -13,8 +13,7 @@ public:
     int read(char *buf, int n) {
        
         int index = 0;
-        
-        while(n>=0){
+        while(n>0){
             int newIndex=0;
             char buf4[4];
             int v= read4(buf4);
