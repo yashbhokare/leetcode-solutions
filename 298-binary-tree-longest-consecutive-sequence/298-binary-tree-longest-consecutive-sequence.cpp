@@ -18,7 +18,6 @@ public:
     }
     
     void rec(TreeNode* root, int total){
-        // cout<<total;
         result = max(result,total);
         if(root==NULL) return;
         if(root->left){
@@ -26,7 +25,6 @@ public:
             else rec(root->left,1);
         }
         if(root->right){
-            // cout<<root->right->val<<" "<<root->val+1<<endl;
             if(root->right->val==root->val+1) rec(root->right,total+1);
              else rec(root->right,1);
         }
