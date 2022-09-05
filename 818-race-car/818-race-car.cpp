@@ -25,9 +25,10 @@ public:
             // if(visited.find(combine)!=visited.end()){
             //     continue;
             // }
-            if(visit.find({position,speed})!=visit.end()) continue;
-            visit.insert({position,speed});
             // visited.insert(combine);
+            
+            // if(visit.find({position,speed})!=visit.end()) continue;
+            // visit.insert({position,speed});
             
             que.push({moves+1,position+speed,speed*2});
             
