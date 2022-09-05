@@ -11,6 +11,7 @@ public:
         queue<Car> que;
       
         que.push({0,0,1});
+        set<pair<long long int, long long int>> visit;
         unordered_set<string> visited;
         while(!que.empty()){
             long long position = que.front().position;
@@ -19,13 +20,14 @@ public:
             que.pop();
             
             if(target==position) return moves;
-            string combine = toString(position,speed);
+            // string combine = toString(position,speed);
             
-            if(visited.find(combine)!=visited.end()){
-                continue;
-            }
-            
-            visited.insert(combine);
+            // if(visited.find(combine)!=visited.end()){
+            //     continue;
+            // }
+            if(visit.find({position,speed})!=visit.end()) continue;
+            visit.insert({position,speed});
+            // visited.insert(combine);
             
             que.push({moves+1,position+speed,speed*2});
             
