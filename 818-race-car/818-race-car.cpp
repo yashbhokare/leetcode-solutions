@@ -8,14 +8,14 @@ struct Car {
 class Solution {
 public:
     int racecar(int target) {
-        queue<Car*> que;
-        Car* newNode = new Car(0,0,1);
-        que.push(newNode);
+        queue<Car> que;
+      
+        que.push({0,0,1});
         unordered_set<string> visited;
         while(!que.empty()){
-            long long position = que.front()->position;
-            long long speed = que.front()->speed;
-            long long moves = que.front()->moves;
+            long long position = que.front().position;
+            long long speed = que.front().speed;
+            long long moves = que.front().moves;
             que.pop();
             
             if(target==position) return moves;
@@ -27,12 +27,12 @@ public:
             
             visited.insert(combine);
             
-            que.push(new Car(moves+1,position+speed,speed*2));
+            que.push({moves+1,position+speed,speed*2});
             
             if((position+speed>target && speed>0) || (position+speed<target && speed < 0)){
                 speed = speed > 0 ? -1 : 1;
                 
-                que.push(new Car(moves+1,position,speed));
+                que.push({moves+1,position,speed});
             }
             
         }
