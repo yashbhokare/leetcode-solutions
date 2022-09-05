@@ -2,7 +2,6 @@ class Logger {
 public:
     unordered_map<string,int> mapper;
     Logger() {
-        mapper = {};
     }
     
     bool shouldPrintMessage(int timestamp, string message) {
