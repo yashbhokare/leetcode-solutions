@@ -5,7 +5,10 @@ public:
         int m = grid.size();
         int n = grid[0].size();
         
+         // if we have sufficient quotas to eliminate the obstacles in the worst case,
+        // then the shortest distance is the Manhattan distance.
         if(k>=(m-1)+(n-1)) return (m-1 + n -1);
+        
         queue<pair<pair<int, int>, int>> myQueue;
         vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         myQueue.push({{0, 0}, k});
