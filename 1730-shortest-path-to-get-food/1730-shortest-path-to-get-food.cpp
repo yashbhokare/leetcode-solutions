@@ -24,7 +24,7 @@ public:
         
         queue<pair<int,int>> q;
         q.push({startX,startY});
-        grid[startX][startY] ='X';
+       
         int result = 0;
         
         while(!q.empty()){
@@ -32,6 +32,7 @@ public:
             while(size--){
                 int x = q.front().first;
                 int y = q.front().second;
+                grid[x][y] ='X';
                 q.pop();
                 for(int i=0;i<4;i++){
                     int newX = x + dir[i][0];
