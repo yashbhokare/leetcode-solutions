@@ -31,8 +31,8 @@ public:
             while(size--){
                 int x = q.front().first;
                 int y = q.front().second;
-                if(grid[x][y]=='#') return result;
-                grid[x][y] ='X';
+                // if(grid[x][y]=='#') return result;
+                // grid[x][y] ='X';
                 q.pop();
                 for(int i=0;i<4;i++){
                     int newX = x + dir[i][0];
