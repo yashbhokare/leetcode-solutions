@@ -24,28 +24,31 @@ public:
             v= 'U';
         }
         return s1+s2;
-        // return "";
     }
 
     
-    void traverse(TreeNode* root, int target, string s, string& result){
-            if(root==NULL) return;
-            if(result.size()!=0) return;
-            if(root->val==target && result=="") {
-                result = s;
-                return;
+    bool traverse(TreeNode* root, int target, string& s){
+            if(root==NULL) return false;
+            if(root->val==target) {
+                
+                return true;
             }
             
             if(root->left){
                 s.push_back('L');
-                traverse(root->left,target,s,result);
+                if(traverse(root->left,target,s)){
+                    return true;
+                }
                 s.pop_back();
             }
             if(root->right){
                 s.push_back('R');
-                traverse(root->right,target,s,result);
+                if(traverse(root->right,target,s));{
+                    return true;
+                }
                 s.pop_back();
             }
+        return false;
         
     }
     int path(TreeNode* root,int& t,string& p){
