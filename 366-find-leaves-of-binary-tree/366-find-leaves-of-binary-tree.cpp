@@ -14,24 +14,7 @@ public:
     vector<vector<int>> findLeaves(TreeNode* root) {
         vector<vector<int>> result;
         depth(root,result);
-        // while(root->left || root->right){
-        //     vector<int> leaves;
-        //     rec(root,leaves);
-        //     result.push_back(leaves);
-        // }
-        // result.push_back({root->val});
         return result;
-    }
-    
-    TreeNode* rec(TreeNode* root,vector<int>& leaves){
-        if(root==NULL) return NULL;
-        if(root->left==NULL && root->right==NULL){
-            leaves.push_back(root->val);
-            return NULL;
-        }
-        root->left = rec(root->left,leaves);
-        root->right = rec(root->right,leaves);
-        return root;
     }
     
     int depth(TreeNode* root,vector<vector<int>>& result){
@@ -47,6 +30,29 @@ public:
         return index;
     } 
     
+    // Code to actually find and delete all leave nodes as well
     
+    // vector<vector<int>> findAndDeleteLeaves(TreeNode* root){
+    //     // vector<vector<int>> result;
+    //     // while(root->left || root->right){
+    //     //     vector<int> leaves;
+    //     //     rec(root,leaves);
+    //     //     result.push_back(leaves);
+    //     // }
+    //     // result.push_back({root->val});
+    // }
+    
+    // TreeNode* rec(TreeNode* root,vector<int>& leaves){
+    //     if(root==NULL) return NULL;
+    //     if(root->left==NULL && root->right==NULL){
+    //         leaves.push_back(root->val);
+    //         return NULL;
+    //     }
+    //     root->left = rec(root->left,leaves);
+    //     root->right = rec(root->right,leaves);
+    //     return root;
+    // }
+    
+   
     
 };
