@@ -18,8 +18,8 @@ public:
     string getDirections(TreeNode* root, int startValue, int destValue) {
         lca(root,startValue,destValue);
         string s1 = "", s2 = "";
-        path(lcaNode,startValue,s1);
-        path(lcaNode,destValue,s2);
+        traverse(lcaNode,startValue,s1);
+        traverse(lcaNode,destValue,s2);
         for(auto &v:s1){
             v= 'U';
         }
@@ -27,10 +27,9 @@ public:
     }
 
     
-    bool traverse(TreeNode* root, int target, string& s){
+    bool traverse(TreeNode* root, int& target, string& s){
             if(root==NULL) return false;
             if(root->val==target) {
-                
                 return true;
             }
             
@@ -43,7 +42,7 @@ public:
             }
             if(root->right){
                 s.push_back('R');
-                if(traverse(root->right,target,s));{
+                if(traverse(root->right,target,s)){
                     return true;
                 }
                 s.pop_back();
