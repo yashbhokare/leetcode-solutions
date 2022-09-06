@@ -13,10 +13,10 @@ class Solution {
 public:
     TreeNode* pruneTree(TreeNode* root) {
       
-        TreeNode* dummyNode = new TreeNode();
-        dummyNode->right = root;
-        rec(dummyNode);
-        return dummyNode->right;
+        // TreeNode* dummyNode = new TreeNode();
+        // dummyNode->right = root;
+        return rec(root) ? root : NULL;
+        // return dummyNode->right;
     }
     
     int rec(TreeNode* root){
