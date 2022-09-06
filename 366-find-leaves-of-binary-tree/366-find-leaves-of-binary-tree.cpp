@@ -13,13 +13,13 @@ class Solution {
 public:
     vector<vector<int>> findLeaves(TreeNode* root) {
         vector<vector<int>> result;
-        int count = 3;
-        while(root->left || root->right){
-            vector<int> leaves;
-            rec(root,leaves);
-            result.push_back(leaves);
-        }
-        result.push_back({root->val});
+        depth(root,result);
+        // while(root->left || root->right){
+        //     vector<int> leaves;
+        //     rec(root,leaves);
+        //     result.push_back(leaves);
+        // }
+        // result.push_back({root->val});
         return result;
     }
     
@@ -33,5 +33,20 @@ public:
         root->right = rec(root->right,leaves);
         return root;
     }
+    
+    int depth(TreeNode* root,vector<vector<int>>& result){
+        if(root==NULL) return -1;
+        int leftDepth = depth(root->left,result);
+        int rightDepth = depth(root->right,result);
+        int index=max(leftDepth,rightDepth)+1;
+        if(result.size()==index){
+            result.push_back({root->val});
+        }else {
+            result[index].push_back(root->val);
+        }
+        return index;
+    } 
+    
+    
     
 };
