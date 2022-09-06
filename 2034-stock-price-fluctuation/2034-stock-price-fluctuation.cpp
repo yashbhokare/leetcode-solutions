@@ -2,8 +2,8 @@ class StockPrice {
 public:
     // stack<int> minPrice;
     // stack<int> maxPrice;
-    int currPrice;
-    map<int,int> timePriceMap;
+    int maxTimeStamp = INT_MIN;
+    unordered_map<int,int> timePriceMap;
     map<int,int> priceMap;
     StockPrice() {
         timePriceMap = {};
@@ -11,6 +11,7 @@ public:
     }
     
     void update(int timestamp, int price) {
+        maxTimeStamp = max(maxTimeStamp,timestamp);
         if(timePriceMap.find(timestamp)!=timePriceMap.end()){
             int oldPrice = timePriceMap[timestamp];
             priceMap[oldPrice]--;
@@ -24,7 +25,7 @@ public:
     }
     
     int current() {
-        return timePriceMap.rbegin()->second;
+        return timePriceMap[maxTimeStamp];
     }
     
     int maximum() {
