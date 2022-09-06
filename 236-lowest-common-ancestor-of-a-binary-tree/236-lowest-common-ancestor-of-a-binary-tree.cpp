@@ -23,16 +23,14 @@ public:
         
         int mid = ((root==p) || (root==q)) ? 1 : 0 ;
         
+        // If any two of the flags left, right or mid become True
         if(left+right+mid>1){
             result = root;
         }
         
+        // Return true if any one of the three bool values is True.
         return (left+right+mid>0);
-//         if((root==p) || (root==q)) return true;
-        
-//         if(leftTree || rightTree) return true;
-        
-//         return false;
+
     }
         bool recursion(TreeNode* root, TreeNode* p, TreeNode* q){
         if(root==NULL) return false;
