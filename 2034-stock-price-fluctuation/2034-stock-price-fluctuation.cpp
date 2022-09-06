@@ -3,28 +3,28 @@ public:
     // stack<int> minPrice;
     // stack<int> maxPrice;
     int currPrice;
-    map<int,int> timeMap;
+    map<int,int> timePriceMap;
     map<int,int> priceMap;
     StockPrice() {
-        timeMap = {};
+        timePriceMap = {};
         priceMap = {};
     }
     
     void update(int timestamp, int price) {
-        if(timeMap.find(timestamp)!=timeMap.end()){
-            int oldPrice = timeMap[timestamp];
+        if(timePriceMap.find(timestamp)!=timePriceMap.end()){
+            int oldPrice = timePriceMap[timestamp];
             priceMap[oldPrice]--;
             if(priceMap[oldPrice]==0)
                 priceMap.erase(oldPrice);
         }
-        timeMap[timestamp]= price;
+        timePriceMap[timestamp]= price;
         priceMap[price]++;
 
         
     }
     
     int current() {
-        return timeMap.rbegin()->second;
+        return timePriceMap.rbegin()->second;
     }
     
     int maximum() {
