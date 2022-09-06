@@ -13,6 +13,7 @@ public:
     void update(int timestamp, int price) {
         maxTimeStamp = max(maxTimeStamp,timestamp);
         if(timePriceMap.find(timestamp)!=timePriceMap.end()){
+            if(timePriceMap[timestamp]==price) return;
             int oldPrice = timePriceMap[timestamp];
             priceMap[oldPrice]--;
             if(priceMap[oldPrice]==0)
