@@ -22,7 +22,6 @@ public:
                 int newStart = mapper[start];
                 mapper[start] = max(mapper[start],end);
                 start = newStart;
-
             }
         }
         return work;
