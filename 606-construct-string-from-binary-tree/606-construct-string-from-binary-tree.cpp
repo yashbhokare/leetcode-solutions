@@ -26,14 +26,16 @@ public:
             s+=to_string(root->val);
             return;
         }
-        s+=to_string(root->val)+"(";
+        s+=to_string(root->val);
+        
+        s+="(";
         rec(root->left,s);
         s+=")";
         
         if(root->right){
              s+="(";
-            rec(root->right,s);
-            s+=")";
+             rec(root->right,s);
+             s+=")";
         }
        
 
