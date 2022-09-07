@@ -11,9 +11,14 @@ public:
             start+=2;
         }
         if(total==finalSum) return result;
+        
+        int lastVal = result.back();
+        result.pop_back();
+        
         long long diff = total-finalSum;
         long long index = (diff/2)-1;
-        result.erase(result.begin()+index);
+        result[index] = lastVal;
+        // result.erase(result.begin()+index);
         return result;
     }
 };
