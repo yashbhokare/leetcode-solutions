@@ -34,9 +34,6 @@ public:
                 stk.push(node);
                 node=node->left;
             }
-            // if(node==NULL) stk.pop();
-            if(!stk.empty() && stk.top()==NULL) break;
-            
             TreeNode* currNode = stk.top();
             stk.pop();
             result.push_back(currNode->val);
