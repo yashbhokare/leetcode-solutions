@@ -2,6 +2,7 @@ class Solution {
 public:
     unordered_map<int,vector<int>> mapper;
     unordered_map<int,int> memo;
+    unordered_set<int> visited;
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         for(auto pre:prerequisites){
             mapper[pre[0]].push_back(pre[1]);
@@ -9,7 +10,7 @@ public:
         
        
         for(int i=0;i<numCourses;i++){
-            unordered_set<int> visited;
+            
             if(isCycle(i,visited)) return false;
         }
         return true;
