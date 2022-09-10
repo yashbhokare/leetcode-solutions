@@ -12,25 +12,15 @@ public:
         
        
         for(int i=0;i<numCourses;i++){
-            // if(mapper.find(i)==mapper.end()) continue;
             if(isCycle(i,visited)) return {};
-            // ans.push_back(i);
         }
         return ans;
     }
     
     bool isCycle(int course,unordered_set<int>& visited){
-        // Check if course exists in mapper
-//         if(mapper.find(course)==mapper.end()) {
-//             if(added.find(course)==added.end()){
-//                 ans.push_back(course);
-//                 added.insert(course);
-//             }
-            
-//             return false;
-//         };
-    
-        
+//         Check if course exists in mapper
+//         if(mapper.find(course)==mapper.end()) return false;
+
         // Course already exists so a cycle is detected
         if(visited.find(course)!=visited.end()) return true;
         
@@ -48,13 +38,7 @@ public:
             
             if(result) break;
         }
-        
-        // if(!result){
-        //     if(added.find(course)==added.end()){
-        //         ans.push_back(course);
-        //         added.insert(course);
-        //     }
-        // }
+
         ans.push_back(course);
         visited.erase(course);
         memo[course] = result;
