@@ -19,11 +19,12 @@ public:
         // Check if course exists in mapper
         if(mapper.find(course)==mapper.end()) return false;
         
-        // Course already exists so a cycle is detected
-        if(visited.find(course)!=visited.end()) return true;
-        
         // Check if it exists in memo
         if(memo.find(course)!=memo.end()) return memo[course];
+        
+        // Course already exists so a cycle is detected
+        if(visited.find(course)!=visited.end()) return true;
+
         
         // Mark course as visited
         visited.insert(course);
