@@ -27,7 +27,7 @@ public:
         int right = pow(2,d)-1;
         
         while(d--){
-            int mid = (left+right)/2;
+            int mid = left+(right-left)/2;
             if(index<=mid){
                 node=node->left;
                 right=mid;
@@ -49,7 +49,7 @@ public:
         int right = pow(2,d)-1;
         
         while(left<=right){
-            int mid = (left+right)/2;
+            int mid = left+(right-left)/2;
             if(ifExists(root,d,mid)){
                 left = mid+1;
             }else {
