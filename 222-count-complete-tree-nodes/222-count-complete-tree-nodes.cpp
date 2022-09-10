@@ -21,10 +21,9 @@ public:
         return depthValue;
     }
     
-     bool ifExists(TreeNode* root,int d,int index){
-        TreeNode* node = root;
+     bool ifExists(TreeNode* node,int d,int index,int totalNodes){
         int left = 0;
-        int right = pow(2,d)-1;
+        int right = totalNodes;// pow(2,d)-1;
         
         while(d--){
             int mid = left+(right-left)/2;
@@ -45,18 +44,19 @@ public:
         int d = depth(root);
         if(d==0) return 1;
         
+        int totalNodes = pow(2,d)-1;
         int left = 0;
-        int right = pow(2,d)-1;
+        int right = totalNodes;// pow(2,d)-1;
         
         while(left<=right){
             int mid = left+(right-left)/2;
-            if(ifExists(root,d,mid)){
+            if(ifExists(root,d,mid,totalNodes)){
                 left = mid+1;
             }else {
                 right=mid-1;
             }
         }
-        int total = pow(2,d)-1 + left;
+        int total = totalNodes + left;
         return total;
         
     }
