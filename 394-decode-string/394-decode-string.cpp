@@ -5,19 +5,16 @@ public:
         for(int i=0;i<s.size();i++){
             if(s[i]==']'){
                 string decodedOne = "";
-                // cout<<stk.top();
                 while(stk.top()!="["){
                     decodedOne= stk.top()+decodedOne;
                     stk.pop();
                 }
                 stk.pop(); // Remove the [ from stack
                 string sdigit = "";
-                // cout<<decodedOne;
                 while(!stk.empty() && stk.top()>="0" && stk.top()<="9" ){
                     sdigit = stk.top() + sdigit;
                     stk.pop();
                 }
-                cout<<sdigit;
                 int digit = stoi(sdigit);
                 while(digit--){
                     stk.push(decodedOne);
