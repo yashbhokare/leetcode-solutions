@@ -49,10 +49,8 @@ public:
         int right = pow(2,d)-1;
         
         while(left<=right){
-            // cout<<left<<" "<<right<<endl;
             int mid = (left+right)/2;
             if(ifExists(root,d,mid)){
-                // cout<<"True";
                 left = mid+1;
             }else {
                 right=mid-1;
