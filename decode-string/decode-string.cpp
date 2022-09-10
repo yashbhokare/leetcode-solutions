@@ -1,44 +1,39 @@
 class Solution {
 public:
     string decodeString(string s) {
-        stack<char> stack;
-        for (int i = 0; i < s.length(); i++) {
-            if (s[i] == ']') {
-                string decodedString = "";
-                // get the encoded string
-                while (stack.top() != '[') {
-                    decodedString += stack.top();
-                    stack.pop();
+        stack<string> stk;
+        for(int i=0;i<s.size();i++){
+            if(s[i]==']'){
+                string decodedOne = "";
+                // cout<<stk.top();
+                while(stk.top()!="["){
+                    decodedOne= stk.top()+decodedOne;
+                    stk.pop();
                 }
-                // pop [ from stack
-                stack.pop();
-                int base = 1;
-                int k = 0;
-                // get the number k
-                while (!stack.empty() && isdigit(stack.top())) {
-                    k = k + (stack.top() - '0') * base;
-                    stack.pop();
-                    base *= 10;
+                stk.pop(); // Remove the [ from stack
+                string sdigit = "";
+                // cout<<decodedOne;
+                while(!stk.empty() && stk.top()>="0" && stk.top()<="9" ){
+                    sdigit = stk.top() + sdigit;
+                    stk.pop();
                 }
-                int currentLen = decodedString.size();
-                // decode k[decodedString], by pushing decodedString k times into stack
-                while (k != 0) {
-                    for (int j = decodedString.size() - 1; j >= 0; j--) {
-                        stack.push(decodedString[j]);
-                    }
-                    k--;
+                cout<<sdigit;
+                int digit = stoi(sdigit);
+                while(digit--){
+                    stk.push(decodedOne);
                 }
-            }
-            // push the current character to stack
-            else {
-                stack.push(s[i]);
+            }else {
+                string str ="";
+                str.push_back(s[i]);
+                
+                // cout<<str;
+                stk.push(str);
             }
         }
-        // get the result from stack
-        string result;
-        for (int i = stack.size() - 1; i >= 0; i--) {
-            result = stack.top() + result;
-            stack.pop();
+        string result = "";
+        while(!stk.empty()){
+            result = stk.top()+result;
+            stk.pop();
         }
         return result;
     }
