@@ -21,9 +21,8 @@ public:
                 }
             }else {
                 string str ="";
-                str.push_back(s[i]);
-                
-                // cout<<str;
+                str+=s[i];
+                // str.push_back(s[i]);
                 stk.push(str);
             }
         }
