@@ -18,12 +18,13 @@ public:
     bool isCycle(int course,unordered_set<int>& visited){
         // Check if course exists in mapper
         if(mapper.find(course)==mapper.end()) return false;
-        
-        // Check if it exists in memo
-        if(memo.find(course)!=memo.end()) return memo[course];
+    
         
         // Course already exists so a cycle is detected
         if(visited.find(course)!=visited.end()) return true;
+        
+          // Check if it exists in memo
+        if(memo.find(course)!=memo.end()) return memo[course];
 
         
         // Mark course as visited
