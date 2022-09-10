@@ -30,9 +30,8 @@ public:
         }
                 
         return minResult; 
-    }
-        
-        
-
+    }       
         
 };
+
+//https://www.youtube.com/watch?v=o8emK4ehhq0
