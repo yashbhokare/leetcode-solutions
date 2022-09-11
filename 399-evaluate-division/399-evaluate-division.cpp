@@ -28,7 +28,6 @@ public:
                 double ans = dfs(s1,s2,visited);
                 result.push_back(ans);
             }
-            // cout<<result[i];
         }
         return result;
     }
