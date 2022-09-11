@@ -1,55 +1,63 @@
 class Solution {
 public:
-    unordered_set<string> visited;
+    unordered_map<string,vector<pair<string,double>>> mapper;
     vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
-        unordered_map<string,unordered_map<string,double>> mapper;
-        vector<double> ans;
-        for(int i=0;i<equations.size();i++){
-            string dividend = equations[i][0];
-            string divisor = equations[i][1];
-            mapper[dividend].insert({divisor,values[i]});
-            mapper[divisor].insert({dividend,1/values[i]});
+        int n = equations.size();
+        for(int i=0;i<n;i++){
+            string s1 = equations[i][0];
+            string s2=  equations[i][1];
+            double div = values[i];
+            mapper[s1].push_back({s2,div});
+            mapper[s2].push_back({s1,1/div});
         }
         
+        vector<double> result;
         for(int i=0;i<queries.size();i++){
-            string start = queries[i][0];
-            string end = queries[i][1];
-            if(mapper.find(start) == mapper.end() || mapper.find(end) == mapper.end()){
-                ans.push_back(-1);
-            }else if(start==end){
-                ans.push_back(1);
-            }else {
-                double res = recursionResult(start,end,mapper);
-                if(res==INT_MAX) ans.push_back(-1);
-                else ans.push_back(res);
+            string s1 = queries[i][0];
+            string s2=  queries[i][1];
+            // Case 1 where the string doesn't exist
+            if(mapper.find(s1)==mapper.end() || mapper.find(s2)==mapper.end()){
+                result.push_back(-1);
+            }
+            // Case 2 if both string are equal
+            else if(s1==s2){
+                result.push_back(1);
+            }
+            else {
+                unordered_set<string> visited;
+                double ans = dfs(s1,s2,visited);
+                result.push_back(ans);
             }
         }
-        return ans;
+        return result;
     }
     
-    double recursionResult(string start,string end,unordered_map<string,unordered_map<string,double>>& mapper){
-        unordered_map<string,double> childs = mapper[start];
-        double result = INT_MAX;
+    
+    double dfs(string start,string end,unordered_set<string>& visited){
+        if(visited.find(start)!=visited.end()) return -1;
+        
+        if(mapper.find(start)==mapper.end()) return -1;
+        
         visited.insert(start);
-        for(auto it=childs.begin();it!=childs.end();it++){
-            if(it->first==end){
-                result = min(result,it->second);
+        double result = -1;
+        for(auto child:mapper[start]){
+            string s2 = child.first;
+            double v2 = child.second;
+            if(s2==end){
+                result = v2;
                 break;
             }else {
-                if(visited.find(it->first) == visited.end()){
-                    double val = recursionResult(it->first,end,mapper);
-                    if(val!=INT_MAX){
-                         result = min(result,val*it->second);
-                    }
-                   
-                    // cout<<it->first<<" "<<end<<":"<<result<<endl;
+                double val = dfs(s2,end,visited);
+                if(val!=-1){
+                    result = val*v2;
+                    break;
                 }
-                
             }
         }
-        cout<<"Final:"<<result<<" Start:"<<start<<" End:"<<end<<endl;
+        
         visited.erase(start);
         return result;
-        
     }
+    
+    
 };
