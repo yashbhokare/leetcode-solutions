@@ -11,7 +11,6 @@ public:
             if(binary[0]=='0') continue;
             
             int bytes = numberOfBytes(binary);
-            cout<<bytes<<endl;
             if(bytes==1) return false;
             if(i+bytes>n) return false;
             
