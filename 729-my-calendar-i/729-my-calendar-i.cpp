@@ -6,20 +6,20 @@ private:
 public:
     bool book(int start, int end) {
         
-        pair<int,int> newEvent = {start,end};
+        const pair<int,int> currEvent = {start,end};
         
-        auto it = calendar.lower_bound(newEvent);
+        const auto nextEvent = calendar.lower_bound(currEvent);
         
-        if(it!=calendar.end() && end>it->first){
+        if(nextEvent!=calendar.end() && end > nextEvent->first){
             return false;
         }
         
-        if(it!=calendar.begin()){
-            auto prevEvent= prev(it);
+        if(nextEvent!=calendar.begin()){
+            auto prevEvent= prev(nextEvent);
             if(start< prevEvent->second) return false;
         }
         
-        calendar.insert(newEvent);
+        calendar.insert(currEvent);
         return true;
     }
 };
