@@ -5,7 +5,7 @@ private:
 public:
     bool book(int start, int end) {
         for (const auto [s, e] : calendar) {
-            if (start < e && s<end) return false;
+            if (start < e && end > s) return false;
         }
         calendar.emplace_back(start, end);
         return true;
