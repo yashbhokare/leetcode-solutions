@@ -8,10 +8,16 @@ public:
             if(data[i]>=248) return false;
             
             string binary =  bitset<8>(data[i]).to_string(); //to binary
+            // Check if the digit is 1 byte thne just continue
             if(binary[0]=='0') continue;
-            
+    
+            // Check for number of bytes
             int bytes = numberOfBytes(binary);
+            
+            // If the bytes is 1 is not possible as the 1000000 is not valid according to UTF
             if(bytes==1) return false;
+            
+            // If the total bytes needed exceed the remaing values return false as no vallues to check
             if(i+bytes>n) return false;
             
             if(!isValidOctetSequence(data,i,bytes)){
