@@ -17,7 +17,6 @@ public:
             for(int c=0;c<colMax;c++){
                 mat[r][c] = mapper[r-c].top();
                 mapper[r-c].pop();
-                // mapper[r-c].push(mat[r][c]);
             }
         }
         return mat;
