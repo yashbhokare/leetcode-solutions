@@ -44,12 +44,12 @@ public:
             if(distinctElement==0 || distinctElement==1){
                 result++;
             }
-             if(isRemoved){
-                numset.insert(root->val);
-            }else {
-                numset.erase(root->val);
-            }
-            return;
+            //  if(isRemoved){
+            //     numset.insert(root->val);
+            // }else {
+            //     numset.erase(root->val);
+            // }
+            // return;
         }
         
         recursion(root->left,numset,distinctElement);
