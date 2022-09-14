@@ -25,8 +25,7 @@ public:
         if(root==NULL){
             return;
         }
-        
-        int currDistinctElement = distinctElement;
+
         bool isRemoved = false;
         
         if(numset.find(root->val)!=numset.end()){
@@ -39,17 +38,11 @@ public:
             isRemoved = false;
         }
         
-        // Check only for leaf nodes
+        // Check result only for leaf nodes
         if(root->left==NULL && root->right==NULL){
             if(distinctElement==0 || distinctElement==1){
                 result++;
             }
-            //  if(isRemoved){
-            //     numset.insert(root->val);
-            // }else {
-            //     numset.erase(root->val);
-            // }
-            // return;
         }
         
         recursion(root->left,numset,distinctElement);
