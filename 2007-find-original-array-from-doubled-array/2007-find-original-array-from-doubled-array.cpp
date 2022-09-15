@@ -11,10 +11,8 @@ public:
             if(num==0 && mapper[num]<2) continue;
             
             if(mapper[num] && mapper[num*2]){
-                
                 mapper[num]--;
                 mapper[num*2]--;
-
                 resultArray.push_back(num);
             }
         }
