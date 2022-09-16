@@ -11,33 +11,17 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        return swap(head);
+        if(head==NULL) return NULL;
+        return swap(head,head->next);
     }
     
-    ListNode* swap(ListNode* head){
-        ListNode* newHead = new ListNode(0);
-        newHead->next = head;
-        ListNode* prev = newHead;
-        // ListNode* curr = newHead->next;
-        while(head!=NULL){
-            ListNode* thirdPointer = NULL;
-            if(head->next!=NULL && head->next->next!=NULL){
-                thirdPointer = head->next->next;
-                // head->next->next =NULL;
-            }
-               
-            if(head->next!=NULL){
-                prev->next = head->next;
-                // head->next = NULL;
-                prev=prev->next;
-            }
-            prev->next=head;
-            prev=prev->next;
-            head = thirdPointer;
-        }
+    ListNode* swap(ListNode* first,ListNode* second){
         
-        prev->next = NULL; //Always end with NULL else it gets stuck in a cycle
-        return newHead->next;
+        if(second==NULL) return first;
         
+        ListNode* temp=second->next;
+        second->next=first;
+        first->next=temp==NULL ? NULL : swap(temp,temp->next);
+        return second;
     }
 };
