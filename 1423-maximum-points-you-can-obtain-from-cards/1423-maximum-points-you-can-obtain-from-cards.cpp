@@ -1,70 +1,19 @@
-// Dp approach
-// class Solution {
-// public:
-//     int maxScore(vector<int> &cardPoints, int k) {
-//         int startingIndex = 0;
-//         int presentSubarrayScore = 0;
-//         int n = cardPoints.size();
-//         int requiredSubarrayLength = n - k;
-//         int minSubarrayScore;
-//         int totalScore = 0;
-
-//         // Total score obtained on selecting all the cards.
-//         for (int i : cardPoints) {
-//             totalScore += i;
-//         }
-        
-//         minSubarrayScore = totalScore;
-
-//         if (k == n) {
-//             return totalScore;
-//         }
-
-//         for (int i = 0; i < n; i++) {
-//             presentSubarrayScore += cardPoints[i];
-//             int presentSubarrayLength = i - startingIndex + 1;
-//             // If a valid subarray (having size cardsPoints.size() - k) is possible.
-//             if (presentSubarrayLength == requiredSubarrayLength) {
-//                 minSubarrayScore = min(minSubarrayScore, presentSubarrayScore);
-//                 presentSubarrayScore -= cardPoints[startingIndex++];
-//             }
-//         }
-//         return totalScore - minSubarrayScore;
-//     }
-// };
-
-
-// Sliding window to find the minimum sum of subarray and remove it from the total sum to get the max sum 
 class Solution {
 public:
-    int maxScore(vector<int> &cardPoints, int k) {
-        int startingIndex = 0;
-        int presentSubarrayScore = 0;
-        int n = cardPoints.size();
-        int requiredSubarrayLength = n - k;
-        int minSubarrayScore;
-        int totalScore = 0;
-
-        // Total score obtained on selecting all the cards.
-        for (int i : cardPoints) {
-            totalScore += i;
+    int maxScore(vector<int>& cardPoints, int k) {
+        int minWindowSize = cardPoints.size()-k;
+        int total = accumulate(cardPoints.begin(),cardPoints.begin()+minWindowSize,0);
+        int left=0;
+        int minTotal = total;
+        for(int right=minWindowSize;right<cardPoints.size();right++){
+            total=total+cardPoints[right]-cardPoints[left++];
+            minTotal = min(total,minTotal);
         }
         
-        minSubarrayScore = totalScore;
-
-        if (k == n) {
-            return totalScore;
-        }
-
-        for (int i = 0; i < n; i++) {
-            presentSubarrayScore += cardPoints[i];
-            int presentSubarrayLength = i - startingIndex + 1;
-            // If a valid subarray (having size cardsPoints.size() - k) is possible.
-            if (presentSubarrayLength == requiredSubarrayLength) {
-                minSubarrayScore = min(minSubarrayScore, presentSubarrayScore);
-                presentSubarrayScore -= cardPoints[startingIndex++];
-            }
-        }
-        return totalScore - minSubarrayScore;
+        int totalSum = accumulate(cardPoints.begin(),cardPoints.end(),0);
+        
+        return totalSum-minTotal;
+        
+        
     }
 };
