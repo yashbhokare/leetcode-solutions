@@ -11,46 +11,17 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        return recSwapPairs(head);
+        if(head==NULL) return NULL;
+        return swap(head,head->next);
     }
     
-    ListNode* recSwapPairs(ListNode* head) {
-        ListNode* third = NULL;
-        if(head== NULL || head->next==NULL){
-            return head;
-        }else {
-            third = recSwapPairs(head->next->next);
-        }
+    ListNode* swap(ListNode* first,ListNode* second){
         
-        ListNode* first = head;
-        ListNode* second = head->next;
-          
-        // Swap first and second
-        second->next= head;
-        first->next = third;
+        if(second==NULL) return first;
         
+        ListNode* temp=second->next;
+        second->next=first;
+        first->next=temp==NULL ? NULL : swap(temp,temp->next);
         return second;
-        
     }
-    
-//         ListNode* recSwapPairs(ListNode* head) {
-//         ListNode* third = NULL;
-//         if(head== NULL || head->next==NULL){
-//             return head;
-//         }
-//         // else {
-//         //     third = recSwapPairs(head->next->next);
-//         // }
-        
-        
-//         ListNode* second = head->next;
-        
-//         head->next = recSwapPairs(head->next->next);;
-        
-//         // Swap first and second
-//         second->next= head;
-//         // first->next = third;
-        
-//         return second;
-        
 };
