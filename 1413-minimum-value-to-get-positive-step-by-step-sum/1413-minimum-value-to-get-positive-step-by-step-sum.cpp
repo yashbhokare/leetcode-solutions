@@ -7,6 +7,6 @@ public:
             total+=num;
             minVal=min(minVal,total);
         }
-        return minVal==0 ? 1 : -minVal+1;
+        return -minVal+1;
     }
 };
