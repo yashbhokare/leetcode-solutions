@@ -4,13 +4,9 @@ public:
         int minVal = 0;
         int total = 0;
         for(auto num:nums){
-            total = num + total;
-            if(total<1){
-                int temp = 1 - total;
-                minVal+=temp;
-                total=1;
-            }
+            total+=num;
+            minVal=min(minVal,total);
         }
-        return minVal==0 ? 1 : minVal;
+        return minVal==0 ? 1 : -minVal+1;
     }
 };
