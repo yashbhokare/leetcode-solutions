@@ -24,12 +24,9 @@ public:
             return allTrees;
         }
 
-    
         for(int i=start;i<=end;i++){
             vector<TreeNode*> leftTree=generateTree(start,i-1);
-            
             vector<TreeNode*> rightTree=generateTree(i+1,end);
-            
             for(auto left:leftTree){
                 for(auto right:rightTree){
                     TreeNode* newRoot = new TreeNode(i);
@@ -39,7 +36,6 @@ public:
                 }
             }
         }
-        
         return allTrees;
         
     }
