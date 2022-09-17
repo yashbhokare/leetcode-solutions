@@ -10,8 +10,9 @@ public:
         for(int i=0;i<recipes.size();i++) recMapper[recipes[i]] = ingredients[i];
        
         vector<string> result;
+        unordered_set<string> visited;
         for(auto recipe:recipes){
-            unordered_set<string> visited;
+            
             if(dfs(recipe,visited)) {
                 result.push_back(recipe);
             }
