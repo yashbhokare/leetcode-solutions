@@ -27,15 +27,15 @@ public:
     
     int hashMap(vector<vector<int>>& wall){
         unordered_map<int,int> mapper;
-        int maxValue = 0;
+        int maxNumberOfGaps = 0;
         for(int r=0;r<wall.size();r++){
             int nextGap = 0;
             for(int c=0;c<wall[r].size()-1;c++){
                 nextGap = nextGap+wall[r][c];
                 mapper[nextGap]++;
-                maxValue = max(maxValue,mapper[nextGap]);
+                maxNumberOfGaps = max(maxNumberOfGaps,mapper[nextGap]);
             }
         }
-        return wall.size()-maxValue;
+        return wall.size()-maxNumberOfGaps;
     }
 };
