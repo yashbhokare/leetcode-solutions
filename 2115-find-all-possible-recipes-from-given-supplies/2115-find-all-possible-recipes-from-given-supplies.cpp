@@ -1,18 +1,23 @@
 class Solution {
 public:
-    unordered_set<string> supply;
+    unordered_set<string> supply; // Add all supplies to set
     unordered_set<string> cannotCook; // Add recipes which cannot be made
-    unordered_map<string,vector<string>> recMapper;
-    
+    unordered_map<string,vector<string>> recMapper; // Add recipe map with ingredients
     vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
         
+        // Insert all supplies in set
         for(auto s:supplies) supply.insert(s);
+        
+        // Add recipe map with ingredients
         for(int i=0;i<recipes.size();i++) recMapper[recipes[i]] = ingredients[i];
        
+        // Store the result
         vector<string> result;
+        
+        // Check if cycle exists
         unordered_set<string> visited;
+        
         for(auto recipe:recipes){
-            
             if(dfs(recipe,visited)) {
                 result.push_back(recipe);
             }
@@ -54,8 +59,12 @@ public:
             }
                 
         }
+        // Remove the recipe i.e for Back tracking
         visited.erase(recipe);
+        
+        // If recipe is possible to cook add to supply chain
         if(result) supply.insert(recipe);
+        
         return result;
         
     }
