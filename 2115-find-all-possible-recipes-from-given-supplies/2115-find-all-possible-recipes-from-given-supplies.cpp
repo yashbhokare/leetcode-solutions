@@ -46,7 +46,7 @@ public:
                     result=false;
                     break;
                 }
-            }else{
+            }else {
                 cannotCook.insert(ingredient);
                 result=false;
                 break;
