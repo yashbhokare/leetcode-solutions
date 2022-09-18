@@ -25,6 +25,7 @@ public:
         
         stack<int> rStack;
         for(int i=n-1;i>=0;i--){
+            // * Important * Remember to make the sign >= as ther values are created for right monotone
             while(!rStack.empty() && arr[rStack.top()]>=arr[i]){
                 rStack.pop();
             }
@@ -40,7 +41,9 @@ public:
         for(int i=0;i<n;i++){
             int leftDistance = leftMono[i]==-1 ? i+1 : abs(leftMono[i]-i);
             int rightDistance = rightMono[i]==-1 ? n-i : abs(rightMono[i]-i);
-            ans=(ans+((arr[i])*((leftDistance*rightDistance)%mod))%mod)%mod;
+            long multi = (leftDistance*rightDistance)%mod;
+            long total = (arr[i]*multi)%mod;
+            ans=(ans+total)%mod;
         }
         
        
