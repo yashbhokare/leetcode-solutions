@@ -8,7 +8,7 @@ public:
             sign = s[index]=='-' ? -1 : 1; 
             index++;
         }
-        long result = 0;
+        int result = 0;
         while(s[index]>='0' && s[index]<='9'){
             
             int digit =s[index]-'0';
