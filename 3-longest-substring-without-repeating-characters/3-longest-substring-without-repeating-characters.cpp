@@ -1,3 +1,6 @@
+//Time complexity : O(n)
+//Space complexity : O(n) where it can be maximum to n if all chars are different
+
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
