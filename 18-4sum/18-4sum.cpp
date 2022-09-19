@@ -6,9 +6,21 @@ public:
     }
     
      vector<vector<int>> kthSum(vector<int>& nums,long target,long start,long end,long k){
-        if(start>=end){
+       
+         if(start>=end){
             return {};
         }
+        // There are k remaining values to add to the sum. The 
+        // average of these values is at least target / k.
+        int average_value = target / k;
+        
+        // We cannot obtain a sum of target if the smallest value
+        // in nums is greater than target / k or if the largest 
+        // value in nums is smaller than target / k.
+        if  (nums[start] > average_value || average_value > nums[end]) {
+            return {};
+        };
+         
         if(k==2){
             return twoSumSorted(nums,start,end,target);
         }else {
