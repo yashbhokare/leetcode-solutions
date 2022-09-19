@@ -1,7 +1,6 @@
 class Solution {
 public:
     int myAtoi(string s) {
-        
         int index=s.find_first_not_of(' ');
         if(index==-1) return 0;
         int sign = 1;
