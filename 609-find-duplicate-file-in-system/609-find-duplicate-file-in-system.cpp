@@ -4,10 +4,8 @@ public:
         unordered_map<string,vector<string>> mapper;
         for(auto path:paths){
             int index = path.find_first_of(" ");
-            string root="root";
-            if(index!=-1){
-                root=path.substr(0,index);
-            }
+            string root;
+            root=path.substr(0,index);
             root.push_back('/');
             path = path.substr(index);
             stringstream ss(path);
