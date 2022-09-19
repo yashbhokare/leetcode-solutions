@@ -2,64 +2,55 @@ class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         sort(nums.begin(),nums.end());
-        return kthSum(nums,4,0,target);
+        return kthSum(nums,target,0,nums.size()-1,4);
     }
     
-    vector<vector<int>> kthSum(vector<int>& nums,int k, int low,long int target){
-        if(low>=nums.size()) return {};
-        
-        // There are k remaining values to add to the sum. The 
-        // average of these values is at least target / k.
-        int average_value = target / k;
-        
-        // We cannot obtain a sum of target if the smallest value
-        // in nums is greater than target / k or if the largest 
-        // value in nums is smaller than target / k.
-        if  (nums[low] > average_value || average_value > nums.back()) {
+     vector<vector<int>> kthSum(vector<int>& nums,long target,long start,long end,long k){
+        if(start>=end){
             return {};
-        };
-        
-        
+        }
         if(k==2){
-            return twoSumSorted(nums,low,target);
+            return twoSumSorted(nums,start,end,target);
         }else {
-            vector<vector<int>> ans;
-            for(int i=low;i<nums.size();i++){
-                if(i==low || nums[i]!=nums[i-1]){
-                    vector<vector<int>> result = kthSum(nums,k-1,i+1,target-nums[i]);
-                    for(auto res:result){
-                        res.push_back(nums[i]);
-                        ans.push_back(res);
-                    }
+            vector<vector<int>> result;
+            for(long i=start;i<=end;i++){
+                if(i!=start && nums[i]==nums[i-1]) continue;
+                long sum = target - nums[i];
+                vector<vector<int>> ans = kthSum(nums,sum,i+1,end,k-1);
+                for(auto arr:ans){
+                    arr.push_back(nums[i]);
+                    result.push_back(arr);
                 }
             }
-            return ans;
+            return result;
         }
+       
     }
     
-    vector<vector<int>> twoSumSorted(vector<int>& nums,int low,int target){
+    
+    vector<vector<int>> twoSumSorted(vector<int>& nums,long start,long end,long target){
         vector<vector<int>> result;
-        int start = low;
-        int high = nums.size()-1;
+        long low=start;
+        long high =end;
         while(low<high){
             if(low!=start && nums[low]==nums[low-1]) {
                 low++;
                 continue;
             }
-            if(high!=nums.size()-1 && nums[high]==nums[high+1]) {
+            if(high!=end && nums[high]==nums[high+1]){
                 high--;
                 continue;
             }
-            
-            int sum = nums[low] + nums[high];
+           
+            long sum = nums[low]+nums[high];
             if(sum==target){
                 result.push_back({nums[low],nums[high]});
                 low++;
                 high--;
-            }else if(sum<target){
-                low++;
-            }else {
+            }else if(sum>target){
                 high--;
+            }else {
+                low++;
             }
         }
         return result;
