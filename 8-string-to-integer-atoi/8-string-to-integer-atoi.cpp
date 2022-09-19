@@ -10,7 +10,6 @@ public:
         }
         int result = 0;
         while(s[index]>='0' && s[index]<='9'){
-            
             int digit =s[index]-'0';
             // Check overflow and underflow conditions. 
             if ((result > INT_MAX / 10) || (result == INT_MAX / 10 && digit > INT_MAX % 10)) { 
