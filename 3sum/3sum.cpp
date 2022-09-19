@@ -2,69 +2,45 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> ans;
-        sort(nums.begin(),nums.end());
-        // return kthSum(nums,3,0,0);
+        sort(begin(nums),end(nums));
         for(int i=0;i<nums.size();i++){
-            if(i==0 || nums[i]!=nums[i-1]){
-                vector<vector<int>> currRes = twoSumSorted(nums,i+1,-nums[i]);
-                for(auto val:currRes){
-                    val.push_back(nums[i]);
-                    ans.push_back(val);
-                }
+            if(i!=0 && nums[i]==nums[i-1]) continue;
+            int target = -nums[i];
+            for(auto arr:twoSumSorted(nums,i+1,nums.size()-1,target)){
+                arr.push_back(nums[i]);
+                ans.push_back(arr);
             }
-           
         }
         return ans;
     }
     
-    vector<vector<int>> kthSum(vector<int>& nums, int k, int index, int target){
-        if(index>=nums.size()) return {};
-        
-        if(k==2){
-            return twoSumSorted(nums,index,target);
-        }
-        
-        vector<vector<int>> ans;
-        for(int i=index;i<nums.size();i++){
-            if(i==index || nums[i]!=nums[i-1]){
-                vector<vector<int>> currRes = kthSum(nums,k-1,i+1, target-nums[i]);
-                for(auto val:currRes){
-                    val.push_back(nums[i]);
-                    ans.push_back(val);
-                }
-            }
-           
-        }
-        return ans;
-        
-    }
-    
-    vector<vector<int>> twoSumSorted(vector<int>& nums,int start, int target){
+    vector<vector<int>> twoSumSorted(vector<int>& nums,int start,int end,int target){
         vector<vector<int>> result;
-        int low = start;
-        int high = nums.size()-1;
+        int low=start;
+        int high =end;
         while(low<high){
-            int total = nums[low]+nums[high];
-            
-            if(low!=start && nums[low]==nums[low-1]){
+            if(low!=start && nums[low]==nums[low-1]) {
                 low++;
                 continue;
             }
-            if(high!=nums.size()-1 && nums[high]==nums[high+1]){
+            if(high!=end && nums[high]==nums[high+1]){
                 high--;
                 continue;
             }
-            
-            if(total==target){
+           
+            int sum = nums[low]+nums[high];
+           // cout<<sum<<" "<<target<<endl;
+            if(sum==target){
                 result.push_back({nums[low],nums[high]});
                 low++;
                 high--;
-            }else if(total>target){
+            }else if(sum>target){
                 high--;
             }else {
                 low++;
             }
         }
+        // cout<<result.size();
         return result;
     }
 };
