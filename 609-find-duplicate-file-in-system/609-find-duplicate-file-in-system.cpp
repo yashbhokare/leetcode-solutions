@@ -20,7 +20,6 @@ public:
                 mapper[fileContent].push_back(root+fileName);
             } 
         }
-        cout<<mapper.size();
         vector<vector<string>> result;
         for(auto it=mapper.begin();it!=mapper.end();it++){
             if(it->second.size()>1)
