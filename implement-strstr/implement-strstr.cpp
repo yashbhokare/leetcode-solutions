@@ -10,18 +10,17 @@ public:
             if(needle[right]==needle[left]){
                 l[right] = left+1;
                 left++;
-                continue;
-            }
-            // int temp = right;
-            while(left!=0){
-                left = l[left-1];
-                // temp=left;
-                if(needle[left]==needle[right]){
-                    l[right] = left+1;
-                    left++;
-                    break;
+            }else {
+                while(left!=0){
+                    left = l[left-1];
+                    if(needle[left]==needle[right]){
+                        l[right] = left+1;
+                        left++;
+                        break;
+                    }
                 }
             }
+           
         }
         
         cout<<endl;
