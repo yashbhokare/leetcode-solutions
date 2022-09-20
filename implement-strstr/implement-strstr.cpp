@@ -12,10 +12,10 @@ public:
                 left++;
                 continue;
             }
-            int temp = right;
+            // int temp = right;
             while(left!=0){
-                left = l[temp-1];
-                temp=left;
+                left = l[left-1];
+                // temp=left;
                 if(needle[left]==needle[right]){
                     l[right] = left+1;
                     left++;
@@ -24,9 +24,6 @@ public:
             }
         }
         
-        for(auto a:l){
-            cout<<a<<" ";
-        }
         cout<<endl;
         return l;
     }
@@ -34,7 +31,6 @@ public:
     
     int strStr(string haystack, string needle) {
         vector<int> l = lps(needle);
-        
         int j=0;
         for(int i=0;i<haystack.size();i++){
             if(needle[j]==haystack[i]){
@@ -48,7 +44,6 @@ public:
                     }
                 }
             }
-            // cout<<j<<endl;
             if(j==needle.size()) return i-j+1;
         }
         return -1;
