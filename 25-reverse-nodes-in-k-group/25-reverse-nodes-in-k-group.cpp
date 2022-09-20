@@ -23,8 +23,6 @@ public:
         while(--n && temp->next){
             temp = temp->next;
         }
-        // cout<<n;
-
         if(n!=0) return root;
         cout<<temp->val;
         
