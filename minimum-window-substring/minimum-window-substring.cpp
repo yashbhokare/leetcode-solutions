@@ -1,49 +1,38 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
+        unordered_map<char,int> targetMap;
+        for(auto ch:t) targetMap[ch]++;
+        int count = targetMap.size();
+        int left=0;
+        int right=0;
+        int minIndex = 0;
+        int minLength = INT_MAX;
         
-        unordered_map<char,int> targetMapper;
-        unordered_map<char,int> currMapper;
-        int left=0,right=0;
-        int n = s.size();
-        int minLen = INT_MAX;
-        int startIndex = -1;
-        int tMapSize = 0;
-        
-        if(t.size()==0) return "";
-        
-        for(auto c:t){
-            targetMapper[c]++;
-        }
-        
-        tMapSize = targetMapper.size();
-        
-        while(right<n){
-            
-            char curr = s[right];
-            if(targetMapper.find(curr)!=targetMapper.end()){
-                currMapper[curr]++;
-                if(currMapper[curr]==targetMapper[curr]) tMapSize--;
+        unordered_map<char,int> currMap;
+        while(right<s.size()){
+            char right_char = s[right];
+            if(targetMap.find(right_char)!=targetMap.end()){
+                currMap[right_char]++;
+                if(currMap[right_char]==targetMap[right_char]) count--;
             }
-            while(tMapSize==0){
-                
-                if(right-left+1<minLen){
-                    minLen = right-left+1;
-                    startIndex = left;
+            
+            while(count==0){
+                int distance = right-left+1;
+                if(distance<minLength){
+                    minIndex = left;
+                    minLength= distance;
                 }
-                char leftCurr = s[left];
-                if(currMapper.find(leftCurr)!=currMapper.end()){
-                    currMapper[leftCurr]--;
-                    if(currMapper[leftCurr]<targetMapper[leftCurr]) tMapSize++;
+                char left_char = s[left];
+                if(targetMap.find(left_char)!=targetMap.end()){
+                    currMap[left_char]--;
+                    if(currMap[left_char]<targetMap[left_char]) count++;
                 }
                 left++;
             }
             right++;
         }
-        if(startIndex==-1) return "";
-        
-        return s.substr(startIndex,minLen);
-        
-        
+        if(minLength==INT_MAX) return "";
+        return s.substr(minIndex,minLength);
     }
 };
