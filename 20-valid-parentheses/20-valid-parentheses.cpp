@@ -5,13 +5,10 @@ public:
         for(auto c:s){
             if(c=='{' || c=='(' || c=='[') stk.push(c);
             else if(
-                !stk.empty() && 
-                (
-                (c=='}' && stk.top()=='{') || 
+                !stk.empty() &&
+                ((c=='}' && stk.top()=='{') || 
                 (c==']' && stk.top()=='[') || 
-                (c==')' && stk.top()=='(')
-                )
-            )
+                (c==')' && stk.top()=='(') ))
             {
                 stk.pop();
             }else {
