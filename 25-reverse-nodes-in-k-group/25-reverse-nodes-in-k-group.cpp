@@ -17,18 +17,20 @@ public:
     
     ListNode* rec(ListNode* root, int k) {
         if(root==NULL) return NULL;
+       
         // Traverse till the last node of the subgroup
         int n=k;
         ListNode* temp=root;
         while(--n && temp->next){
             temp = temp->next;
         }
+        
         if(n!=0) return root;
         
         ListNode* nextNode = rec(temp->next,k);
-        ListNode* curr = reverse(root,k);
+        ListNode* reverseHead = reverse(root,k);
         root->next=nextNode;
-        return curr;
+        return reverseHead;
     }
     
     ListNode* reverse(ListNode* head,int k){
