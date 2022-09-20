@@ -24,7 +24,6 @@ public:
             temp = temp->next;
         }
         if(n!=0) return root;
-        cout<<temp->val;
         
         ListNode* nextNode = rec(temp->next,k);
         ListNode* curr = reverse(root,k);
