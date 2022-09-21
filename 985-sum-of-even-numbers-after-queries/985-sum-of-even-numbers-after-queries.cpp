@@ -11,13 +11,12 @@ public:
             if(nums[index]%2==0){
                 sumEvenNums-=nums[index];
             }
-            int newValue = nums[index]+value;
-            if(newValue%2==0){
-                sumEvenNums+=newValue;
+            //Assigning new value to the given index
+            nums[index] = nums[index]+value;
+            if(nums[index]%2==0){
+                sumEvenNums+=nums[index];
             }
-            // cout<<sumEvenNums<<" ";
             result.push_back(sumEvenNums);
-            nums[index] = newValue;
         }
         return result;
     }
