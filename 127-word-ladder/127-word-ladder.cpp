@@ -32,6 +32,7 @@ public:
                     if(wordMap.find(curr)!=wordMap.end()){
                         for(auto word:wordMap[curr]){
                             if(visited.find(word)==visited.end()){
+                                cout<<word<<endl;
                                 q.push(word);
                                 visited.insert(word);
                                 if(word==endWord) return result+1;
