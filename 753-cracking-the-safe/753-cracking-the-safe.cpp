@@ -1,13 +1,15 @@
+
+//De Bruijn sequence
+// Hamilton Graph can also be used
+
 class Solution {
 public:
-    
-    
     string crackSafe(int n, int k) {
-        
         return dfs_crackSafe(n,k);
+        
     }
-  
     // Using DFS
+    //https://leetcode.com/problems/cracking-the-safe/discuss/153039/DFS-with-Explanations
     string dfs_crackSafe(int n, int k){
        
         unordered_set<string> visited;
@@ -35,7 +37,6 @@ public:
         }
         return false;
     }
-    
     
     
     // Greedy Approach
