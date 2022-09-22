@@ -1,6 +1,50 @@
 class Solution {
 public:
+    
+    
     string crackSafe(int n, int k) {
+        
+        return dfs_crackSafe(n,k);
+    }
+    
+
+    int finalSize = 0;
+    // Using DFS
+    string dfs_crackSafe(int n, int k){
+        string pwd(n,'0');
+        unordered_set<string> visited; 
+        visited.insert(pwd);
+        finalSize = (int)pow(k,n);
+        dfs(pwd,visited,n,k);
+        return pwd;
+    }
+    
+    bool dfs(string& pwd,unordered_set<string>& visited,int n,int k){
+        if(visited.size()==finalSize){
+            return true;
+        }
+        
+        string lastSubString = pwd.substr(pwd.size()-n+1);
+        for(char ch='0';ch<k+'0';ch++){
+            string newComb =lastSubString+ch;
+            if(visited.find(newComb)==visited.end()){
+                visited.insert(newComb);
+                pwd.push_back(ch);
+                if(dfs(pwd,visited,n,k)) return true;
+                visited.erase(newComb);
+                pwd.pop_back();
+            }
+        }
+        
+        return false;
+        
+        
+    }
+    
+    
+    
+    // Greedy Approach
+    string greedy_crackSafe(int n, int k) {
         string ans = string(n, '0');
         unordered_set<string> visited;
         visited.insert(ans);
