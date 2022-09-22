@@ -6,39 +6,34 @@ public:
         
         return dfs_crackSafe(n,k);
     }
-    
-
-    int finalSize = 0;
-    unordered_set<string> visited;
+  
     // Using DFS
     string dfs_crackSafe(int n, int k){
+       
+        unordered_set<string> visited;
         string pwd(n,'0');
         visited.insert(pwd);
-        finalSize = (int)pow(k,n);
-        dfs(pwd,n,k);
+        int finalSize = (int)pow(k,n);
+        dfs(pwd,visited,n,k,finalSize);
         return pwd;
     }
     
-    bool dfs(string& pwd,int n,int k){
+    bool dfs(string& pwd,unordered_set<string>& visited,int n,int k,int finalSize){
         if(visited.size()==finalSize){
             return true;
         }
-        
         string lastSubString = pwd.substr(pwd.size()-n+1);
         for(char ch='0';ch<k+'0';ch++){
             string newComb =lastSubString+ch;
             if(visited.find(newComb)==visited.end()){
                 visited.insert(newComb);
                 pwd.push_back(ch);
-                if(dfs(pwd,n,k)) return true;
+                if(dfs(pwd,visited,n,k,finalSize)) return true;
                 visited.erase(newComb);
                 pwd.pop_back();
             }
         }
-        
         return false;
-        
-        
     }
     
     
