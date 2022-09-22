@@ -9,17 +9,17 @@ public:
     
 
     int finalSize = 0;
+    unordered_set<string> visited;
     // Using DFS
     string dfs_crackSafe(int n, int k){
         string pwd(n,'0');
-        unordered_set<string> visited; 
         visited.insert(pwd);
         finalSize = (int)pow(k,n);
-        dfs(pwd,visited,n,k);
+        dfs(pwd,n,k);
         return pwd;
     }
     
-    bool dfs(string& pwd,unordered_set<string>& visited,int n,int k){
+    bool dfs(string& pwd,int n,int k){
         if(visited.size()==finalSize){
             return true;
         }
@@ -30,7 +30,7 @@ public:
             if(visited.find(newComb)==visited.end()){
                 visited.insert(newComb);
                 pwd.push_back(ch);
-                if(dfs(pwd,visited,n,k)) return true;
+                if(dfs(pwd,n,k)) return true;
                 visited.erase(newComb);
                 pwd.pop_back();
             }
