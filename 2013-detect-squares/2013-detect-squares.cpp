@@ -20,7 +20,7 @@ public:
         for(auto& [x3,y3]:points){
             if(abs(x1-x3)==0 || abs(x1-x3)!=abs(y1-y3)) continue;
             ans+=cntPoints[x1][y3]*cntPoints[x3][y1];
-            cout<<ans<<endl;
+            // cout<<ans<<endl;
         }
         return ans;
     }
