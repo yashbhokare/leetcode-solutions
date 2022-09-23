@@ -17,31 +17,31 @@ public:
         return ans;
     }
     
-    
-    bool isCycle(int num,unordered_set<int>& visited){
-        // Number doesn't exist so no pre req
-        // if(mapper.find(num)==mapper.end()) return false;
+    bool isCycle(int course,unordered_set<int>& visited){
+//         Check if course exists in mapper
+//         if(mapper.find(course)==mapper.end()) return false;
+
+        // Course already exists so a cycle is detected
+        if(visited.find(course)!=visited.end()) return true;
         
-        // Already checked
-        if(added.find(num)!=added.end()) return false;
+          // Check if it exists in memo
+        if(memo.find(course)!=memo.end()) return memo[course];
+
         
-        // Cycle exisits
-        if(visited.find(num)!=visited.end()) return true;
+        // Mark course as visited
+        visited.insert(course);
         
-        visited.insert(num);
         bool result = false;
-        for(auto child:mapper[num]){
-            if(isCycle(child,visited)){
-                result = true;
-                break;
-            }
+        // Check for all it's children
+        for(auto childCourse:mapper[course]){
+            result = isCycle(childCourse,visited);
+            
+            if(result) break;
         }
-        
-        visited.erase(num);
-        if(!result) {
-            ans.push_back(num);
-            added.insert(num);
-        }
+
+        ans.push_back(course);
+        visited.erase(course);
+        memo[course] = result;
         return result;
     }
 };
