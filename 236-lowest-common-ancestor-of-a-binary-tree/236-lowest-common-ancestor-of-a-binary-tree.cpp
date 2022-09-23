@@ -23,9 +23,9 @@ public:
         int curr = root==p || root==q ? 1 : 0;
         
         int sum = left+right+curr;
-        if(sum>1){
+        if(sum>1 && result==NULL){
             result = root;
-            sum=0;
+            // sum=0;
         }
         
         return sum;
