@@ -41,6 +41,7 @@ public:
                     curr[i] = currCh;
                 }
             }
+            cout<<endl;
             result++;
         }
         return 0;
