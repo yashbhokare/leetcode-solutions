@@ -37,7 +37,7 @@ public:
         unionFind.init(n);
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
-                if(stones[i][0]==stones[j][0] || stones[i][1]==stones[j][1] ){
+                if(stones[i][0]==stones[j][0] || stones[i][1]==stones[j][1]){
                     unionFind.uni(i,j);
                 }
             }
