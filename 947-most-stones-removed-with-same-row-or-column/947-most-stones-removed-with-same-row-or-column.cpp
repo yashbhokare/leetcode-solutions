@@ -18,7 +18,7 @@ class Uf{
         int rootX=find(x);
         int rootY=find(y);
         if(rootX!=rootY){
-            root[rootX] = rootY;
+            root[rootX] = root[rootY];
             count--;
         }
     }
