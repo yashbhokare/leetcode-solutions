@@ -1,56 +1,40 @@
 class Solution {
 public:
-    stack<int> ans;
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         unordered_map<int,vector<int>> mapper;
-        for(int i=0;i<prerequisites.size();i++){
-            mapper[prerequisites[i][0]].push_back(prerequisites[i][1]);
-        }
+        for(auto preq:prerequisites) mapper[preq[0]].push_back(preq[1]);
+        
         unordered_set<int> visited;
         unordered_set<int> memo;
         for(int i=0;i<numCourses;i++){
-            if(isCycle(i,mapper,visited,memo)){
-                return false;
-            }
-        }
-
-        while(!ans.empty()){
-            cout<<ans.top()<<" ";
-            ans.pop();
+            if(isCycle(i,visited,memo,mapper)) return false;
+            memo.insert(i);
         }
         return true;
-        
     }
     
-    bool isCycle(int numCourse,unordered_map<int,vector<int>>& mapper,unordered_set<int>& visited,unordered_set<int>& memo){
-        if(visited.find(numCourse)!=visited.end()){
-            return true;
-        }
-        if(memo.find(numCourse)!=memo.end()){
-            return false;
-        }
+    
+    bool isCycle(int num,unordered_set<int>& visited,unordered_set<int>& memo,unordered_map<int,vector<int>>& mapper){
+        // Number doesn't exist so no pre req
+        if(mapper.find(num)==mapper.end()) return false;
         
-        // if(mapper.find(numCourse)==mapper.end()){
-        //     // ans.push(numCourse);
-        //     return false;
-        // }
+        // Already checked
+        if(memo.find(num)!=memo.end()) return false;
         
-        visited.insert(numCourse);
-        vector<int> childs = mapper[numCourse];
-        bool res= false;
-        for(int child:childs){
-            if(isCycle(child,mapper,visited,memo)){
-                res= true;
+        // Cycle exisits
+        if(visited.find(num)!=visited.end()) return true;
+        
+        visited.insert(num);
+        bool result = false;
+        for(auto child:mapper[num]){
+            if(isCycle(child,visited,memo,mapper)){
+                result = true;
                 break;
             }
         }
         
-        visited.erase(numCourse);
-        memo.insert(numCourse);
-        if(res==false){
-            ans.push(numCourse);
-        }
-        return res;
-        
+        visited.erase(num);
+        if(!result) memo.insert(num);
+        return result;
     }
 };
