@@ -8,7 +8,6 @@ public:
         unordered_set<int> memo;
         for(int i=0;i<numCourses;i++){
             if(isCycle(i,visited,memo,mapper)) return false;
-            memo.insert(i);
         }
         return true;
     }
@@ -34,7 +33,7 @@ public:
         }
         
         visited.erase(num);
-        // if(!result) memo.insert(num);
+        if(!result) memo.insert(num);
         return result;
     }
 };
