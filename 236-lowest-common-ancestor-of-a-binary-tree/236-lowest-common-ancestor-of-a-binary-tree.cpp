@@ -8,45 +8,27 @@
  * };
  */
 class Solution {
+    TreeNode* result=NULL;
 public:
-    TreeNode* result;
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        recursionWithCount(root,p,q);
+        lowestCommonAncestorCount(root,p,q);
         return result;
     }
     
-    bool recursionWithCount(TreeNode* root, TreeNode* p, TreeNode* q){
-        if(root==NULL) return false;
+    int lowestCommonAncestorCount(TreeNode* root, TreeNode* p, TreeNode* q){
+        if(root==NULL) return 0;
         
-        int left = recursion(root->left,p,q) ? 1 : 0;
-        int right = recursion(root->right,p,q)? 1 : 0;
+        int left = lowestCommonAncestorCount(root->left,p,q);
+        int right = lowestCommonAncestorCount(root->right,p,q);
+        int curr = root==p || root==q ? 1 : 0;
         
-        int mid = ((root==p) || (root==q)) ? 1 : 0 ;
-        
-        // If any two of the flags left, right or mid become True
-        if(left+right+mid>1){
+        int sum = left+right+curr;
+        if(sum>1){
             result = root;
+            sum=0;
         }
         
-        // Return true if any one of the three bool values is True.
-        return (left+right+mid>0);
-
-    }
-        bool recursion(TreeNode* root, TreeNode* p, TreeNode* q){
-        if(root==NULL) return false;
+        return sum;
         
-        bool leftTree = recursion(root->left,p,q);
-        bool rightTree = recursion(root->right,p,q);
-        
-        if((leftTree && rightTree) || ((leftTree || rightTree) && ((root==p) || (root==q)))){
-            result = root;
-            return false;
-        }
-        
-        if((root==p) || (root==q)) return true;
-        
-        if(leftTree || rightTree) return true;
-        
-        return false;
     }
 };
