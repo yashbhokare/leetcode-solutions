@@ -1,45 +1,40 @@
 class Solution {
 public:
-    unordered_map<int,vector<int>> mapper;
-    unordered_map<int,int> memo;
-    unordered_set<int> visited;
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        for(auto pre:prerequisites){
-            mapper[pre[0]].push_back(pre[1]);
-        }
+        unordered_map<int,vector<int>> mapper;
+        for(auto preq:prerequisites) mapper[preq[0]].push_back(preq[1]);
         
-       
+        unordered_set<int> visited;
+        unordered_set<int> memo;
         for(int i=0;i<numCourses;i++){
-            
-            if(isCycle(i,visited)) return false;
+            if(isCycle(i,visited,memo,mapper)) return false;
+            memo.insert(i);
         }
         return true;
     }
     
-    bool isCycle(int course,unordered_set<int>& visited){
-        // Check if course exists in mapper
-        if(mapper.find(course)==mapper.end()) return false;
     
+    bool isCycle(int num,unordered_set<int>& visited,unordered_set<int>& memo,unordered_map<int,vector<int>>& mapper){
+        // Number doesn't exist so no pre req
+        if(mapper.find(num)==mapper.end()) return false;
         
-        // Course already exists so a cycle is detected
-        if(visited.find(course)!=visited.end()) return true;
+        // Already checked
+        if(memo.find(num)!=memo.end()) return false;
         
-          // Check if it exists in memo
-        if(memo.find(course)!=memo.end()) return memo[course];
-
+        // Cycle exisits
+        if(visited.find(num)!=visited.end()) return true;
         
-        // Mark course as visited
-        visited.insert(course);
-        
+        visited.insert(num);
         bool result = false;
-        // Check for all it's children
-        for(auto childCourse:mapper[course]){
-            result = isCycle(childCourse,visited);
-            if(result) break;
+        for(auto child:mapper[num]){
+            if(isCycle(child,visited,memo,mapper)){
+                result = true;
+                break;
+            }
         }
         
-        visited.erase(course);
-        memo[course] = result;
+        visited.erase(num);
+        // if(!result) memo.insert(num);
         return result;
     }
 };
