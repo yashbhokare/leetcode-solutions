@@ -13,8 +13,8 @@ class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> result;
-        preorderTraversalRec(root,result);
-        // preorderTraversalIterative(root,result);
+        // preorderTraversalRec(root,result);
+        preorderTraversalIterative(root,result);
         return result;
     }
     
