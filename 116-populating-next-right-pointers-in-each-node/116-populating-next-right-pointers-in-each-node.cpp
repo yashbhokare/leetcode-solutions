@@ -18,32 +18,13 @@ public:
 
 class Solution {
 public:
-    // Node* connect(Node* root) {
-    //     if(root==NULL) return root;
-    //     queue<Node*> q;
-    //     Node* head = root;
-    //     q.push(root);
-    //     while(!q.empty()){
-    //         int qSize = q.size();
-    //         while(qSize){
-    //             Node* node = q.front();
-    //             q.pop();
-    //             if(qSize>1){
-    //                 node->next = q.front();
-    //             }
-    //             if(node->left!=NULL){
-    //                 q.push(node->left);
-    //             }
-    //             if(node->right!=NULL){
-    //                 q.push(node->right);
-    //             }
-    //             qSize--;
-    //         }
-    //     }
-    //     return head;
-    // }
-    // Using O(1) Space complexity
     Node* connect(Node* root) {
+        return connect_using_no_space(root);
+        // return connect_using_bfs(root);
+    }
+    
+    // Using O(1) Space complexity
+    Node* connect_using_no_space(Node* root) {
         if(root==NULL) return NULL;
         Node* head=root;
         Node* leftMost=root;
@@ -64,5 +45,31 @@ public:
         }
         return root;
     }
+    
+    Node* connect_using_bfs(Node* root) {
+        if(root==NULL) return root;
+        queue<Node*> q;
+        Node* head = root;
+        q.push(root);
+        while(!q.empty()){
+            int qSize = q.size();
+            while(qSize){
+                Node* node = q.front();
+                q.pop();
+                if(qSize>1){
+                    node->next = q.front();
+                }
+                if(node->left!=NULL){
+                    q.push(node->left);
+                }
+                if(node->right!=NULL){
+                    q.push(node->right);
+                }
+                qSize--;
+            }
+        }
+        return head;
+    }
+
     
 };
