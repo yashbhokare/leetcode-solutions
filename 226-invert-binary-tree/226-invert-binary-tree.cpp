@@ -17,9 +17,9 @@ public:
     
     TreeNode* rec(TreeNode* root){
         if(root==NULL) return NULL;
-        TreeNode* temp = new TreeNode(root->val);
-        temp->left = rec(root->right);
-        temp->right = rec(root->left);
-        return temp;
+        TreeNode* temp = root->left;
+        root->left = rec(root->right);
+        root->right = rec(temp);
+        return root;
     }
 };
