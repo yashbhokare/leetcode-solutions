@@ -30,26 +30,31 @@ public:
             
             Node* level = nextValid;
             Node* prev = NULL;
+            //**** Order of if conditions very important *****
             while(level){
-                
+                // If no child exists move to next parent
                 if(level->left==NULL && level->right==NULL){
                     level = level->next;
                     continue;
                 }
+                // First pref given to left node 
                 if(level->left!=NULL && prev){
                     prev->next=level->left;
                     prev = prev->next;
                 }
                 
+                // Store the prev element if it doesn't exist 
                 if(level->left!=NULL && prev==NULL){
                     prev=level->left;
                 }
                 
+                // Check if right child exists if prev exists
                 if(level->right!=NULL && prev){
                     prev->next=level->right;
                     prev = prev->next;
                 }
                 
+                // Store the prev element if it doesn't exist 
                 if(level->right!=NULL && prev==NULL){
                     prev=level->right;
                 }
