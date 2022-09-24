@@ -2,6 +2,7 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         return searchMatrixUsingBinarySearch(matrix,target);
+        // return searchMatrixSimple(matrix,target);
     }
     
     bool searchMatrixSimple(vector<vector<int>>& matrix, int target) {
