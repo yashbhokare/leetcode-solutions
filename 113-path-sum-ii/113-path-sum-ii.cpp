@@ -18,7 +18,7 @@ public:
         return result;
     }
     
-    void rec(TreeNode* root, int targetSum,vector<int>& total){
+    void rec(TreeNode* root, int& targetSum,vector<int>& total){
         if(root==NULL) return;
         targetSum-=root->val;
         total.push_back(root->val);
@@ -26,11 +26,13 @@ public:
             if(targetSum==0){
                 result.push_back(total);
             }
+            targetSum+=root->val;
             total.pop_back();
             return;
         }
         rec(root->left,targetSum,total);
         rec(root->right,targetSum,total);
+        targetSum+=root->val;
         total.pop_back();
         
         
