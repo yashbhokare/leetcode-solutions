@@ -13,7 +13,7 @@ class Solution {
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
         if(root==NULL) return false;
-        // if(targetSum<0) return false;
+        
         targetSum=targetSum-root->val;
         if(root->left==NULL && root->right==NULL) return targetSum==0;
 
