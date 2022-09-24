@@ -1,16 +1,16 @@
 class Solution {
 public:
     vector<int> sortArray(vector<int>& nums) {
-        // mergeSort(nums,0,nums.size()-1);
-        quickSort(nums,0,nums.size()-1);
+        mergeSort(nums,0,nums.size()-1);
+        // quickSort(nums,0,nums.size()-1);
         return nums;
     }
     
-    void quickSort(vector<int>& nums,int low,int high){
-        if(low>=high) return; 
-        int pivotElement = nums[low];
-        int start = low;
-        int end = high;
+    void quickSort(vector<int>& nums,int start,int end){
+        if(start>=end) return;
+        // int pivotElement = nums[start];
+        int low  = start;
+        int high = end;
         while(low<high){
             if(nums[low]>nums[low+1]){
                 swap(nums[low],nums[low+1]);
@@ -24,40 +24,36 @@ public:
         quickSort(nums,low+1,end);
     }
     
-    void mergeSort(vector<int>& nums,int low,int high){
-        if(low>=high) return;
-        int mid = (low+high)/2;
-        mergeSort(nums,low,mid);
-        mergeSort(nums,mid+1,high);
-        merge(nums,low,mid,high);
+    void mergeSort(vector<int>& nums,int start,int end){
+        if(start>=end) return;
+        int mid = (start + end)/2;
+        mergeSort(nums,start,mid);
+        mergeSort(nums,mid+1,end);
+        merge(nums,start,mid,end);
     }
     
-    void merge(vector<int>& nums,int low,int mid,int high){
-        int left = low;
-        int leftMax = mid;
-        int right = mid+1;
-        int rightMax = high;
-        vector<int> mergedList;
-        while(left<=leftMax && right<=rightMax){
-            if(nums[left]<=nums[right]){
-                mergedList.push_back(nums[left]);
-                left++;
-            }else{
-                mergedList.push_back(nums[right]);
-                right++;
+    void merge(vector<int>& nums,int start,int mid,int end){
+        int low1=start;
+        int high1=mid;
+        
+        int low2 = mid+1;
+        int high2=end;
+        vector<int> mergedArray;
+        
+        while(low1<=high1 && low2<=high2){
+            if(nums[low1]<nums[low2]){
+                mergedArray.push_back(nums[low1]);
+                low1++;
+            }else {
+                mergedArray.push_back(nums[low2]);
+                low2++;
             }
         }
-        while(left<=leftMax){
-            mergedList.push_back(nums[left]);
-            left++;
-        }
-        
-        while(right<=rightMax){
-            mergedList.push_back(nums[right]);
-            right++;
-        }
-        for(int i =0;i<mergedList.size();i++){
-            nums[low+i]= mergedList[i];
-        }
+        // cout<<low1;
+        while(low1<=high1) mergedArray.push_back(nums[low1++]);
+        while(low2<=high2) mergedArray.push_back(nums[low2++]);
+        int index=0;
+        for(int i=start;i<=end;i++)
+            nums[i] = mergedArray[index++];
     }
 };
