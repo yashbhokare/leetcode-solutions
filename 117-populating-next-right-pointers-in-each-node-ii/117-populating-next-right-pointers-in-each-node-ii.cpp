@@ -25,11 +25,12 @@ public:
         if(root == NULL) return root;
         
         Node* head = root;
-        Node* nextValid = nextValidNode(head);
+        Node* nextValid = root;
         while(nextValid!=NULL){
             
             Node* level = nextValid;
             Node* prev = NULL;
+            nextValid =NULL;
             //**** Order of if conditions very important *****
             while(level){
                 // If no child exists move to next parent
@@ -46,6 +47,7 @@ public:
                 // Store the prev element if it doesn't exist 
                 if(level->left!=NULL && prev==NULL){
                     prev=level->left;
+                    nextValid = prev;
                 }
                 
                 // Check if right child exists if prev exists
@@ -57,11 +59,12 @@ public:
                 // Store the prev element if it doesn't exist 
                 if(level->right!=NULL && prev==NULL){
                     prev=level->right;
+                    nextValid = prev;
                 }
                 level = level->next;
             }
-            head = nextValid->left ? nextValid->left : nextValid->right;
-            nextValid = nextValidNode(head);
+            // head = nextValid->left ? nextValid->left : nextValid->right;
+            // nextValid = nextValidNode(head);
         }
         return root;
     }
