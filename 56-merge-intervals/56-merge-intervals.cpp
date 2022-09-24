@@ -23,17 +23,16 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        vector<vector<int>> result;
+        vector<vector<int>> merged;
         sort(intervals.begin(),intervals.end());
         for(int i=0;i<intervals.size();i++){
-           
-            if(i!=0 && intervals[i][0]<=result.back()[1]){
-                result.back()[1] = max(result.back()[1],intervals[i][1]);
+            if(i!=0 && intervals[i][0]<=merged.back()[1]){
+                merged.back()[1] = max(merged.back()[1],intervals[i][1]);
             }
             else {
-                result.push_back(intervals[i]);
+                merged.push_back(intervals[i]);
             }
         }
-        return result;
+        return merged;
     }
 };
