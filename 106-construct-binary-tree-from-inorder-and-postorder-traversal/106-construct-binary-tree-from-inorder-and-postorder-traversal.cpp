@@ -33,11 +33,11 @@ public:
         // cout<<rootValue<<endl;
         TreeNode* root = new TreeNode(rootValue);
         
-        if(inorder.size()==1){
-             root->left=nullptr;
-             root->right=nullptr;
-            return root;
-        }
+//         if(inorder.size()==1){
+//              root->left=nullptr;
+//              root->right=nullptr;
+//             return root;
+//         }
         
         int inorderIndex = find(inorder.begin(),inorder.end(),rootValue)-inorder.begin();
         root->right = rec({inorder.begin()+inorderIndex+1,inorder.end()},postorder);
