@@ -12,8 +12,8 @@ public:
 
     // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
-        if(root==NULL) return "NULL ";
-        return to_string(root->val) + " "+ serialize(root->left) + serialize(root->right);
+        if(root==NULL) return "NULL,";
+        return to_string(root->val) + ","+ serialize(root->left) + serialize(root->right);
     }
 
     // Decodes your encoded data to tree.
@@ -24,8 +24,7 @@ public:
     
     TreeNode* deserializeHelper(stringstream& ss){
         string curr;
-        // getline(ss,curr,',');
-        ss>>curr;
+        getline(ss,curr,',');
         if(curr=="NULL") return nullptr;
         
         TreeNode* root = new TreeNode(stoi(curr));
