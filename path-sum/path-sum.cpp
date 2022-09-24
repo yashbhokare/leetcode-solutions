@@ -11,18 +11,13 @@
  */
 class Solution {
 public:
-    bool result= false;
     bool hasPathSum(TreeNode* root, int targetSum) {
-        return checkPathSum(root,targetSum);
-    }
-    
-    bool checkPathSum(TreeNode* root, int targetSum){
         if(root==NULL) return false;
-        targetSum = targetSum - root->val;
-        if(root->left==NULL && root->right==NULL){
-            return targetSum==0;
-        }
-        return checkPathSum(root->left,targetSum) || checkPathSum(root->right,targetSum);
+        // if(targetSum<0) return false;
+        targetSum=targetSum-root->val;
+        if(root->left==NULL && root->right==NULL) return targetSum==0;
+
+        return hasPathSum(root->left,targetSum) || hasPathSum(root->right,targetSum);
         
     }
 };
