@@ -26,13 +26,13 @@ public:
             if(targetSum==0){
                 result.push_back(total);
             }
-            targetSum+=root->val;
-            total.pop_back();
-            return;
+            // targetSum+=root->val; // Add this only if you are passing target sum by reference
+            // total.pop_back();
+            // return;
         }
         rec(root->left,targetSum,total);
         rec(root->right,targetSum,total);
-        targetSum+=root->val;
+        targetSum+=root->val; // Add this only if you are passing target sum by reference
         total.pop_back();
         
         
