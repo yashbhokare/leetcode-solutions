@@ -18,28 +18,51 @@ public:
 
 class Solution {
 public:
+    // Node* connect(Node* root) {
+    //     if(root==NULL) return root;
+    //     queue<Node*> q;
+    //     Node* head = root;
+    //     q.push(root);
+    //     while(!q.empty()){
+    //         int qSize = q.size();
+    //         while(qSize){
+    //             Node* node = q.front();
+    //             q.pop();
+    //             if(qSize>1){
+    //                 node->next = q.front();
+    //             }
+    //             if(node->left!=NULL){
+    //                 q.push(node->left);
+    //             }
+    //             if(node->right!=NULL){
+    //                 q.push(node->right);
+    //             }
+    //             qSize--;
+    //         }
+    //     }
+    //     return head;
+    // }
+    // Using O(1) Space complexity
     Node* connect(Node* root) {
-        if(root==NULL) return root;
-        queue<Node*> q;
-        Node* head = root;
-        q.push(root);
-        while(!q.empty()){
-            int qSize = q.size();
-            while(qSize){
-                Node* node = q.front();
-                q.pop();
-                if(qSize>1){
-                    node->next = q.front();
+        if(root==NULL) return NULL;
+        Node* head=root;
+        Node* leftMost=root;
+        while(leftMost->left){
+            Node* node = leftMost;
+            while(node!=NULL){
+                // Connection 1
+                node->left->next=node->right;
+                
+                // Connection 2
+                if(node->next){
+                    node->right->next=node->next->left;
                 }
-                if(node->left!=NULL){
-                    q.push(node->left);
-                }
-                if(node->right!=NULL){
-                    q.push(node->right);
-                }
-                qSize--;
+                
+                node=node->next;
             }
+            leftMost=leftMost->left;
         }
-        return head;
+        return root;
     }
+    
 };
