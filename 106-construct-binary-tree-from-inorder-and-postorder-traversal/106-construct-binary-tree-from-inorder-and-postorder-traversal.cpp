@@ -11,7 +11,9 @@
  */
 class Solution {
 public:
+    unordered_map<int,int> inorderMap;
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+
         return rec(inorder,postorder);
     }
     
