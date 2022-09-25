@@ -1,20 +1,20 @@
 class Solution {
-public:
+public: 
     vector<vector<int>> result;
     vector<vector<int>> permute(vector<int>& nums) {
-        rec(0,nums);
+        rec(nums,0);
         return result;
     }
     
-    void rec(int index,vector<int>& nums){
-        if(index==nums.size()-1){
+    void rec(vector<int>& nums,int start){
+        if(start==nums.size()){
             result.push_back(nums);
             return;
         }
-        for(int i=index;i<nums.size();i++){
-            swap(nums[i],nums[index]);
-            rec(index+1,nums);
-            swap(nums[i],nums[index]);
+        for(int i=start;i<nums.size();i++){
+            swap(nums[i],nums[start]);
+            rec(nums,start+1);
+            swap(nums[i],nums[start]);
         }
     }
 };
