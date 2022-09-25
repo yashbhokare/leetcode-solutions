@@ -15,3 +15,5 @@ public:
         if(close<open) rec(s+')',open,close+1,n);
     }
 };
+
+//https://leetcode.com/problems/generate-parentheses/discuss/1276579/Short-and-Easy-Solution-w-Explanation-or-Beats-100
