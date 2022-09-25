@@ -1,19 +1,26 @@
 class Solution {
 public:
-    vector<string> mappings = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}, ans;    
+    vector<string> mapper= {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    vector<string> result;
     vector<string> letterCombinations(string digits) {
-        if(digits == "") return ans;         // no combinations formed without any digits
-        helper(digits, 0, "");              
-        return ans;
+        string s="";
+        if(digits.size()==0) return {};
+        rec(0,s,digits);
+        return result;
     }
-    // recursive helper function
-    void helper(string &digits, int i, string combi){	
-        if(i == size(digits)) {  // base condition - push when we have recursed for all digits
-            ans.push_back(combi);    
+    
+    void rec(int index,string s,string digits){
+        if(index==digits.size()){
+            result.push_back(s);
             return;
         }
-        // add and recurse for each character (chosen from current digit-charcter mapping)
-        for(auto &c : mappings[digits[i] - '2'])
-            helper(digits, i + 1, combi + c);
+        int num = digits[index]-'0';
+        for(auto ch:mapper[num]){
+            s.push_back(ch);
+            rec(index+1,s,digits);
+            s.pop_back();
+        }
     }
+    
+    
 };
