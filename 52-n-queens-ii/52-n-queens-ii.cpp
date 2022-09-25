@@ -1,47 +1,61 @@
 class Solution {
 public:
-    int result= 0;
-    int size;
-    int totalNQueens(int n) {
-        size = n;
-        vector<string> matrix;
-        for(int i=0;i<n;i++){
-            string row = "";
-            for(int j=0;j<n;j++){
-                row+=".";
-            }
-            matrix.push_back(row);
-        }
-        unordered_set<int> col;
-        unordered_set<int> diag;
-        unordered_set<int> anti_diag;
-        backtrack(0,col,diag,anti_diag,matrix);
-        return result;
+    unordered_set<int> col_map;
+    unordered_set<int> diag;
+    unordered_set<int> anti_diag;
+    // vector<vector<int>> matrix;
+    int N;
+    int count=0;
+    void init(int n){
+        N = n;
+        // matrix.resize(n,vector<int>(n,0));
     }
     
-    void backtrack(int r,unordered_set<int>& col,unordered_set<int>& diag,unordered_set<int>& anti_diag,vector<string>& matrix){
-        if(r==size){
-            result++;
+    int totalNQueens(int n) {
+        init(n);
+        // display();
+        rec(0);
+        return count;
+    }
+    
+    // void display(){
+    //     for(int i=0;i<N;i++){
+    //         for(int j=0;j<N;j++){
+    //             cout<<matrix[i][j]<<" ";
+    //         }
+    //         cout<<endl;
+    //     }
+    //     cout<<"**********************\n";
+    // }
+    void rec(int row){
+        if(row==N){
+            count++;
             return;
         }
         
-        for(int c=0;c<size;c++){
-            if(col.find(c) != col.end() || diag.find(r-c) != diag.end() || anti_diag.find(r+c) != anti_diag.end()){
-                continue;
+        for(int col=0;col<N;col++){
+            int diag_value = row-col;
+            int anti_diag_value=row+col;
+            if(
+                diag.find(diag_value)==diag.end() && 
+                anti_diag.find(anti_diag_value)==anti_diag.end() &&
+                col_map.find(col)==col_map.end()
+            ){
+                diag.insert(diag_value);
+                anti_diag.insert(anti_diag_value);
+                col_map.insert(col);
+                // matrix[row][col]=1;
+                
+                // Recursion call
+                rec(row+1);
+                
+                // Backtrack
+                diag.erase(diag_value);
+                anti_diag.erase(anti_diag_value);
+                col_map.erase(col);
+                // matrix[row][col]=0;
             }
-            matrix[r][c] = 'Q';
-            col.insert(c);
-            diag.insert(r-c);
-            anti_diag.insert(r+c);
-            
-            backtrack(r+1,col,diag,anti_diag,matrix);
-            
-            // Backtrack
-            matrix[r][c] = '.';
-            col.erase(c);
-            diag.erase(r-c);
-            anti_diag.erase(r+c);
-            
+           
         }
     }
 };
