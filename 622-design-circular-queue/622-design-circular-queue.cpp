@@ -12,33 +12,33 @@ public:
     bool enQueue(int value) {
         if(isFull()) return false;
         
-        if(head==-1){
-            tail=0;
+        if(tail==-1){
+            head=0;
         }
-        head = (head+1)%size;
-        dq[head]=value;
+        tail = (tail+1)%size;
+        dq[tail]=value;
         return true;
     }
     
     bool deQueue() {
         if(isEmpty()) return false;
-        if(tail==head){
+        if(head==tail){
             tail=-1;
             head=-1;
             return true;
         }
-        tail = (tail+1)%size;
+        head = (head+1)%size;
         return true;
     }
     
     int Front() {
         if(isEmpty()) return -1;
-        return dq[tail];
+        return dq[head];
     }
     
     int Rear() {
         if(isEmpty()) return -1;
-        return dq[head];
+        return dq[tail];
     }
     
     bool isEmpty() {
@@ -47,7 +47,7 @@ public:
     }
     
     bool isFull() {
-        if(((head+1)%size)==tail) return true;
+        if(((tail+1)%size)==head) return true;
         return false;
     }
 };
