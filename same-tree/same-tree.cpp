@@ -13,6 +13,11 @@ class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
         return isSameTree_Iterative(p,q);
+        // return isSameTree_Recursion(p,q);
+    }
+    
+    bool isSameTree_Recursion(TreeNode* p, TreeNode* q) {
+        return isSameTree_Iterative(p,q);
         if(p==NULL && q==NULL) return true;
         if(p==NULL || q==NULL || p->val!=q->val) return false;
         return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
