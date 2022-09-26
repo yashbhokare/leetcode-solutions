@@ -38,14 +38,15 @@ public:
                 if(union_find.find(equation[0]-'a')==union_find.find(equation[3]-'a')){
                     return false;
                 }
-                notEqual.push_back(equation);
+                equations[index++]=equation;
+                // notEqual.push_back(equation);
                 
             }else {
                 union_find.unionF(equation[0]-'a',equation[3]-'a');
             }
         }
-        for(auto eq:notEqual){
-            if(union_find.find(eq[0]-'a')==union_find.find(eq[3]-'a')){
+        for(int i=0;i<index;i++){
+            if(union_find.find(equations[i][0]-'a')==union_find.find(equations[i][3]-'a')){
                     return false;
             }
         }
