@@ -25,9 +25,7 @@ public:
                 count=0;
             }
             left[i]=count;
-        }
-        
-        for(int i=0;i<n;i++){
+            
             char ch='.';
             if(left[i]==right[i]){
                 ch='.';
@@ -38,6 +36,18 @@ public:
             }
             dominoes[i]=ch;
         }
+        
+        // for(int i=0;i<n;i++){
+        //     char ch='.';
+        //     if(left[i]==right[i]){
+        //         ch='.';
+        //     }else if(left[i]==0 || (right[i]!=0 && right[i]<left[i])){
+        //         ch='R';
+        //     }else if(right[i]==0 || (left[i]!=0 && left[i]<right[i])){
+        //         ch='L';
+        //     }
+        //     dominoes[i]=ch;
+        // }
         return dominoes;
     }
 };
