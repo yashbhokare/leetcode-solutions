@@ -33,7 +33,7 @@ public:
                 ch='.';
             }else if(left[i]==0 || (right[i]!=0 && right[i]<left[i])){
                 ch='R';
-            }else if(right[i]==0 || left[i]<right[i]){
+            }else if(right[i]==0 || (left[i]!=0 && left[i]<right[i])){
                 ch='L';
             }
             dominoes[i]=ch;
