@@ -22,7 +22,6 @@ public:
             if(maxLeftX<=minRightY && maxLeftY<=minRightX){
                 int leftMax = max(maxLeftX,maxLeftY);
                 int rightMin = min(minRightX,minRightY);
-                cout<<leftMax;
                 if((x+y)%2==0){
                     return (leftMax+rightMin)/2.0;
                 }else {
