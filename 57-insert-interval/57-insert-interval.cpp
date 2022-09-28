@@ -18,17 +18,22 @@ public:
             index++;
         }
         
-        // if(index<n && newInterval[0]>=intervals[index][0]){
-        //     intervals[index][1]=max(intervals[index][1],newInterval[1]);
-        //     merged.push_back(intervals[index++]);
-        // }else {
+         // Step 2 : Check to merge the current interval based on the start value
+        if(index<n && newInterval[0]>=intervals[index][0]){
+            intervals[index][1]=max(intervals[index][1],newInterval[1]);
+            merged.push_back(intervals[index++]);
+        }else {
             merged.push_back(newInterval);
-        // }
+        }
+         
+        // Step 2.a : To ignore step 2 just uncomment the below line and comment step 2
+        // merged.push_back(newInterval);
 
         // Merge intervals
         for(int i=index;i<n;i++){
                 if(merged.size()!=0 && intervals[i][0]<=merged.back()[1]){
-                    merged.back()[0] = min(merged.back()[0],intervals[i][0]);
+                    // merged.back()[0] = min(merged.back()[0],intervals[i][0]);
+                    // If you're doing step 2.a then check for the min value as well
                     merged.back()[1] = max(merged.back()[1],intervals[i][1]);
                 }else {
                      merged.push_back(intervals[i]);
