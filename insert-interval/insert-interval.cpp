@@ -8,6 +8,8 @@ public:
             idx++;
         }
         //TODO
+        
+            
         merged.push_back(newInterval);
         
         for(int i=idx;i<intervals.size();i++){
