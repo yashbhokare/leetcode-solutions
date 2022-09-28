@@ -11,9 +11,7 @@ public:
         }
         
         merge_sort(new_nums,0,new_nums.size()-1);
-        // for(auto num:new_nums){
-        //     cout<<num.first<<" ";
-        // }
+
         return result;
     }
     
