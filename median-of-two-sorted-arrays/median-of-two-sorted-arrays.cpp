@@ -8,8 +8,8 @@ public:
         }
         
         int low = 0;
-        int high = x;
-        while(low<=high){
+        int high = x; // Consider the entire length
+        while(low<=high){ // low <= high
             int posX = (low+high)/2;
             int posY = ((x+y+1)/2) - posX;
             
