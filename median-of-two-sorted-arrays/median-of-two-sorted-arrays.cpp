@@ -6,11 +6,12 @@ public:
         if(x>y){
             return findMedianSortedArrays(nums2,nums1);
         }
-        int low=0;
+        
+        int low = 0;
         int high = x;
         while(low<=high){
-            int posX = (low + high)/2;
-            int posY = (x+y+1)/2 - posX;
+            int posX = (low+high)/2;
+            int posY = ((x+y+1)/2) - posX;
             
             int maxLeftX = posX==0 ? INT_MIN : nums1[posX-1];
             int minRightX = posX==x ? INT_MAX : nums1[posX];
@@ -19,22 +20,18 @@ public:
             int minRightY = posY==y ? INT_MAX : nums2[posY];
             
             if(maxLeftX<=minRightY && maxLeftY<=minRightX){
-                
-                // cout<<maxLeftX<<minRightY<<endl;
-                // cout<<maxLeftY<<minRightX<<endl;
                 int leftMax = max(maxLeftX,maxLeftY);
-                int rightMax = min(minRightX,minRightY);
-                
-                if((x+y)%2!=0){
-                    return leftMax;
+                int rightMin = min(minRightX,minRightY);
+                cout<<leftMax;
+                if((x+y)%2==0){
+                    return (leftMax+rightMin)/2.0;
                 }else {
-                    double result= (leftMax+rightMax)/2.0;
-                    return result;
+                    return leftMax;
                 }
             }else if(maxLeftX>minRightY){
                 high = posX-1;
             }else {
-                low=posX+1;
+                low = posX+1;
             }
         }
         return -1;
