@@ -6,6 +6,38 @@ public:
             minHeap.push(num);
             if(minHeap.size()>k) minHeap.pop();
         }
-        return minHeap.top();
+        // return minHeap.top();
+        return quickSelect(nums,k);
+    }
+    
+    int quickSelect(vector<int>& nums, int k){
+        int n = nums.size();
+        int smallestPos = n-k;
+        
+        int left=0,right=n-1;
+        int pivotIndex =-1;
+        while(pivotIndex!=smallestPos){
+            pivotIndex = left;
+            int tempLeft = left+1;
+            int tempRight = right;
+            while(tempLeft<=tempRight){
+                if(nums[pivotIndex]>nums[tempLeft]){
+                    swap(nums[pivotIndex],nums[tempLeft]);
+                    pivotIndex = tempLeft;
+                    tempLeft++;
+                }else {
+                    swap(nums[tempLeft],nums[tempRight--]);
+                }
+            }
+            if(pivotIndex==smallestPos) return nums[pivotIndex];
+            if(pivotIndex<smallestPos) left = pivotIndex+1;
+            else right=pivotIndex-1;
+        }
+        return nums[pivotIndex];
+    }
+    
+    void display(vector<int>& nums){
+        for(int num:nums) cout<<num<<" ";
+        cout<<endl;
     }
 };
