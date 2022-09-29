@@ -27,13 +27,13 @@ public:
             result+=backTrack(1,i-1)*4;
             // visited.erase(1);
             
-            visited.insert(2);
+            // visited.insert(2);
             result+=backTrack(2,i-1)*4;
-            visited.erase(2);
+            // visited.erase(2);
             
-            visited.insert(5);
+            // visited.insert(5);
             result+=backTrack(5,i-1);
-            visited.erase(5);
+            // visited.erase(5);
             
             // for(int num=1;num<=9;num++){
             //     visited.insert(num);
