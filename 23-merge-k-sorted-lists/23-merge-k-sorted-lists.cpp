@@ -12,24 +12,24 @@ class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         ListNode* head = new ListNode(0);
-        ListNode* res = head;
+        ListNode* curr = head;
         priority_queue<pair<int,ListNode*>,vector<pair<int,ListNode*>>,greater<pair<int,ListNode*>>> minHeap;
         for(auto list:lists){
-            if(list!=NULL){
+            if(list){
                 minHeap.push({list->val,list});
             }
         }
         
         while(!minHeap.empty()){
-            ListNode* temp = minHeap.top().second;
+            ListNode* node = minHeap.top().second;
             minHeap.pop();
-            res->next = temp;
-            if(temp->next!= NULL){
-                minHeap.push({temp->next->val,temp->next});
+            curr->next=node;
+            curr=curr->next;
+            if(node->next){
+                minHeap.push({node->next->val,node->next});
             }
-            res=res->next;
         }
-        
-        return head->next;
+         return head->next;
     }
+   
 };
