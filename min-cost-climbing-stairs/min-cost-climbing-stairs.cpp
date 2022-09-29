@@ -1,26 +1,18 @@
 class Solution {
 public:
-    vector<int> memo;
+    unordered_map<int,int> memo;
     int minCostClimbingStairs(vector<int>& cost) {
-       
         cost.push_back(0);
-        memo.resize(cost.size(),INT_MAX);
-        return rec(cost.size()-1,cost);
-        for(auto& it:memo){
-            cout<<it<<" ";
-        }
-        return 0;
+        return dp(cost,cost.size()-1);
     }
     
-    int rec(int index,vector<int>& cost){
-        if(index==0){
-            return cost[0];
-        }
-        if(index==1){
-            return cost[1];
-        }
-        if(memo[index]!=INT_MAX) return memo[index];
-        memo[index] = min(rec(index-1,cost),rec(index-2,cost))+cost[index];
+    int dp(vector<int>& cost, int index){
+        if(memo.find(index)!=memo.end()) return memo[index];
+        
+        if(index==0) return cost[0];
+        if(index==1) return cost[1];
+        
+        memo[index] = min(dp(cost,index-2),dp(cost,index-1)) + cost[index];
         return memo[index];
     }
 };
