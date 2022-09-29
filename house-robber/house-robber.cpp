@@ -1,22 +1,20 @@
 class Solution {
 public:
+    unordered_map<int,int> memo;
     int rob(vector<int>& nums) {
-        vector<int> memo(nums.size(),-1);
-        // cout<<memo[nums.size()-1];
-        return rec(nums,nums.size()-1,memo);
+        return dp(nums,nums.size()-1);
     }
     
-    int rec(vector<int>& nums,int index,vector<int>& memo){
-
-        if(index==0){
-            return nums[0];
-        } else if(index ==1){
-            return max(nums[0],nums[1]);
-        }
-        if(memo[index]!=-1){
-            return memo[index];
-        }
-        memo[index] = max(rec(nums,index-1,memo),rec(nums,index-2,memo)+nums[index]);
-        return memo[index];
+    
+    int dp(vector<int>& nums, int house){
+        if(memo.find(house)!=memo.end()) return memo[house];
+        
+        if(house==0) return nums[0];
+        if(house==1) return max(nums[1],nums[0]);
+        
+        memo[house] = max(dp(nums,house-2)+nums[house],dp(nums,house-1));
+        return memo[house];
     }
+    
+    
 };
