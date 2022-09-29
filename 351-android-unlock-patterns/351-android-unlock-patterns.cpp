@@ -23,9 +23,9 @@ public:
         
         int result = 0;
         for(int i=m;i<=n;i++){
-            visited.insert(1);
+            // visited.insert(1);
             result+=backTrack(1,i-1)*4;
-            visited.erase(1);
+            // visited.erase(1);
             
             visited.insert(2);
             result+=backTrack(2,i-1)*4;
