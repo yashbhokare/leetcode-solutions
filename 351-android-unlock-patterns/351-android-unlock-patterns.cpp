@@ -53,9 +53,9 @@ public:
         for(int num=1;num<=9;num++){
             if(visited.find(num)==visited.end() && (skip[curr_num][num]==0 || visited.find(skip[curr_num][num])!=visited.end())){
                 // cout<<num<<" ";
-                visited.insert(num);
+                // visited.insert(num);
                 ans+=backTrack(num,remain-1);
-                visited.erase(num);
+                // visited.erase(num);
             }
         }
         visited.erase(curr_num);
