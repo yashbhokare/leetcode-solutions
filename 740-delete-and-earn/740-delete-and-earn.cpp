@@ -1,30 +1,29 @@
 class Solution {
 public:
-    map<int,int> mapper;
-    unordered_map<int,int> memo;
+    unordered_map<int,int> num_mapper;
+    unordered_map<int,int> cache;
     int deleteAndEarn(vector<int>& nums) {
-        int maxNum=0;
-        for(auto& num:nums){
-            mapper[num]=mapper[num]+num;
-            maxNum=max(maxNum,num);
+        int maxNumber = 0;
+        for(int i=0;i<nums.size();i++){
+            num_mapper[nums[i]]=num_mapper[nums[i]]+nums[i];
+            maxNumber = max(nums[i],maxNumber);
         }
-        return rec(maxNum);
+        return dp(maxNumber);
     }
     
-    int rec(int num){
-        if(num==0) return 0;
-        if(num==1) return mapper[num];
-        if(memo.find(num)!=memo.end()) return memo[num];
-        int gain=mapper[num];
-        
-        int maxVal;
-        // If previous element exists
-        if(mapper.find(num-1)!=mapper.end()){
-             maxVal = max(gain+rec(num-2),rec(num-1));
-        }else {
-            maxVal = gain+rec(num-2); 
+    int dp(int n){
+        if(cache.find(n)!=cache.end()) return cache[n];
+        if(n==0) return 0;
+        if(n==1) {
+            if(num_mapper.find(1)==num_mapper.end()) return 0;
+            else return num_mapper[1];
         }
-        memo[num]= maxVal;
-        return maxVal;
+        int gain = 0;
+        if(num_mapper.find(n)!=num_mapper.end()){
+            gain = num_mapper[n];
+        }
+
+        cache[n] = max(gain+dp(n-2),dp(n-1));
+        return cache[n];
     }
 };
