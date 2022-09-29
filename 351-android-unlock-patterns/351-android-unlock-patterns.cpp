@@ -24,16 +24,15 @@ public:
         int result = 0;
         for(int i=m;i<=n;i++){
             // visited.insert(1);
-            result+=backTrack(1,i-1)*4;
+            result+=backTrack(1,i)*4;
             // visited.erase(1);
             
             // visited.insert(2);
-            result+=backTrack(2,i-1)*4;
+            result+=backTrack(2,i)*4;
             // visited.erase(2);
             
             // visited.insert(5);
-            result+=backTrack(5,i-1);
-            // visited.erase(5);
+            result+=backTrack(5,i);
             
             // for(int num=1;num<=9;num++){
             //     visited.insert(num);
@@ -46,16 +45,13 @@ public:
     }
     
     int backTrack(int curr_num,int remain){
-        if(remain<0) return 0;
-        if(remain==0) return 1;
+        if(remain<=0) return 0;
+        if(remain==1) return 1;
         visited.insert(curr_num);
         int ans = 0;
         for(int num=1;num<=9;num++){
             if(visited.find(num)==visited.end() && (skip[curr_num][num]==0 || visited.find(skip[curr_num][num])!=visited.end())){
-                // cout<<num<<" ";
-                // visited.insert(num);
                 ans+=backTrack(num,remain-1);
-                // visited.erase(num);
             }
         }
         visited.erase(curr_num);
