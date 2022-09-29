@@ -17,7 +17,13 @@ public:
         if(n==1) return num_mapper[1];
         
         int gain = num_mapper[n];
-        cache[n] = max(gain+dp(n-2),dp(n-1));
+        int result = 0;
+        if(num_mapper.find(n-1)!=num_mapper.end()){
+            result = max(gain+dp(n-2),dp(n-1));
+        }else {
+            result =  gain+dp(n-2);
+        }
+        cache[n] = result;
         return cache[n];
     }
 };
