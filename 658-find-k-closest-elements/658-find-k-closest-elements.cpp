@@ -21,7 +21,7 @@ public:
         
         
         left = left-1;
-      right = left+1;
+        right = left+1;
         while((right-left-1)<k){
             
             if(left==-1){
@@ -41,6 +41,8 @@ public:
         }
         
         vector<int> result;
+
+        
         for(int index=left+1;index<right;index++){
             result.push_back(arr[index]);
         }
