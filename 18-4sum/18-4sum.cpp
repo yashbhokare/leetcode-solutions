@@ -18,6 +18,16 @@ public:
             return twoSum(nums,l,r,target);
         }
         
+        // There are k remaining values to add to the sum. The 
+        // average of these values is at least target / k.
+        int average_value = target / k;
+        
+        // We cannot obtain a sum of target if the smallest value
+        // in nums is greater than target / k or if the largest 
+        // value in nums is smaller than target / k.
+        if  (nums[l] > average_value || average_value > nums[r]) {
+            return {};
+        };
         vector<vector<int>> ans;
         for(int i=l;i<n;i++){
             if(i!=l && nums[i]==nums[i-1]) continue;
