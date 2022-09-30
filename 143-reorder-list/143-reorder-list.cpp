@@ -19,7 +19,6 @@ public:
         // return head;
     }
     
-    
     ListNode* middle_element(ListNode* head){
         ListNode* slow= head;
         ListNode* fast= head;
@@ -29,6 +28,7 @@ public:
         }
         return slow;
     }
+    
     ListNode* reverse_list(ListNode* head){
         ListNode* prev=NULL;
         ListNode* curr= head;
