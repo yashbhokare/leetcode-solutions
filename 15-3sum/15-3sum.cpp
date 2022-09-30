@@ -1,43 +1,46 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> result;
-        
+        int target = 0;
+        int n = nums.size();
         sort(nums.begin(),nums.end());
-        
-        for(int i=0;i<nums.size();i++){
-            if(i==0 || nums[i]!=nums[i-1]){
-                for(auto res:twoSumSorted(nums,i+1,nums.size()-1,-nums[i])){
-                   res.push_back(nums[i]);
-                   result.push_back(res);
-               }
+        vector<vector<int>> ans;
+        for(int i=0;i<n;i++){
+            if(i!=0 && nums[i]==nums[i-1]) continue;
+            
+            int new_target = target -  nums[i];
+            for(auto num:twoSum(nums,i+1,n-1,new_target)){
+                num.push_back(nums[i]);
+                ans.push_back(num);
             }
         }
-        return result;
-        
+        return ans;
     }
-    vector<vector<int>> twoSumSorted(vector<int>& nums,int low,int high,int target){
+    
+    vector<vector<int>> twoSum(vector<int>& nums,int l,int r,int target){
+        int left=l;
+        int right =r;
         vector<vector<int>> result;
-        int start = low;
-        int end = high;
-        while(low<high){
-
-            if(low!=start && nums[low]==nums[low-1]) {
-                low++;
+        while(left<right){
+            if(left!=l && nums[left]==nums[left-1]){
+                left++;
                 continue;
             }
             
+            if(right!=r && nums[right]==nums[right+1]){
+                right--;
+                continue;
+            }
             
-            int sum = nums[low] + nums[high];
-            
+            int sum = nums[left]+nums[right];
             if(sum==target){
-                result.push_back({nums[low],nums[high]});
-                low++;
-                high--;
-            }else if(sum<target){
-                low++;
+                result.push_back({nums[left],nums[right]});
+                left++;
+                right--;
+            }else if(sum>target){
+                right--;
             }else {
-                high--;
+                left++;
             }
         }
         return result;
