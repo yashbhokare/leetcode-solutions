@@ -2,8 +2,8 @@ class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
         
-        return sortValuesAndCompare(nums);
-       // return hashTableApproach(nums);
+        // return sortValuesAndCompare(nums);
+       return hashTableApproach(nums);
     }
     
     bool sortValuesAndCompare(vector<int> nums){
