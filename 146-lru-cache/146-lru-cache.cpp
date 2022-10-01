@@ -1,10 +1,11 @@
 class LRUCache {
-public:
-    int maxCapacity=0;
+    int size = 0;
     unordered_map<int,list<pair<int,int>>::iterator> mapper;
-    list<pair<int,int>> listMap;
+    list<pair<int,int>> linked_list;
+public:
+    
     LRUCache(int capacity) {
-        maxCapacity=capacity;
+        size=capacity;
     }
     
     int get(int key) {
@@ -12,24 +13,25 @@ public:
             return -1;
         }else {
             auto it=mapper[key];
-            listMap.splice(listMap.begin(),listMap,it);
+            linked_list.splice(linked_list.begin(),linked_list,it);
             return it->second;
         }
     }
     
     void put(int key, int value) {
-        if(mapper.find(key)!=mapper.end()){
+       if(mapper.find(key)!=mapper.end()){
             auto it=mapper[key];
-            listMap.splice(listMap.begin(),listMap,it);
-            it->second=value;
+            linked_list.splice(linked_list.begin(),linked_list,it);
+            it->second = value;
             return;
-        }else if(maxCapacity==mapper.size()){
-            int key = listMap.back().first;
-            listMap.pop_back();
-            mapper.erase(key);
-        }
-        listMap.push_front({key,value});
-        mapper[key]=listMap.begin();
+       }else if(mapper.size()==size){
+           auto it = linked_list.back();
+           mapper.erase(it.first);
+           linked_list.pop_back();
+       }
+        linked_list.push_front({key,value});
+        auto it = linked_list.begin();
+        mapper[key] = it;
         
     }
 };
