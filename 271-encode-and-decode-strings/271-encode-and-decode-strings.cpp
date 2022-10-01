@@ -1,9 +1,9 @@
 class Codec {
 public:
-
+    char ch = (char)500;
     // Encodes a list of strings to a single string.
     string encode(vector<string>& strs) {
-        char ch = (char)257;
+       
         string result = "";
         for(auto s:strs){
             result = result + s + ch; 
@@ -14,7 +14,6 @@ public:
 
     // Decodes a single string to a list of strings.
     vector<string> decode(string s) {
-        char ch = (char)257;
         vector<string> result;
         stringstream ss(s);
         string word;
