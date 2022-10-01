@@ -3,10 +3,10 @@ public:
     int ans = 0;
     unordered_map<int,int> mapper;
     int coinChange(vector<int>& coins, int amount) {
-        return rec(coins,0,amount);
+        return rec(coins,amount);
     }
     
-    int rec(vector<int>& coins,int start,int amount){
+    int rec(vector<int>& coins,int amount){
         if(amount==0){
             return 0;
         }
@@ -18,7 +18,7 @@ public:
         
         int min = INT_MAX;
         for(int i=0;i<coins.size();i++){
-            int res= rec(coins,i,amount-coins[i]);
+            int res= rec(coins,amount-coins[i]);
             if(res>=0 && res<min){
                 min=res+1;
             }
