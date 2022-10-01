@@ -1,38 +1,36 @@
-// https://leetcode.com/problems/lru-cache/discuss/792449/Simple-C%2B%2B-Solution-with-Detailed-Explanation-%3A-
-
 class LRUCache {
+    int size = 0;
+    unordered_map<int,list<pair<int,int>>::iterator> mapper;
+    list<pair<int,int>> linked_list;
 public:
-    int maxCapacity;
-    unordered_map<int,list<pair<int,int>>::iterator> mp;
-    list<pair<int,int>> l;
+    
     LRUCache(int capacity) {
-        maxCapacity = capacity;
+        size=capacity;
     }
     
     int get(int key) {
-        if(mp.find(key)== mp.end()){
+        if(mapper.find(key)==mapper.end()){
             return -1;
+        }else {
+            auto it=mapper[key];
+            linked_list.splice(linked_list.begin(),linked_list,it);
+            return it->second;
         }
-        
-        l.splice(l.begin(),l,mp[key]);       
-        return mp[key]->second;
     }
     
     void put(int key, int value) {
-        if(mp.find(key)!=mp.end()){
-            l.splice(l.begin(),l,mp[key]);
-            mp[key]->second = value;
+       if(mapper.find(key)!=mapper.end()){
+            auto it=mapper[key];
+            linked_list.splice(linked_list.begin(),linked_list,it);
+            it->second = value;
             return;
-        }
+       }else if(mapper.size()==size){
+           mapper.erase(linked_list.back().first);
+           linked_list.pop_back();
+       }
+        linked_list.push_front({key,value});
+        mapper[key] = linked_list.begin();
         
-        if(l.size() == maxCapacity){
-            int removeKey= l.back().first;
-            l.pop_back();
-            mp.erase(removeKey);
-        }
-        
-        l.push_front({key,value});
-        mp.insert({key,l.begin()});
     }
 };
 
