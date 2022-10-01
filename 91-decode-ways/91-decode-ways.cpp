@@ -9,9 +9,9 @@ public:
         if(index==s.size()){
             return 1;
         }
-        if(index>s.size()){
-            return 0;
-        }
+        // if(index>s.size()){
+        //     return 0;
+        // }
         
         if(s[index]=='0') return 0;
 
