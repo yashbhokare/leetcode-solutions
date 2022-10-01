@@ -1,37 +1,41 @@
 class Solution {
 public:
-    //pass board by reference
-    bool DFS(vector<vector<char>>& board, string word, int i, int j, int n) {
-		//check if all the alphabets in the word is checked
-        if(n == word.size()) return true; 
-        
-		//check if i and j are out of bound or if the characters aren't equal
-        if(i < 0 || i >= board.size() || j < 0 || j >= board[i].size() || board[i][j] != word[n]) return false;
-        
-		//mark as visited 
-        board[i][j] = '0';
-        
-		//branch out in all 4 directions
-        bool status = DFS(board, word, i + 1, j, n + 1) ||  //down
-                        DFS(board, word, i, j + 1, n + 1) ||  //right
-                        DFS(board, word, i - 1, j, n + 1) ||  //up
-                        DFS(board, word, i, j - 1, n + 1);  //left
-        
-		//change the character back for other searches
-        board[i][j] = word[n];
-		
-        return status;
-    }
+    int cMax,rMax;
+    vector<vector<int>> dir = {
+        {1,0},{0,1},{-1,0},{0,-1}
+    };
     
     bool exist(vector<vector<char>>& board, string word) {
-        if(word == "") return false;
+        rMax = board.size();
+        cMax = board[0].size();
         
-        for(int i = 0; i < board.size(); i++) 
-            for(int j = 0; j < board[i].size(); j++) 
-				//check if the characters are equal then call DFS
-                if(board[i][j] == word[0] && DFS(board, word, i, j, 0))
-                    return true;
-        
+        for(int i=0;i<rMax;i++){
+            for(int j=0;j<cMax;j++){
+                if(word[0]==board[i][j]){
+                    // cout<<i<<j<<endl;
+                    if(rec(board,word,1,i,j)) return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    unordered_set<char> visited;
+    
+    bool rec(vector<vector<char>>& board,string word,int index,int r,int c){
+        if(board[r][c]=='.') return false;
+        if(index==word.size()) return true;
+        char temp = board[r][c];
+        board[r][c]='.';
+        for(int d=0;d<4;d++){
+            int newR = dir[d][0] + r;
+            int newC = dir[d][1] + c;
+            if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && board[newR][newC]==word[index]){
+                // curr.push_back(board[newR][newC]);
+                if(rec(board,word,index+1,newR,newC)) return true;
+            }
+        }
+        board[r][c] = temp;
         return false;
     }
 };
