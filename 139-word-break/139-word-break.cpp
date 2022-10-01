@@ -11,11 +11,8 @@ public:
             while(size--){
                 int start = q.front();
                 q.pop();
-                // if(visited.find(start)!=visited.end()) continue;
-                
                 for(int end =start+1;end<=s.size();end++){
                     string curr = s.substr(start,end-start);
-                    // cout<<curr<<" ";
                     if(words.find(curr)!=words.end() && visited.find(end)==visited.end()){
                         cout<<curr<<" ";
                         visited.insert(end);
