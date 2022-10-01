@@ -19,14 +19,14 @@ public:
         for(auto coin:coins){
             int val = rec(coins,amount-coin);
             if(val>-1 && val<ans){
-                ans = val+1;
+                ans = val;
             }
         }
         if(ans==INT_MAX){
-            ans=-1;
+            ans=-2;
         }
-        memo[amount] = ans;
-        return ans;
+        memo[amount] = ans+1;
+        return ans+1;
 
     }
 };
