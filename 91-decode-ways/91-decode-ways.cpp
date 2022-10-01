@@ -6,7 +6,7 @@ public:
     }
     
     int rec(string s,int index){
-        if(index>=s.size()){
+        if(index==s.size()){
             return 1;
         }
         if(index>s.size()){
