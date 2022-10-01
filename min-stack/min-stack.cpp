@@ -4,7 +4,8 @@ private:
     stack<int> min_stk;
 public:
     MinStack() {
-        
+        stk = {};
+        min_stk = {};
     }
     
     void push(int val) {
