@@ -13,6 +13,7 @@ public:
             if(letters_to_replace>k){
                 mapper[s[left]]--;
                 left++;
+                max_freq = 0;
             }
             result = max(result,right-left+1);
             
