@@ -29,7 +29,6 @@ public:
         if(abs(rows[row])==N || abs(cols[col])==N || abs(diag)==N || abs(anti_diag)==N){
             return player;
         }
-        // cout<<player<<": "<<rows[row]<<" "<<cols[col]<<" "<<diag<<" "<<anti_diag<<endl;
         return 0;
     }
 };
