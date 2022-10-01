@@ -1,26 +1,36 @@
 class Solution {
 public:
-    vector<int> dp;
+    unordered_map<int,int> memo;
     int numDecodings(string s) {
-        dp.resize(s.size()+1,-1);
         return rec(s,0);
     }
     
     int rec(string s,int index){
-        if(dp[index]!=-1) {
-            return dp[index];
+        if(index>=s.size()){
+            return 1;
         }
-
-        if(index==s.size()) return 1;
+        if(index>s.size()){
+            return 0;
+        }
+        
         if(s[index]=='0') return 0;
-        if(index==s.size()-1) return 1; 
         
-        int res = rec(s,index+1);
-        if(stoi(s.substr(index,2))<=26){
-            res+=rec(s,index+2);
+        // while(s[index]=='0'){
+        //     index++;
+        // }
+        
+        if(memo.find(index)!=memo.end()) return memo[index];
+        
+        // int ans =0;
+        int total = rec(s,index+1);
+        if(index+1<s.size() && stoi(s.substr(index,2))<=26){
+            total+=rec(s,index+2);
         }
         
-        dp[index]=res;
-        return res;
+        memo[index] = total;
+        
+        return memo[index];
+        
+        
     }
 };
