@@ -2,51 +2,48 @@ class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         vector<int> result;
-        int maxR = matrix.size();
-        int maxC = matrix[0].size();
-        vector<int> topLeft = {0,0};
-        vector<int> topRight ={0,maxC-1};
-        vector<int> bottomLeft = {maxR-1,0};
-        vector<int> bottomRight = {maxR-1,maxC-1};
-       
-        while(result.size() < maxR*maxC){
-           
+        
+        int m = matrix.size();
+        int n = matrix[0].size();
+        int total = m*n;
+        
+        int left = 0;
+        int right = n-1;
+        int top = 0;
+        int down = m-1;
+        
+        
+        while(result.size()!=total){
+            
             // Left to right
-            for(int col=topLeft[1];col<=topRight[1];col++){
-                result.push_back(matrix[topLeft[0]][col]);
+            for(int c=left;c<=right;c++){
+                result.push_back(matrix[top][c]);
             }
             
-  
-            // Right Top to Right Bottom
-            for(int row =topRight[0]+1;row<=bottomRight[0];row++){
-                result.push_back(matrix[row][topRight[1]]);
+            // Top to down
+            for(int r=top+1;r<=down;r++){
+                result.push_back(matrix[r][right]);
             }
-
             
-            if(topLeft[0]!=bottomRight[0])
-            {
-                //Right Bottom to Left Bottom
-                for(int col=bottomRight[1]-1;col>=bottomLeft[1];col--){
-                    result.push_back(matrix[bottomRight[0]][col]);
+            if(top!=down){
+                // Bottom Left to right
+                for(int c=right-1;c>=left;c--){
+                    result.push_back(matrix[down][c]);
                 }
             }
             
-            if(topLeft[1]!=bottomRight[1]){
-                // Left Bottom to Left Top
-                for(int row =bottomLeft[0]-1;row>=topLeft[0]+1;row--){
-                    result.push_back(matrix[row][bottomLeft[1]]);
+            if(left!=right){
+                // Left down to top
+                for(int r=down-1;r>=top+1;r--){
+                    result.push_back(matrix[r][left]);
                 }
             }
-
-            topLeft[0]++;
-            topLeft[1]++;
-            topRight[0]++;
-            topRight[1]--;
-            bottomLeft[0]--;
-            bottomLeft[1]++;
-            bottomRight[0]--;
-            bottomRight[1]--;
+            left++;
+            right--;
+            top++;
+            down--;
         }
         return result;
+        
     }
 };
