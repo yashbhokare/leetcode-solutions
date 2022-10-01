@@ -12,26 +12,30 @@ public:
 
     // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
-        if(root==NULL) return "NULL,";
-        return to_string(root->val) + ","+ serialize(root->left) + serialize(root->right);
+        if(root==NULL){
+            return "NULL";
+        }
+        return to_string(root->val) + " "+serialize(root->left) +" "+ serialize(root->right);
+        
     }
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
         stringstream ss(data);
-        return deserializeHelper(ss);
+        return deserialize_string(ss);
+        return NULL;
     }
     
-    TreeNode* deserializeHelper(stringstream& ss){
-        string curr;
-        getline(ss,curr,',');
-        if(curr=="NULL") return nullptr;
-        
-        TreeNode* root = new TreeNode(stoi(curr));
-        root->left = deserializeHelper(ss);
-        root->right = deserializeHelper(ss);
+    TreeNode* deserialize_string(stringstream& ss){
+        string word;
+        ss>>word;
+        if(word=="NULL"){
+            return NULL;
+        }
+        TreeNode* root = new TreeNode(stoi(word));
+        root->left = deserialize_string(ss);
+        root->right = deserialize_string(ss);
         return root;
-        
     }
 };
 
