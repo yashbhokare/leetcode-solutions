@@ -14,14 +14,9 @@ public:
         }
         
         if(s[index]=='0') return 0;
-        
-        // while(s[index]=='0'){
-        //     index++;
-        // }
-        
+
         if(memo.find(index)!=memo.end()) return memo[index];
-        
-        // int ans =0;
+
         int total = rec(s,index+1);
         if(index+1<s.size() && stoi(s.substr(index,2))<=26){
             total+=rec(s,index+2);
