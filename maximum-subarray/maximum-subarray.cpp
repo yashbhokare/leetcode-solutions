@@ -1,14 +1,13 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        int maxResult=INT_MIN;
-        int count = 0;
+        int longest = INT_MIN;
+        int curr = 0;
         for(auto num:nums){
-            count = max(num,count+num);
-            maxResult = max(maxResult,count);
+            curr = max(curr+num,num);
+            longest = max(longest,curr);
         }
-        return maxResult;
+        return longest;
     }
 };
-
-//Kadane's Algorithm.
+////Kadane's Algorithm.
