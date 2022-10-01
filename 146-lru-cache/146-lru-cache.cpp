@@ -25,13 +25,11 @@ public:
             it->second = value;
             return;
        }else if(mapper.size()==size){
-           auto it = linked_list.back();
-           mapper.erase(it.first);
+           mapper.erase(linked_list.back().first);
            linked_list.pop_back();
        }
         linked_list.push_front({key,value});
-        auto it = linked_list.begin();
-        mapper[key] = it;
+        mapper[key] = linked_list.begin();
         
     }
 };
