@@ -7,8 +7,8 @@ public:
         
         unordered_map<int,int> memo;
         int l1 = dp(nums,0,nums.size()-2,memo);
-        unordered_map<int,int> memo2;
-        int l2 = dp(nums,1,nums.size()-1,memo2);
+        memo = {};
+        int l2 = dp(nums,1,nums.size()-1,memo);
         return max(l1,l2);
     }
     
