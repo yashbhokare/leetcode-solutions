@@ -12,6 +12,7 @@ public:
         }
         
         vector<double> result;
+        unordered_set<string> visited;
         for(int i=0;i<queries.size();i++){
             string s1 = queries[i][0];
             string s2=  queries[i][1];
@@ -24,7 +25,7 @@ public:
                 result.push_back(1);
             }
             else {
-                unordered_set<string> visited;
+                
                 double ans = dfs(s1,s2,visited);
                 result.push_back(ans);
             }
