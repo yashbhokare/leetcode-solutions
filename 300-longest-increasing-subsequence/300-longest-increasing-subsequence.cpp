@@ -17,6 +17,8 @@
 //     }
 // };
 
+// /https://leetcode.com/problems/longest-increasing-subsequence/discuss/1326308/C%2B%2BPython-DP-Binary-Search-BIT-Solutions-Picture-explain-O(NlogN)
+
 class Solution { // 8 ms, faster than 91.61%
 public:
     int lengthOfLIS(vector<int>& nums) {
