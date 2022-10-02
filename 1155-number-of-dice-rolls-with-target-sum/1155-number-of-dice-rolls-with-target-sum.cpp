@@ -2,12 +2,12 @@
 class Solution {
 public:
     #define MOD 1000000007
-    int dp[32][1002];
+    vector<vector<int>> dp;
     
     int solve(int d, int f, int target){
         if(d==0 && target==0) return 1;
         if(d<=0 || target<=0) return 0;
-        if(dp[d][target] != -1) return dp[d][target];
+        if(dp[d][target]!=-1) return dp[d][target];
      
         int sum=0;
         for(int i=1;i<=f;i++){
@@ -18,7 +18,8 @@ public:
     }
     
     int numRollsToTarget(int d, int f, int target) {
-        memset(dp,-1,sizeof(dp));
+        // memset(dp,-1,sizeof(dp));
+        dp.resize(32,vector<int>(1002,-1));
         return solve(d,f,target);
     }
 };
