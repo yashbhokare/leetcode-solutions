@@ -3,6 +3,8 @@ public:
     string s1,s2;
     vector<vector<int>> memo;
     int longestCommonSubsequence(string text1, string text2) {
+        return dpUsingMatrix(text1,text2);
+        
         s1=text1;
         s2=text2;
         // Make the memo big enough to hold the cases where the pointers
@@ -30,5 +32,23 @@ public:
          memo[p1][p2] = ans;
         
         return ans;
+    }
+    
+    
+    int dpUsingMatrix(string text1, string text2){
+        int m = text1.size();
+        int n = text2.size();
+        vector<vector<int>> dp(m+1,(vector<int>(n+1,0)));
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                // cout<<i<<" "<<j<<endl;
+                if(text1[i]==text2[j]){
+                    dp[i+1][j+1] = dp[i][j]+1;
+                }else {
+                    dp[i+1][j+1] = max(dp[i][j+1],dp[i+1][j]);
+                }
+            }
+        }
+        return dp[m][n];
     }
 };
