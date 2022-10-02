@@ -1,20 +1,18 @@
 class Solution {
 public:
     unordered_map<int,int> memo;
+    
     int rob(vector<int>& nums) {
         return dp(nums,nums.size()-1);
     }
     
-    
-    int dp(vector<int>& nums, int house){
-        if(memo.find(house)!=memo.end()) return memo[house];
+    int dp(vector<int>& nums,int i){
+        if(i==0) return nums[0];
+        if(i==1) return max(nums[0],nums[1]);
+        if(memo.find(i)!=memo.end()) return memo[i];
+        int amount = nums[i];
+        memo[i] = max(dp(nums,i-2)+amount,dp(nums,i-1));
         
-        if(house==0) return nums[0];
-        if(house==1) return max(nums[1],nums[0]);
-        
-        memo[house] = max(dp(nums,house-2)+nums[house],dp(nums,house-1));
-        return memo[house];
+        return memo[i];
     }
-    
-    
 };
