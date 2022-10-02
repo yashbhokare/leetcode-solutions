@@ -4,8 +4,8 @@ public:
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
         unordered_set<int> visited;
         vector<int> ans;
-        // dfs(0,graph,visited,ans);
-        bfs(graph,visited);
+        dfs(0,graph,visited,ans);
+        // bfs(graph,visited);
         return result;
     }
     
@@ -36,6 +36,7 @@ public:
         if(index==graph.size()-1){
             ans.push_back(index);
             result.push_back(ans);
+            ans.pop_back();
             return;
         }
         ans.push_back(index);
@@ -44,9 +45,10 @@ public:
         for(auto child:childs){
             if(visited.find(child)==visited.end()){
                 dfs(child,graph,visited,ans);
-                ans.pop_back();
+                
             }
         }
+       ans.pop_back();
         visited.erase(index);
     }
 };
