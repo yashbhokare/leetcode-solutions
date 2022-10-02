@@ -1,17 +1,17 @@
 class Solution {
 public:
-    
-    vector<int> dp;
+    unordered_map<int,int> memo;
     int climbStairs(int n) {
-        dp.resize(n+1,-1);
-        return rec(n);
+        return dp(n);
     }
     
-    int rec(int n){
+    int dp(int n){
         if(n==1) return 1;
         if(n==2) return 2;
-        if(dp[n]!=-1) return dp[n];
-        dp[n] = rec(n-1)+rec(n-2);
-        return dp[n];
+        if(memo.find(n)!=memo.end()) return memo[n];
+        
+        memo[n] = dp(n-1) + dp(n-2);
+        return memo[n];
+        
     }
 };
