@@ -81,9 +81,13 @@ class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> result;
+        vector<vector<int>> edges(numCourses);
         vector<int> indegree(numCourses);
         queue<int> zeroDegree;
+        
+        
         for (vector<int>& pre : prerequisites) {
+            edges[pre[1]].push_back(pre[0]);
             indegree[pre[0]]++;
         }
         for (int i = 0; i < indegree.size(); i++) {
@@ -91,18 +95,17 @@ public:
                 zeroDegree.push(i);
             }
         }
-        int index = 0;
         while (!zeroDegree.empty()) {
             int course = zeroDegree.front();
             zeroDegree.pop();
             result.push_back(course);
-            for (vector<int>& pre : prerequisites) {
-                if (pre[1] == course) {
-                    indegree[pre[0]]--;
-                    if (indegree[pre[0]] == 0) {
-                        zeroDegree.push(pre[0]);
+            for (auto c:edges[course]) {
+                // if (pre[1] == course) {
+                    indegree[c]--;
+                    if (indegree[c] == 0) {
+                        zeroDegree.push(c);
                     }
-                }
+                // }
             }
         }
         if(result.size()==numCourses) return result;
