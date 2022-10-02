@@ -30,7 +30,7 @@ public:
             }
         }
         result.push_back({startTime,endTime});
-        
+
         for(int i=0;i<result.size();i++){
             cout<<result[i][0]<<":"<<result[i][1]<<endl;
             ans.push_back(result[i][1] - result[i][0]+1);
