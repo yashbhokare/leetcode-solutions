@@ -1,31 +1,55 @@
 class Solution {
-public:
     vector<vector<int>> dir = {
         {0,1},{1,0},{-1,0},{0,-1}
     };
-    int maxX,maxY;
+public:
+    int rMax;
+    int cMax;
     int numIslands(vector<vector<char>>& grid) {
-        int result=0;
-        maxX=grid.size();
-        maxY = grid[0].size();
-        for(int i=0;i<maxX;i++){
-            for(int j=0;j<maxY;j++){
-                if(grid[i][j]=='1'){
-                    dfs(grid,i,j);
-                    result++;
+        int count = 0;
+        rMax = grid.size();
+        cMax = grid[0].size();
+        for(int r=0;r<rMax;r++){
+            for(int c=0;c<cMax;c++){
+                if(grid[r][c]=='1'){
+                    // dfs(grid,r,c);
+                    bfs(grid,r,c);
+                    count++;
                 }
             }
         }
-        return result;
+        return count;
     }
+    
     
     void dfs(vector<vector<char>>& grid,int r,int c){
         grid[r][c]='0';
-        for(int d=0;d<4;d++){
-            int newX = r+dir[d][0];
-            int newY = c+dir[d][1];
-            if(newX>=0 && newX<maxX && newY>=0 && newY<maxY && grid[newX][newY]=='1'){
-                dfs(grid,newX,newY);
+        
+        for(int i=0;i<4;i++){
+            int newR = r + dir[i][0];
+            int newC = c + dir[i][1];
+            if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && grid[newR][newC]=='1'){
+                dfs(grid,newR,newC);
+            }
+        }
+    }
+    
+    void bfs(vector<vector<char>>& grid,int r,int c){
+        queue<pair<int,int>> q;
+        grid[r][c] = '0';
+        q.push({r,c});
+        while(!q.empty()){
+            r = q.front().first;
+            c = q.front().second;
+            q.pop();
+            for(int i=0;i<4;i++){
+                int newR = r + dir[i][0];
+                int newC = c + dir[i][1];
+                if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && grid[newR][newC]=='1'){
+                    grid[newR][newC] = '0';
+                    q.push({newR,newC});
+
+                }
             }
         }
     }
