@@ -9,7 +9,6 @@ public:
         
         for(int course=0;course<numCourses;course++){
             if(isCycle(course)) return false;
-            cache[course] = false;
         }
         return true;
     }
