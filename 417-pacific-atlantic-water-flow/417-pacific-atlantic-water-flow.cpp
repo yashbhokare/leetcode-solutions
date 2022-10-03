@@ -1,109 +1,84 @@
 class Solution {
 public:
-    int rMax,cMax;
-    vector<vector<int>> dir = {
-        {0,1},{1,0},{0,-1},{-1,0}
+    int m,n;
+    vector<vector<int>> dir ={
+        {0,1},{1,0},{-1,0},{0,-1}
     };
+    vector<vector<int>> result;
+    vector<vector<int>> pacific;
+    vector<vector<int>> atlantic;
     
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        vector<vector<int>> result;
-        
-        rMax = heights.size();
-        cMax = heights[0].size();
-        
-        vector<int> isPacific(rMax*cMax,0);
-        vector<int> isAtlantic(rMax*cMax,0);
-        
-        // 1 = Possible
-        //-1 = Not possible
-        
-        for(int r=0;r<rMax;r++){
-            for(int c=0;c<cMax;c++){
-                if(recPacific(r,c,isPacific,heights)==1 && recAtlantic(r,c,isAtlantic,heights)==1){
-                     result.push_back({r,c});
-                }
-                // if(recAtlantic(r,c,isAtlantic,heights)==1){
-                //      result.push_back({r,c});
-                // }
-                // int pos = r+c+(r*(cMax-1)); 
-                // if(isPacific[pos]==1){
-                //     result.push_back({r,c});
-                // }
-            }   
+    void display(vector<vector<int>>& heights){
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                cout<<heights[i][j]<<"\t";
+            }
+            cout<<endl;
         }
+        cout<<"*****************************"<<endl;
+    }
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        m = heights.size();
+        n = heights[0].size();
+        pacific = heights;
+        atlantic = heights;
+        fill_pacific(pacific);
+        fill_atlantic(atlantic);
+        merged(pacific,atlantic);
         return result;
     }
     
-    int recPacific(int r,int c,vector<int>& isPacific,vector<vector<int>>& heights){
-        int pos = r+c+(r*(cMax-1));
-        
-        if(isPacific[pos]==1) return 1;
-        if(isPacific[pos]==-1) return -1;
-        
-        if(r==0 || c==0){
-            isPacific[pos] = 1;
-            return isPacific[pos];
+    void merged(vector<vector<int>>& pacific,vector<vector<int>>& atlantic){
+        for(int i=0;i<m;i++){
+             for(int j=0;j<n;j++){
+                 if(pacific[i][j]==-1 && atlantic[i][j]==-2){
+                     result.push_back({i,j});
+                 }
+             }
         }
-        
-        // Visited
-        isPacific[pos] = -2;
-
-        int result = 0;
-        for(int d =0;d<dir.size();d++){
-            int newR = r + dir[d][0];
-            int newC = c + dir[d][1];
-            int newPos =  newR+newC+(newR*(cMax-1));
-            
-            if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && heights[newR][newC]<=heights[r][c]&& isPacific[newPos]!=-2 ) {
-                int val = recPacific(newR,newC,isPacific,heights);
-                if(val==1){
-                    // cout<<pos;
-                    result = 1;
-                    break;
-                }else if(val==-1){
-                    result = -1;
-                }
-            }
-        }
-        
-        isPacific[pos] = result;
-        return isPacific[pos];
     }
     
-    int recAtlantic(int r,int c,vector<int>& isAtlantic,vector<vector<int>>& heights){
-        int pos = r+c+(r*(cMax-1));
-        
-        if(isAtlantic[pos]==1) return 1;
-        if(isAtlantic[pos]==-1) return -1;
-        
-        if(r==rMax-1 || c==cMax-1){
-            isAtlantic[pos] = 1;
-            return isAtlantic[pos];
-        }
-        
-        // Visited
-        isAtlantic[pos] = -2;
-
-        int result = 0;
-        for(int d =0;d<dir.size();d++){
-            int newR = r + dir[d][0];
-            int newC = c + dir[d][1];
-            int newPos =  newR+newC+(newR*(cMax-1));
-            
-            if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && heights[newR][newC]<=heights[r][c]&& isAtlantic[newPos]!=-2 ) {
-                int val = recAtlantic(newR,newC,isAtlantic,heights);
-                if(val==1){
-                    result = 1;
-                    break;
-                }else if(val==-1){
-                    result = -1;
-                }
-            }
-        }
-        
-        isAtlantic[pos] = result;
-        return isAtlantic[pos];
+    void fill_pacific(vector<vector<int>>& heights){
+         for(int c=0;c<n;c++)
+              dfs_pacific(heights,0,c);
+         for(int r=1;r<m;r++)
+              dfs_pacific(heights,r,0);
+        // display(heights);
     }
     
+    void fill_atlantic(vector<vector<int>>& heights){
+         for(int c=0;c<n;c++)
+              dfs_atlantic(heights,m-1,c);
+         for(int r=0;r<m-1;r++)
+              dfs_atlantic(heights,r,n-1);
+        
+        // display(heights);
+    }
     
+    void dfs_pacific(vector<vector<int>>& heights,int r,int c){
+        if(heights[r][c]==-1) return;
+        int height = heights[r][c];
+        heights[r][c] = -1;
+        for(int i=0;i<4;i++){
+            int newR = r + dir[i][0];
+            int newC = c + dir[i][1];
+            if(newR>=0 && newR<m && newC>=0 && newC<n && heights[newR][newC]>=height){
+                dfs_pacific(heights,newR,newC);
+            }
+        }
+    }
+    
+    void dfs_atlantic(vector<vector<int>>& heights,int r,int c){
+        // cout<<r<<" "<<c<<endl;
+        if(heights[r][c]==-2) return;
+        int height = heights[r][c];
+        heights[r][c] = -2;
+        for(int i=0;i<4;i++){
+            int newR = r + dir[i][0];
+            int newC = c + dir[i][1];
+            if(newR>=0 && newR<m && newC>=0 && newC<n && (heights[newR][newC]>=height)){
+                dfs_atlantic(heights,newR,newC);
+            }
+        }
+    }
 };
