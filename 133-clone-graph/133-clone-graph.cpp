@@ -26,13 +26,11 @@ public:
         if(node==NULL) return NULL;
         if(mapper.find(node)!=mapper.end()) return mapper[node];
         
-        Node* newNode = new Node(node->val);
-        mapper[node] = newNode;
-        for(auto neighbor:node->neighbors){
-            newNode->neighbors.push_back(cloneGraph(neighbor));
+        Node* new_node = new Node(node->val);
+        mapper[node]=new_node;
+        for(auto child:node->neighbors){
+            new_node->neighbors.push_back(cloneGraph(child));
         }
-        
-        return mapper[node];
-        
+        return new_node;
     }
 };
