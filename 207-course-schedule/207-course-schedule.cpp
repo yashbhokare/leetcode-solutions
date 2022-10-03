@@ -1,40 +1,39 @@
 class Solution {
 public:
+    unordered_set<int> visited;
+    unordered_map<int,vector<int>> mapper;
+    unordered_map<int,bool> cache;
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        unordered_map<int,vector<int>> mapper;
-        for(auto preq:prerequisites) mapper[preq[0]].push_back(preq[1]);
+       
+        for(auto pre:prerequisites) mapper[pre[0]].push_back(pre[1]);
         
-        unordered_set<int> visited;
-        unordered_set<int> memo;
-        for(int i=0;i<numCourses;i++){
-            if(isCycle(i,visited,memo,mapper)) return false;
-            memo.insert(i);
+        for(int course=0;course<numCourses;course++){
+            if(isCycle(course)) return false;
         }
         return true;
     }
     
-    
-    bool isCycle(int num,unordered_set<int>& visited,unordered_set<int>& memo,unordered_map<int,vector<int>>& mapper){
-        // Number doesn't exist so no pre req
-        if(mapper.find(num)==mapper.end()) return false;
+    bool isCycle(int course){
+        //If already cached return that
+        if(cache.find(course)!=cache.end()) return cache[course];
         
-        // Already checked
-        if(memo.find(num)!=memo.end()) return false;
+        // Course does not exist on mapper so valid
+        if(mapper.find(course)==mapper.end()) return false;
         
-        // Cycle exisits
-        if(visited.find(num)!=visited.end()) return true;
+        //If course already visited return cycle found
+        if(visited.find(course)!=visited.end()) return true;
         
-        visited.insert(num);
-        bool result = false;
-        for(auto child:mapper[num]){
-            if(isCycle(child,visited,memo,mapper)){
-                result = true;
-                break;
-            }
+        // Mark as visited
+        visited.insert(course);
+        bool res = false;
+        for(auto child:mapper[course]){
+            res=isCycle(child);
+            if(res) break;
         }
         
-        visited.erase(num);
-        if(!result) memo.insert(num);
-        return result;
+        visited.erase(course);
+        cache[course] = res;
+        return res;
+        
     }
 };
