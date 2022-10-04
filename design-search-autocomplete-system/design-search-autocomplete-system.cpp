@@ -1,88 +1,117 @@
-class Trie{
-    struct Node{
-        int size;
-        bool isWord;
-        unordered_map<char,Node*> child;
-    };
+struct TrieNode{
+    string word="";
+    bool is_word=false;
+    unordered_map<char,TrieNode*> child;
+};
+
+class Trie {
     public:
-    Node* root;
+    TrieNode* root;
+    TrieNode* new_curr;
+    string new_word = "";
+    bool not_found = false;
+    unordered_map<string,int> word_mapper;
+    
     Trie(){
-        root = new Node();
+        root = new TrieNode();
+        new_curr = root;
     }
     
-    static int compare(pair<string,int> a, pair<string,int> b){
-        if(a.second==b.second) return a.first < b.first;
-        return a.second > b.second;
-    }
-    
-    void insert(string word,int val){
-        Node* curr=root;
+    void insert(string word){
+        TrieNode* curr = root;
         for(auto ch:word){
-            if(curr->child.count(ch)<=0) curr->child[ch]=new Node();
-            // curr->child[ch]->size = curr->child[ch]->size+val;
+            if(curr->child.find(ch)==curr->child.end()){
+                curr->child[ch] = new TrieNode();
+            }
             curr = curr->child[ch];
         }
-        curr->size = curr->size + val;
-        curr->isWord=true;
+        curr->word=word;
+        curr->is_word = true;
     }
     
-    vector<string> findString(string searchWord){
-        vector<string> result = {};
-        Node* curr=root;
-        for(auto ch:searchWord){
-            if(curr->child.count(ch)<=0) return result;
-            curr = curr->child[ch];
-        }
-        
-        vector<pair<string,int>> ans = {};
-        dfs(curr,searchWord,ans);
-        
-        sort(ans.begin(),ans.end(),compare);
-        int size = ans.size();
-        int minVal = min(size,3);
-        for(int i=0;i<minVal;i++){
-            result.push_back(ans[i].first);
-        }
-        return result;
+    void addKey(string s,int val){
+        word_mapper[s]+=val;
+        insert(s);
     }
     
-    void dfs(Node* curr,string prefix,vector<pair<string,int>>& result){
-        // if(result.size()==3) return;
-        if(curr->isWord) result.push_back({prefix,curr->size});
+    void newSearch(){
+        new_curr = root;
+        new_word = "";
+        not_found = false;
+    }
+    
+    static int comparator(pair<int,string> &a,pair<int,string> &b){
+        if(a.first==b.first){
+            return a.second < b.second;
+        }else {
+            return a.first > b.first;
+        }
+    }
+    vector<string> search(char c){
+        new_word.push_back(c);
+        
+        TrieNode* curr = new_curr;
+        if(curr->child.find(c)==curr->child.end() || not_found){
+            not_found = true;
+            return {};    
+        }
+        curr = curr->child[c];
+        new_curr = curr;
+        vector<pair<int,string>> values;
+        
+        dfs(curr,values);
+        
+        sort(values.begin(),values.end(),comparator);
+        
+        int size = values.size();
+        int maxVal = min(size,3);
+        vector<string> ans;
+        for(int i=0;i<maxVal;i++){
+            ans.push_back(values[i].second);
+        }
+        return ans;
+        
+    }
+    
+    void addCurrentWord(){
+        addKey(new_word,1);
+    }
+    
+    void dfs(TrieNode* curr,vector<pair<int,string>>& values){
+        if(curr->is_word){
+            values.push_back({word_mapper[curr->word],curr->word});
+        }
+        if(curr->child.size()==0){
+            return;
+        }
         
         for(auto it=curr->child.begin();it!=curr->child.end();it++){
-            prefix.push_back(it->first);
-            dfs(it->second,prefix,result);
-            prefix.pop_back();
+            dfs(it->second,values);
         }
+        
     }
     
 };
 
-
 class AutocompleteSystem {
 public:
-    Trie* trie;
-    string prefix ="";
+    Trie t;
     AutocompleteSystem(vector<string>& sentences, vector<int>& times) {
-        trie = new Trie();
         for(int i=0;i<sentences.size();i++){
-            trie->insert(sentences[i],times[i]);
+            t.addKey(sentences[i],times[i]);
         }
+        
     }
     
     vector<string> input(char c) {
-        
+        // return {};
         if(c=='#'){
-            trie->insert(prefix,1);
-             prefix="";
+            t.addCurrentWord();
+            t.newSearch();
             return {};
+        }else {
+            return t.search(c);
         }
-        prefix+=c;
-        
-        
-        // cout<<prefix<<endl;
-        return trie->findString(prefix);
     }
 };
 
