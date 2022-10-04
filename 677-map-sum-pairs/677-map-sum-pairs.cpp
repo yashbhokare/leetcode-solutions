@@ -14,7 +14,7 @@ public:
     
     void insert(string key, int val) {
         int delta = val - mapper[key];
-         mapper[key] = val;
+        mapper[key] = val;
         Trie* current = root;
         
         for(auto c:key){
