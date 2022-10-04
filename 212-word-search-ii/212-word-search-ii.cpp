@@ -27,10 +27,10 @@ class Trie {
     
     void search(vector<vector<char>>& board,int r,int c){
         TrieNode* curr=root;
-        if(curr->child.find(board[r][c])==curr->child.end()){
-            return;
-        }
-        curr = curr->child[board[r][c]];
+        // if(curr->child.find(board[r][c])==curr->child.end()){
+        //     return;
+        // }
+        // curr = curr->child[board[r][c]];
         dfs(curr,board,r,c);
     }
     
@@ -38,11 +38,15 @@ class Trie {
         {0,1},{1,0},{-1,0},{0,-1}  
     };
     
-    void dfs(TrieNode* curr, vector<vector<char>>& board,int r,int c){
+    void dfs(TrieNode* parent, vector<vector<char>>& board,int r,int c){
         char ch = board[r][c];
+        if(parent->child.find(ch)==parent->child.end()){
+            return;
+        }
+        TrieNode* curr = parent->child[ch];
+        
         if(curr->is_word){
             ans.push_back(curr->word);
-            result.insert(curr->word);
             curr->is_word = false; // Important
         }
 
@@ -51,22 +55,19 @@ class Trie {
             int newR = r + dir[i][0];
             int newC = c + dir[i][1];
             if(newR>=0 && newR<board.size() && newC>=0 && newC<board[0].size() && curr->child.find(board[newR][newC])!=curr->child.end()){
-                dfs(curr->child[board[newR][newC]],board,newR,newC);
+                dfs(curr,board,newR,newC);
             }
         }
         board[r][c] = ch;
         
-        // if(curr->child[ch].size()==0){
-        //     // curr->child.erase(ch);
+        // if(curr->child.size()==0){
+        //     cout<<"Yes"<<endl;
+        //     curr->child.erase(ch);
         // }
         
     }
     
     vector<string> getResult(){
-        // for(auto it=result.begin();it!=result.end();it++){
-        //     ans.push_back(*it);
-        // }
-        // cout<<result.size();
         return ans;
     }
     
