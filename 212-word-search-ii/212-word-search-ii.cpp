@@ -7,6 +7,7 @@ struct TrieNode{
 class Trie {
     TrieNode* root;
     unordered_set<string> result;
+    vector<string> ans;
     public:
     Trie(){
         root = new TrieNode();
@@ -40,8 +41,9 @@ class Trie {
     void dfs(TrieNode* curr, vector<vector<char>>& board,int r,int c){
         char ch = board[r][c];
         if(curr->is_word){
+            ans.push_back(curr->word);
             result.insert(curr->word);
-            curr->is_word = false;
+            curr->is_word = false; // Important
         }
 
         board[r][c] = '0';
@@ -61,11 +63,10 @@ class Trie {
     }
     
     vector<string> getResult(){
-        vector<string> ans;
-        for(auto it=result.begin();it!=result.end();it++){
-            ans.push_back(*it);
-        }
-        cout<<result.size();
+        // for(auto it=result.begin();it!=result.end();it++){
+        //     ans.push_back(*it);
+        // }
+        // cout<<result.size();
         return ans;
     }
     
