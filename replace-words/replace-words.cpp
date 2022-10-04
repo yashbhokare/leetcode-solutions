@@ -1,45 +1,52 @@
-struct Trie{
-    bool isWord;
-    unordered_map<char,Trie*> child;
+struct TrieNode{
+    bool is_word = false;
+    string word = "";
+    unordered_map<char,TrieNode*> child;
 };
-
 class Solution {
-private:
-    Trie* root = new Trie();
 public:
+    TrieNode* root = new TrieNode();
     
-    void insertWords(string word){
-        Trie* current = root;
-        for(auto c:word){
-            if(current->child.count(c)<=0) current->child[c]=new Trie();
-            current = current->child[c];
+    void insert(string word){
+        TrieNode* curr = root;
+        for(auto ch:word){
+            if(curr->child.find(ch)==curr->child.end()){
+                curr->child[ch] = new TrieNode();
+            }
+            curr= curr->child[ch];
         }
-        current->isWord=true;
+        curr->is_word=true;
+        curr->word = word;
     }
     
-    string prefix(string word){
-        string result = "";
-        Trie* current = root;
-         for(auto c:word){
-             if(current->child.count(c)<=0) return word;
-             result = result + c;
-             if(current->child[c]->isWord) return result;
-             current = current->child[c];
-         }
-        return result;
+    string search(string word){
+        TrieNode* curr = root;
+        for(auto ch:word){
+            if(curr->child.find(ch)==curr->child.end()){
+              return word;
+            }
+            if(curr->child[ch]->is_word){
+                return curr->child[ch]->word;
+            }
+            curr= curr->child[ch];
+        }
+        if(curr->is_word){
+            return curr->word;
+        }
+        return word;
     }
     
     string replaceWords(vector<string>& dictionary, string sentence) {
-        for(auto word:dictionary) {
-            insertWords(word);
+        for(auto word:dictionary){
+            insert(word);
         }
-        
+        string result="";
         stringstream ss(sentence);
         string word;
-        string result = "";
         while(ss>>word){
-            result = result + " "+prefix(word);
+            result = result + " " + search(word);
         }
+        // cout<<result;
         return result.substr(1);
     }
 };
