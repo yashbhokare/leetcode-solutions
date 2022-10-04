@@ -60,10 +60,11 @@ class Trie {
         }
         board[r][c] = ch;
         
-        // if(curr->child.size()==0){
-        //     cout<<"Yes"<<endl;
-        //     curr->child.erase(ch);
-        // }
+        if(curr->child.size()==0){
+            // cout<<"Yes"<<endl;
+            parent->child.erase(ch);
+            // curr->child.erase(ch);
+        }
         
     }
     
