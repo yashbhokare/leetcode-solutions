@@ -60,10 +60,10 @@ class Trie {
         }
         board[r][c] = ch;
         
+        // Best Case for Optimization
+        // Once a match is found till leaf node then delete the node elements
         if(curr->child.size()==0){
-            // cout<<"Yes"<<endl;
             parent->child.erase(ch);
-            // curr->child.erase(ch);
         }
         
     }
