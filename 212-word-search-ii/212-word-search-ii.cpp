@@ -41,6 +41,7 @@ class Trie {
         char ch = board[r][c];
         if(curr->is_word){
             result.insert(curr->word);
+            curr->is_word = false;
         }
 
         board[r][c] = '0';
@@ -52,6 +53,10 @@ class Trie {
             }
         }
         board[r][c] = ch;
+        
+        // if(curr->child[ch].size()==0){
+        //     // curr->child.erase(ch);
+        // }
         
     }
     
