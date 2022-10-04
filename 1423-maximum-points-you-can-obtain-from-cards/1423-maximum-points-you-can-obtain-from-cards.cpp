@@ -18,6 +18,7 @@ public:
             total_sum+=cardPoints[right];
             left++;
         }
+        cout<<min_window_sum;
         return total_sum-min_window_sum;
         
     }
