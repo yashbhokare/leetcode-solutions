@@ -1,59 +1,49 @@
-
-class TrieNode {
-    public:
-    bool is_word;
-    vector<TrieNode*> children;
-    
-    TrieNode(){
-        is_word = false;
-        children.resize(26,NULL);
-    }
+struct TrieNode{
+    bool is_end = false;
+    unordered_map<char,TrieNode*> children;
 };
 
 class Trie {
-private:
-    TrieNode* root;
 public:
-    /** Initialize your data structure here. */
+    TrieNode* root;
     Trie() {
         root = new TrieNode();
     }
     
-    /** Inserts a word into the trie. */
     void insert(string word) {
-        TrieNode* current =root;
-        for(auto& c:word){
-            if(current->children[c-'a']==NULL){
-                current->children[c-'a'] = new TrieNode();
+        TrieNode* current = root;
+        for(auto ch:word){
+            if(current->children.find(ch)==current->children.end()){
+                current->children[ch] = new TrieNode();
             }
-            current = current->children[c-'a'];
+            current =  current->children[ch];
         }
-        current->is_word=true;
+        current->is_end = true;
     }
     
-    /** Returns if the word is in the trie. */
     bool search(string word) {
-        TrieNode* current =root;
-        for(auto& c:word){
-          if(current->children[c-'a']==NULL) return false;
-            current = current->children[c-'a'];
-        }
-        return current->is_word;
+         TrieNode* current = root;
+         for(auto ch:word){
+             if(current->children.find(ch)==current->children.end()){
+                 return false;
+             }
+             current =  current->children[ch];
+         }
+        if(current->is_end) return true;
+        return false;
     }
     
-    /** Returns if there is any word in the trie that starts with the given prefix. */
     bool startsWith(string prefix) {
-        TrieNode* current =root;
-        for(auto& c:prefix){
-          if(current->children[c-'a']==NULL) return false;
-            current = current->children[c-'a'];
-        }
+        TrieNode* current = root;
+         for(auto ch:prefix){
+             if(current->children.find(ch)==current->children.end()){
+                 return false;
+             }
+             current =  current->children[ch];
+         }
         return true;
     }
-
 };
-
-
 
 /**
  * Your Trie object will be instantiated and called as such:
