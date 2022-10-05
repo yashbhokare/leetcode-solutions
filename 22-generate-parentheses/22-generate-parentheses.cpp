@@ -1,19 +1,18 @@
 class Solution {
 public:
-    vector<string> ans;
+    vector<string> result;
     vector<string> generateParenthesis(int n) {
+        int open = 0;
         rec("",0,0,n);
-        return ans;
+        return result;
     }
     
     void rec(string s,int open,int close,int n){
-        if(s.length()==2*n){
-            ans.push_back(s);
+        if(s.size()==2*n){
+            result.push_back(s);
             return;
         }
         if(open<n) rec(s+'(',open+1,close,n);
         if(close<open) rec(s+')',open,close+1,n);
     }
 };
-
-//https://leetcode.com/problems/generate-parentheses/discuss/1276579/Short-and-Easy-Solution-w-Explanation-or-Beats-100
