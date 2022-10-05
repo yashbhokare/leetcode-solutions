@@ -1,28 +1,34 @@
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
-        while(version1.size()>0 || version2.size()>0){
-            int v1Index = version1.find_first_of('.');
-            string v1S = v1Index==-1 ? version1 : version1.substr(0,v1Index);
-            stringstream ss1(v1S);
-            int v1 = 0;
-            ss1>>v1;
-            // cout<<v1<<" ";
-            int v2Index = version2.find_first_of('.');
-            string v2S = v2Index==-1 ? version2 : version2.substr(0,v2Index);
-            stringstream ss2(v2S);
-            int v2 = 0;
-            ss2>>v2;
-            // cout<<v2<<endl;
-            if(v1<v2) return -1;
-            else if(v1>v2) return 1;
-            
-            version1 = v1Index==-1 ? "0":version1.substr(v1Index+1);
-            version2 = v2Index==-1 ? "0":version2.substr(v2Index+1);
-            
-            if(version1=="0" && version2=="0") break;
-            // cout<<version1<<" "<<version2<<endl;
+    int i = 0; 
+    int j = 0;
+    int n1 = version1.size(); 
+    int n2 = version2.size();
+    
+    int num1 = 0;
+    int num2 = 0;
+    while(i<n1 || j<n2)
+    {
+        while(i<n1 && version1[i]!='.'){
+            num1 = num1*10+(version1[i]-'0');
+            i++;
         }
-        return 0;
+        
+        while(j<n2 && version2[j]!='.'){
+            num2 = num2*10+(version2[j]-'0');;
+            j++;
+        }
+        
+        if(num1>num2) return 1;
+        else if(num1 < num2) return -1;
+        
+        num1 = 0;
+        num2 = 0;
+        i++;
+        j++;
+    }
+    
+    return 0;
     }
 };
