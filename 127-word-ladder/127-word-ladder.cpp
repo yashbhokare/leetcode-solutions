@@ -19,7 +19,7 @@ public:
         unordered_set<string> visited;
         q.push(beginWord);
         visited.insert(beginWord);
-         // cout<<beginWord<<endl;
+         cout<<beginWord<<endl;
         int result = 1;
         while(!q.empty()){
             int size = q.size();
@@ -34,7 +34,7 @@ public:
                     word[i]='*';
                     for(auto list_word:mapper[word]){
                         if(visited.find(list_word)==visited.end()){
-                            // cout<<list_word<<" ";
+                            cout<<list_word<<" ";
                             q.push(list_word);
                             visited.insert(list_word);
                             if(list_word==endWord){
@@ -45,7 +45,7 @@ public:
                     word[i] = temp;
                 }
             }
-            // cout<<endl;
+            cout<<endl;
             result++;
         }
         return 0;
