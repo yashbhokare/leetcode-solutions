@@ -19,18 +19,13 @@ public:
         int variance = 0;
         int max_variance = 0;
         for(auto ch:s){
-            if(ch==b && variance==-1){
-                continue;
-            }
             if(ch==a){
                 variance+=1;
             }else if(ch==b){
                 has_b = true;
-                
                 if(variance>=0 && first_b){
                     first_b = false;
-                }
-                else if((variance-1)<0){
+                }else if((variance-1)<0){
                     first_b = true;
                     variance = -1;
                 }else {
