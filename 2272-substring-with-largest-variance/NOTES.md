@@ -25,4 +25,5 @@ maxVal = max(maxVal,charsMax[i]);
 ​
 }
 ```
+https://leetcode.com/problems/substring-with-largest-variance/discuss/2039178/Weird-Kadane/1589164
 ​
