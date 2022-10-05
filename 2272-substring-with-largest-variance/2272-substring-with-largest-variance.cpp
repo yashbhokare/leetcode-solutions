@@ -27,15 +27,18 @@ public:
             }else if(ch==b){
                 has_b = true;
                 
-                if(first_b && variance>=0){
+                if(variance>=0 && first_b){
                     first_b = false;
-                }else if((variance-1)<0){
+                }
+                else if((variance-1)<0){
                     first_b = true;
-                    variance=-1;
+                    variance = -1;
                 }else {
                     variance-=1;
                 }
+                
             }
+            // variance = max(0, variance)
             if(has_b){
                 max_variance = max(variance,max_variance);
             }
