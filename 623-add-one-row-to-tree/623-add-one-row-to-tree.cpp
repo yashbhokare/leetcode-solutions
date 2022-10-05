@@ -34,10 +34,7 @@ public:
                  if(node->left) q.push(node->left);
                  if(node->right) q.push(node->right);
              }
-             
              currDepth++;
-             // cout<<currDepth<<endl;
-             if((currDepth)==(depth-1)) break;
          }
          TreeNode* left;
          TreeNode* right;
