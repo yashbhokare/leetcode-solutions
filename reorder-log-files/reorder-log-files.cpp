@@ -3,13 +3,14 @@ public:
     static bool comparator(string& s1,string& s2){
         int s1_index = s1.find_first_of(' ');
         int s2_index = s2.find_first_of(' ');
-        string id1 = s1.substr(0,s1_index);
-        string id2 = s2.substr(0,s2_index);
+        // string id1 = s1.substr(0,s1_index);
+        // string id2 = s2.substr(0,s2_index);
         
         string content1 = s1.substr(s1_index+1);
         string content2 = s2.substr(s2_index+1);
         if(content1!=content2) return content1 < content2;
-        return id1 < id2;
+        // return id1 < id2;
+        return s1 < s2;
     }
     
     vector<string> reorderLogFiles(vector<string>& logs) {
