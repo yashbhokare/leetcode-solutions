@@ -14,27 +14,27 @@ public:
         auto it = mapper[key].upper_bound(timestamp);
         return it == mapper[key].begin() ? "" : prev(it)->second;
         // display(key,timestamp);
-        if(mapper.find(key)==mapper.end()) return "";
-        auto setMap = mapper[key];
-        if(setMap.find(timestamp)==setMap.end()) return minElement(key,timestamp);
-        else return setMap[timestamp];
+        // if(mapper.find(key)==mapper.end()) return "";
+        // auto setMap = mapper[key];
+        // if(setMap.find(timestamp)==setMap.end()) return minElement(key,timestamp);
+        // else return setMap[timestamp];
     }
     
-    void display(string key, int timestamp){
-        if(mapper.find(key)==mapper.end()) cout<<"Not Found"<<endl;
-        auto setMap = mapper[key];
-        for(auto it=setMap.begin();it!=setMap.end();it++){
-            cout<<"Key:"<<key<<" Timestamp:"<<it->first<<" Value:"<<it->second<<endl;
-        }
-    }
+//     void display(string key, int timestamp){
+//         if(mapper.find(key)==mapper.end()) cout<<"Not Found"<<endl;
+//         auto setMap = mapper[key];
+//         for(auto it=setMap.begin();it!=setMap.end();it++){
+//             cout<<"Key:"<<key<<" Timestamp:"<<it->first<<" Value:"<<it->second<<endl;
+//         }
+//     }
     
-    string minElement(string key, int timestamp){
-        auto setMap = mapper[key];
-        for(auto it=setMap.rbegin();it!=setMap.rend();it++){
-            if(it->first<timestamp) return it->second;
-        }
-        return "";
-    }
+//     string minElement(string key, int timestamp){
+//         auto setMap = mapper[key];
+//         for(auto it=setMap.rbegin();it!=setMap.rend();it++){
+//             if(it->first<timestamp) return it->second;
+//         }
+//         return "";
+//     }
 };
 
 /**
