@@ -4,9 +4,44 @@ public:
     unordered_set<int> visited;
     unordered_map<int,int> cache;
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        return canFinishUsingRecursion(numCourses,prerequisites);
+        return canFinishUsingTopologicalSort(numCourses,prerequisites);
+        // return canFinishUsingRecursion(numCourses,prerequisites);
     }
 
+    bool canFinishUsingTopologicalSort(int numCourses, vector<vector<int>>& prerequisites){
+        vector<int> inDegree(numCourses,0);
+        for(auto pre:prerequisites){
+            mapper[pre[1]].push_back(pre[0]);
+            inDegree[pre[0]]++;
+        }
+        
+        queue<int> q;
+        for(int i=0;i<numCourses;i++){
+            if(inDegree[i]==0){
+                q.push(i);
+            }
+        }
+        
+        vector<int> result;
+        while(!q.empty()){
+            int course = q.front();
+            result.push_back(course);
+            q.pop();
+            visited.insert(course);
+            // if(visited.find(course)==visited.end()){
+                for(auto child:mapper[course]){
+                    inDegree[child]--;
+                    if(inDegree[child]==0){
+                        q.push(child);
+                    }
+                }
+            // }
+            
+        }
+        if(result.size()==numCourses) return true;
+        return false;
+    }
+    
      bool canFinishUsingRecursion(int numCourses, vector<vector<int>>& prerequisites) {
             for(auto pre:prerequisites){
                 mapper[pre[0]].push_back(pre[1]);
