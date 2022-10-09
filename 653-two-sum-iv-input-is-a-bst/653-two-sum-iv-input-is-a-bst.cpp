@@ -17,7 +17,6 @@ public:
         int target  = k-root->val;
         if(mapper.find(target)!=mapper.end()) return true;
         mapper.insert(root->val);
-        // cout<<root->val<<endl;
         return findTarget(root->left,k) || findTarget(root->right,k);
     }
     
