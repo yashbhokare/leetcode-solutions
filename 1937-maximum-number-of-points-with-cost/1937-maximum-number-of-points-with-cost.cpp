@@ -22,6 +22,7 @@ public:
 //         return result;
 //     }
     
+//https://leetcode.com/problems/maximum-number-of-points-with-cost/discuss/1344908/C%2B%2BJavaPython-3-DP-Explanation-with-pictures-O(MN)-Time-O(N)-Space
     long long maxPoints(vector<vector<int>>& P) {
         long long m = P.size(), n = P[0].size();
         vector<long long> pre(n);
