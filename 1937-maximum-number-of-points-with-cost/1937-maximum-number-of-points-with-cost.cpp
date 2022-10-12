@@ -38,9 +38,9 @@ public:
             }
             for (int j = 0; j < n; ++j){
                 cur[j] = P[i][j] + max(lft[j], rgt[j]);
-                cout<<cur[j]<<" ";
+                // cout<<cur[j]<<" ";
             }
-            cout<<endl;
+            // cout<<endl;
             pre = cur;
         }
         long long ans = 0;
