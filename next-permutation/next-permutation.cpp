@@ -9,14 +9,12 @@ public:
                 break;
             }
         }
-        // cout<<swapIndex;
         if(swapIndex>=0){
             int nextHighestVal=INT_MAX;
             int nexSwapIndex = swapIndex;
             for(int i=swapIndex+1;i<n;i++){
                 if(nums[i]>nums[swapIndex] && nums[i]<=nextHighestVal){
                     nextHighestVal = nums[i];
-                    // cout<<nextHighestVal;
                     nexSwapIndex = i;
                 }
             }
