@@ -9,9 +9,10 @@
 class Solution {
 public:
     void findSecretWord(vector<string>& wordlist, Master& master) {
-        for(int i=0;i<10;i++){
-            string guessWord = wordlist[rand()%wordlist.size()];
+        for(int i=0;i<30;i++){
+            string guessWord = wordlist[wordlist.size()/2];
             int guessCount = master.guess(guessWord);
+            if(guessCount==6) break;
             wordlist = compareTheCount(guessWord,guessCount,wordlist);
         }
     }
