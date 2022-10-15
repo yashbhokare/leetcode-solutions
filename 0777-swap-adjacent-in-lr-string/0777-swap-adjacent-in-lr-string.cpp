@@ -13,7 +13,6 @@ public:
         while(i<m || j<n){
             while(i<m && start[i]=='X') i++;
             while(j<n && end[j]=='X') j++;
-            // if(i==m && j==n) return true;
             if(start[i]!=end[j]) return false;
             if(start[i]=='L' && j>i) return false;
             if(start[i]=='R' && j<i) return false;
