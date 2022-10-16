@@ -27,10 +27,6 @@ class Trie {
     
     void search(vector<vector<char>>& board,int r,int c){
         TrieNode* curr=root;
-        // if(curr->child.find(board[r][c])==curr->child.end()){
-        //     return;
-        // }
-        // curr = curr->child[board[r][c]];
         dfs(curr,board,r,c);
     }
     
