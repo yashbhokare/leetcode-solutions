@@ -44,11 +44,11 @@ public:
         }
     }
         
-    vector<string> fetchPrefixWord(string s){
-        if(prefixSet.find(s) == prefixSet.end()){
-            return {};
-        }else {
-            return prefixSet[s];
-        }
-    }
+    // vector<string> fetchPrefixWord(string s){
+    //     if(prefixSet.find(s) == prefixSet.end()){
+    //         return {};
+    //     }else {
+    //         return prefixSet[s];
+    //     }
+    // }
 };
