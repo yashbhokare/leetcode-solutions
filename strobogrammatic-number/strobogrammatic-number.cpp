@@ -11,7 +11,7 @@ public:
         
         int n = num.size();
         for(int i=0;i<n+1/2;i++){
-            if(mapper[num[i]]==num[n-1-i] || num[i]==mapper[num[n-1-i]]) continue;
+            if(mapper[num[i]]==num[n-1-i] ) continue;
             return false;
         }
         return true;
