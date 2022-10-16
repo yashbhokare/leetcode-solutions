@@ -23,22 +23,9 @@ public:
         
         int result = 0;
         for(int i=m;i<=n;i++){
-            // visited.insert(1);
             result+=backTrack(1,i)*4;
-            // visited.erase(1);
-            
-            // visited.insert(2);
             result+=backTrack(2,i)*4;
-            // visited.erase(2);
-            
-            // visited.insert(5);
             result+=backTrack(5,i);
-            
-            // for(int num=1;num<=9;num++){
-            //     visited.insert(num);
-            //     result+=backTrack(num,i-1);
-            //     visited.erase(num);
-            // }
         }
         return result;
         
@@ -61,3 +48,5 @@ public:
     
     
 };
+
+//https://www.youtube.com/watch?v=9ciVlXZRW8s
