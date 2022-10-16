@@ -47,6 +47,7 @@ class Trie {
             return a.first > b.first;
         }
     }
+    
     vector<string> search(char c){
         new_word.push_back(c);
         
