@@ -25,8 +25,6 @@ public:
             if(dCount > sCount) return false;
             if(sCount<3) return false;
         }
-        // cout<<dstn<<" ";
-        // cout<<i<<" "<<j<<endl;
         return (i==n && j==m);
     }
 };
