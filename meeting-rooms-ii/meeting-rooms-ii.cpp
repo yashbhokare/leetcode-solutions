@@ -7,7 +7,7 @@ public:
             if(!min_heap.empty() && min_heap.top()<=interval[0]){
                  min_heap.pop();
             }
-                min_heap.push(interval[1]);
+            min_heap.push(interval[1]);
     
         }
         return min_heap.size();
