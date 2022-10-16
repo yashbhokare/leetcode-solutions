@@ -3,7 +3,7 @@
 <p>You may assume the given input string is always valid. For example, <code>"01:34"</code>, <code>"12:09"</code> are all valid. <code>"1:34"</code>, <code>"12:9"</code> are all invalid.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> time = "19:34"
 <strong>Output:</strong> "19:39"
@@ -11,7 +11,7 @@
 It is not <strong>19:33</strong>, because this occurs 23 hours and 59 minutes later.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> time = "23:59"
 <strong>Output:</strong> "22:22"
