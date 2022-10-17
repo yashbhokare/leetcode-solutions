@@ -8,7 +8,7 @@ public:
         while(right<n){
             char currC = s[right];
             umap[currC]++;
-            while(umap.size()>2 && left<n){
+            while(umap.size()>2){
                 char tempC = s[left];
                 umap[tempC]--;
                 if(umap[tempC]==0) umap.erase(tempC);
