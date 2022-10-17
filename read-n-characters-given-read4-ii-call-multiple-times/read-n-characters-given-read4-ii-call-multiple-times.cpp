@@ -10,35 +10,21 @@ public:
      * @param n   Number of characters to read
      * @return    The number of actual characters read
      */
+    int index4= 0;
+    char buff4[4];
     int n4 = 0;
-    int index4 = 0;
-    char buf4[4];
     int read(char *buf, int n) {
-        int i=0;
+        int i = 0;
         while(i<n){
             if(index4<n4){
-                buf[i++]=buf4[index4++];
+                buf[i++]=buff4[index4++];
             }else {
-                index4 = 0;
-                n4=read4(buf4);
+                n4 = read4(buff4);
+                index4=0;
             }
             if(n4==0) break;
-            
         }
         return i;
-        
-
     }
+    
 };
-
-// class Solution {
-// public:
-//     int read(char *buf, int n) {
-//         int i = 0;
-//         while (i < n && (i4 < n4 || (i4 = 0) < (n4 = read4(buf4))))
-//             buf[i++] = buf4[i4++];
-//         return i;
-//     }
-//     char buf4[4];
-//     int i4 = 0, n4 = 0;
-// };
