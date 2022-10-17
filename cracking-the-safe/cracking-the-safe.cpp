@@ -5,7 +5,7 @@
 class Solution {
 public:
     string crackSafe(int n, int k) {
-        return dfs_crackSafe(n,k);
+        return greedy_crackSafe(n,k);
         
     }
     // Using DFS
@@ -47,13 +47,21 @@ public:
         
         for(int i = 0;i<pow(k,n);i++){
             string prev = ans.substr(ans.size()-n+1,n-1);
+            bool visit = true;
             for(int j = k-1;j>=0;j--){
                 string now = prev + to_string(j);
                 if(!visited.count(now)){
+                    visit = false;
+                    // cout<<to_string(j)<<endl;
                     visited.insert(now);
                     ans += to_string(j);
                     break;
                 }
+            }
+            if(visit){
+                break;
+                // cout<<prev<<endl;
+                visit = true;
             }
         }
         return ans;
