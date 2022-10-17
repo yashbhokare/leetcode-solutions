@@ -1,9 +1,9 @@
 class DetectSquares {
 public:
 
-    int cntPoints[1001][1001]  = {};
+    // int cntPoints[1001][1001]  = {};
     vector<pair<int,int>> points;
-    
+    unordered_map<int,unordered_map<int,int>> cntPoints;
     DetectSquares() {
         
     }
