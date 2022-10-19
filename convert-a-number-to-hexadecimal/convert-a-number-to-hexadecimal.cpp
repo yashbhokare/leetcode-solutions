@@ -6,9 +6,7 @@ public:
         string result;
         int count = 0;
         while (num && count++ < 8) {
-            // cout<<(num & 0xf)<<endl;
-            result = HEX[(num & 15)] + result;
-            // cout<<result<<endl;
+            result = HEX[(num & 0xf)] + result;
             num >>= 4;
         }
         return result;
