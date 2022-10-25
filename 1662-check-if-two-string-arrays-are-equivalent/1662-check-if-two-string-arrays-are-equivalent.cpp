@@ -22,7 +22,7 @@ public:
             if(word1[index1][i++]!=word2[index2][j++]) return false;
         }
         
-        return false;
+        return true;
         
     }
 };
