@@ -10,12 +10,10 @@ public:
             if(index1<len1 && word1[index1].size()==i){
                 i=0;
                 index1++;
-                // continue;
             }
             if(index2<len2 && word2[index2].size()==j){
                 j=0;
                 index2++;
-                // continue;
             }
             if(index1==len1 && index2==len2) return true;
             if(index1==len1 || index2==len2) return false;
