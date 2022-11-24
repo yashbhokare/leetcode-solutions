@@ -22,12 +22,10 @@ public:
         int m = board.size();
         int n = board[0].size();
         char tempCh = board[r][c];
-        // cout<<tempCh<<" ";
         board[r][c] = '.';
         for(int i=0;i<4;i++){
             int newR = dir[i][0]+r;
             int newC = dir[i][1]+c;
-            // cout<<newR<<" "<<newC<<endl;
             if(newR>=0 && newR<m && newC>=0 && newC<n && board[newR][newC]==word[index]){
                 index++;
                 if(dfs(board,word,index,newR,newC)) return true;
