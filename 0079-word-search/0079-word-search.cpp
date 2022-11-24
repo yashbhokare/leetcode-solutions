@@ -7,7 +7,6 @@ public:
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(board[i][j]==word[0]){
-                    // vector<vector<char>> temp = board;
                     if(dfs(board,word,1,i,j)) return true;
                 }
             }
