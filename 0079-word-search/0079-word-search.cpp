@@ -26,9 +26,7 @@ public:
             int newR = dir[i][0]+r;
             int newC = dir[i][1]+c;
             if(newR>=0 && newR<m && newC>=0 && newC<n && board[newR][newC]==word[index]){
-                index++;
-                if(dfs(board,word,index,newR,newC)) return true;
-                index--;
+                if(dfs(board,word,index+1,newR,newC)) return true;
             }
         }
         board[r][c] = tempCh;
