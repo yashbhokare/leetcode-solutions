@@ -12,7 +12,7 @@ public:
                 count++;
             }else{
                 consecutive=false;
-                count=0;
+                // count=0;
             }
             result=max(result,count);
         }
