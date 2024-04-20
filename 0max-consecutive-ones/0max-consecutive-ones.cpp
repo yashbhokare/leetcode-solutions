@@ -5,16 +5,12 @@ public:
         int count=0;
         int result=0;
         for(int i=0;i<nums.size();i++){
-            if(nums[i] && !consecutive){
-                consecutive=true;
-                count=1;
-            }else if(consecutive && nums[i]){
-                count++;
+            if(nums[i]==0){
+                count=0;
             }else{
-                consecutive=false;
-                // count=0;
+                count++;
+                result=max(result,count);
             }
-            result=max(result,count);
         }
         return result;
     }
