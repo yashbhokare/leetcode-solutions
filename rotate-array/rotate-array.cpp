@@ -2,6 +2,7 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         cyclicRotation(nums,k);
+        // reverseApproach(nums,k);
     }
     
     void reverseApproach(vector<int>& nums, int k){
@@ -18,17 +19,16 @@ public:
         int start=0;
         while(count<size){
             int pos=start;
-            int val=nums[pos];
+            int prevValue =nums[pos];
             do{
                 int move=(pos+k)%nums.size();
-                int temp=nums[move];
-                nums[move]=val;
+                int currValue=nums[move];
+                nums[move]=prevValue ;
                 pos=move;
-                val=temp;
+                prevValue =currValue;
                 count++;
             }while(pos!=start);
             start++;
-            // break;
         }
     }
 };
