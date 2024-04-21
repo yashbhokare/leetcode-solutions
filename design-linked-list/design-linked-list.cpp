@@ -20,18 +20,11 @@ public:
 // };
 class MyLinkedList {
 public:
-Node* head=new Node(0);
-int n=0;
-    MyLinkedList() {}
-    
-    void display(){
-        // Node* temp= head;
-        // // cout<<"N:"<<n<<endl;
-        // while(temp!=NULL){
-        //     cout<<temp->val<<" ";
-        //     temp=temp->next;
-        // }
-        // cout<<endl;
+Node* head;
+int n;
+    MyLinkedList() {
+        head=new Node(0);
+        n=0;
     }
     
     int get(int index) {
@@ -40,7 +33,6 @@ int n=0;
         for(int i=0;i<index;i++){
             temp=temp->next;
         }
-        display();
         return temp->val;
     }
     
@@ -50,7 +42,6 @@ int n=0;
         newNode->next=temp->next;
         temp->next=newNode;
         n++;
-        display();
     }
     
     void addAtTail(int val) {
@@ -76,7 +67,6 @@ int n=0;
         newNode->next=curr->next;
         curr->next=newNode;
         n++;
-        display();
     }
     
     void deleteAtIndex(int index) {
@@ -90,7 +80,6 @@ int n=0;
         Node* curr=temp;
         curr->next=curr->next!=NULL ? curr->next->next: NULL;
         n--;
-        display();
     }
 };
 
