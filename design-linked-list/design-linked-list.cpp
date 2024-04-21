@@ -1,23 +1,12 @@
 class Node{
 public:
     int val;
-    Node* next=NULL;
+    Node* next;
     Node(int x){
-        this->val=x;
+        val=x;
         next=NULL;
     }
 };
-// class Node{
-// public:
-// int val;
-// Node* next;
-// Node* prev;
-// Node(int x){
-//     this->val = x;
-//     next = NULL;
-//     prev= NULL;
-// }
-// };
 class MyLinkedList {
 public:
 Node* head;
