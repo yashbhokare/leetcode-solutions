@@ -1,31 +1,31 @@
 class Solution {
 public:
-     void reverseword(string &s, int i, int j){
-        while(i<j){
-          char t=s[i];
-          s[i++]=s[j];
-          s[j--]=t;
-        } 
-    }
     string reverseWords(string s) {
-        int i=0, j=0;
-        int l=0;
-        int len=s.length();
-        int wordcount=0;
-        
-        while(true){
-            while(i<len && s[i] == ' ') i++;  // skip spaces in front of the word
-            if(i==len) break;
-            if(wordcount) s[j++]=' ';
-            l=j;
-            while(i<len && s[i] != ' ') {s[j]=s[i]; j++; i++;} 
-            reverseword(s,l,j-1);                // reverse word in place
-            wordcount++;
-            
+        stack<string> stack;
+        int index=0;
+        string result="";
+        while(index<s.length()){
+            // cout<<index<<" ";
+            if(s[index]==' '){
+                index++;
+                continue;
+            }
+            string word="";
+            while(index<s.length() && s[index]!=' '){
+                // cout<<index<<" ";
+                word+=s[index];
+                index++;
+            }
+            stack.push(word);
         }
-        
-        s.resize(j);                           // resize result string
-        reverseword(s,0,j-1);                  // reverse whole string
-        return s;
+        while(!stack.empty()){
+            // cout<<stack.top()<<endl;
+            result+=stack.top();
+            stack.pop();
+            if(!stack.empty()){
+                result+=' ';
+            }   
+        }
+        return result;
     }
 };
