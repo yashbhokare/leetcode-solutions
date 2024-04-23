@@ -30,7 +30,7 @@ public:
             evenVal->next=tempEvenVal;
             evenVal=evenVal->next;
         }
-        // Add Null top last pointer
+        // Add Null to last pointer
         evenVal->next=NULL;
         oddVal->next=evenHead->next;
         return head;
