@@ -8,40 +8,21 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-// class Solution {
-// public:
-//     ListNode* reverseList(ListNode* head) {
-//         ListNode* curr=head;
-//         while(curr && curr->next){
-            
-//             ListNode* temp=curr->next;
-            
-//             // Delete the next node
-//             curr->next=curr->next->next;
-            
-//             //Add the deleted node on head
-            
-//             temp->next=head;
-//             head=temp;
-//         }
-//         return head;
-//     }
-// };
-
-// Assume that we have linked list 1 → 2 → 3 → Ø, we would like to change it to Ø ← 1 ← 2 ← 3.
-
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* curr=head;
-        ListNode* prev= NULL;
-        while(curr){
-            ListNode* nextElem =curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=nextElem;
+        if(head==NULL || head->next==NULL) return head;
+        ListNode* newHead=new ListNode(0);
+        newHead->next=head;
+        ListNode* p=head;
+        while(p->next!=NULL){
+            ListNode* removedNode=p->next;
+            p->next=p->next!=NULL ? p->next->next : NULL;
+            
+            // Adding at the head
+            removedNode->next=newHead->next;
+            newHead->next=removedNode;
         }
-       
-        return prev;
+        return newHead->next;
     }
 };
