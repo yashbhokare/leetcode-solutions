@@ -22,10 +22,8 @@ public:
         }
         
         // Reverse values from mid point
-        ListNode* p2=reverese(slow);
-        // cout<<p2->val;
-        while(p2->next!=NULL){
-            // cout<<p1->val<<":"<<p2->val<<endl;
+        ListNode* p2=reverese(slow->next);
+        while(p2!=NULL){
             if(p1->val!=p2->val){
                 return false;
             }
