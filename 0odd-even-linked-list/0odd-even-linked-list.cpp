@@ -19,24 +19,20 @@ public:
         ListNode* oddVal=oddHead;
         ListNode* tempEvenVal;
         
-
         while(oddVal->next!=NULL){
-            // cout<<oddVal->val<<" ";
+
             tempEvenVal=oddVal->next;
             //Remove even number
             oddVal->next=oddVal->next!=NULL ? oddVal->next->next : NULL;
             oddVal=oddVal->next!=NULL ? oddVal->next : oddVal;
-            // cout<<oddVal->val<<endl;
+
             //Add the even number
             evenVal->next=tempEvenVal;
             evenVal=evenVal->next;
         }
+        // Add Null top last pointer
         evenVal->next=NULL;
         oddVal->next=evenHead->next;
-        // while(oddHead!=NULL){
-        //     cout<<oddHead->val<<" ";
-        //     oddHead=oddHead->next;
-        // }
         return head;
         
     }
