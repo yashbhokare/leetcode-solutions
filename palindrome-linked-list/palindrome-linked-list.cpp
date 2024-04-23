@@ -11,45 +11,40 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(head == NULL) return NULL;
-        ListNode* thead = head;
-        ListNode* firstHalfEndVal = firstHalfEnd(thead);
-        ListNode* p2 = reverseLinkedList(firstHalfEndVal->next);
-        ListNode* p1 = head;
+      
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* p1=head;
         
-        while(p2!=NULL){
-            if(p1->val != p2->val){
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        
+        // Reverse values from mid point
+        ListNode* p2=reverese(slow);
+        // cout<<p2->val;
+        while(p2->next!=NULL){
+            // cout<<p1->val<<":"<<p2->val<<endl;
+            if(p1->val!=p2->val){
                 return false;
             }
-            p1 = p1->next;
-            p2= p2->next;
+            p1=p1->next;
+            p2=p2->next;
         }
-
         return true;
-    }
-    
-    ListNode* reverseLinkedList(ListNode* root){
-        ListNode* node = root;
         
-        while(node && node->next){
-            // Remove element
-            ListNode* temp = node->next;
-            node->next = node->next->next;
-            
-            //Insert at head
-            temp->next = root;
-            root = temp;
-        }
-        return root;
     }
     
-     ListNode* firstHalfEnd(ListNode* head){
-        ListNode* slow =head;
-        ListNode* fast =head;
-         while(fast->next && fast->next->next){
-             fast = fast->next->next;
-             slow=slow->next;
-         }
-         return slow;
-     }
+    ListNode* reverese(ListNode* head){
+        ListNode* prev=NULL;
+        ListNode* curr=head;
+        while(curr!=NULL){
+            ListNode* next_node=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next_node;
+        }
+        return prev;
+    }
 };
