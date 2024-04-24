@@ -17,33 +17,43 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        // Add a copy of new node after every other node
-        if(head==NULL) return NULL;
-        Node* curr = head;
-        while(curr){
-            Node* newNode = new Node(curr->val);
-            newNode->next = curr->next;
-            curr->next = newNode;
+        
+        if(head==NULL) return head;
+        Node* curr=head;
+        // Insert new nodes inbetween existing nodes
+        while(curr!=NULL){
+            Node* newVal=new Node(curr->val);
+            newVal->next=curr->next;
+            curr->next=newVal;
+            curr=curr->next->next;
+        }
+        curr=head;
+        // Find the random pointers for new nodes
+        while(curr!=NULL && curr->next!=NULL){
+            Node* newNode=curr->next;
+            newNode->random=curr->random!=NULL ? curr->random->next : NULL;
             curr=curr->next->next;
         }
         
-        // Mark the random pointers of new Nodes
-        curr = head;
-         while(curr){  
-            curr->next->random=curr->random == NULL ? NULL : curr->random->next;
-            curr=curr->next->next;
-         }
-        
-        // Delete the existing nodes
-        Node* oldCurr = head;
-        Node* newHead = head->next;
-        curr = newHead;
-        while(oldCurr && oldCurr->next){
-            Node* temp = oldCurr->next;
-            oldCurr->next = oldCurr->next->next;
-            temp->next = oldCurr->next ? oldCurr->next->next : NULL;
-            oldCurr = oldCurr->next;
+        // Detach the new nodes
+        curr=head;
+        Node* newHead=head->next;
+        while(curr!=NULL && curr->next!=NULL){
+            Node* newNode=curr->next;
+            
+            //Attach the old pointers
+            curr->next=newNode->next;
+            
+            //Attach the new pointers
+            newNode->next= newNode->next ? newNode->next->next : NULL;
+            
+            curr=curr->next;
         }
+        // curr=head;
+        // while(curr!=NULL){
+        //     cout<<curr->val<<" ";
+        //     curr=curr->next;
+        // }
         
         return newHead;
         
