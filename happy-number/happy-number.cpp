@@ -7,7 +7,7 @@ public:
     
     bool sumOfSquaresOfNumber(int val){
         if(val==1) return true;
-        if(val<4) return false;
+        // if(val<4) return false;
         int sum=0;
         while(val>0){
             int digit=val%10;
