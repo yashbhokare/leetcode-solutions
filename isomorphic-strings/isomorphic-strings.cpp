@@ -1,15 +1,22 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        if(s.size()!=t.size()) return false;
-        unordered_map<char,char> s_t_map;
-        unordered_map<char,char> t_s_map;
-        for(int i=0;i<s.size();i++){
-            if(s_t_map.find(s[i])!=s_t_map.end() && s_t_map[s[i]]!=t[i]) return false;
-            if(t_s_map.find(t[i])!=t_s_map.end() && t_s_map[t[i]]!=s[i]) return false;
-            s_t_map[s[i]] = t[i];
-            t_s_map[t[i]] = s[i];
+        if(s.length()!=t.length()) return false;
+        
+        unordered_map<char,char> mapperstot;
+        unordered_map<char,char> mapperttos;// mapper t -> s
+        
+        for(int i=0;i<s.length();i++){
+            if(mapperstot.count(s[i])>0 && mapperstot[s[i]]!=t[i]){
+                return false;
+            }else if(mapperttos.count(t[i])>0 && mapperttos[t[i]]!=s[i]) {
+                return false;
+            }else {
+                mapperstot[s[i]]=t[i];
+                mapperttos[t[i]] =s[i];
+            }
         }
+    
         return true;
     }
 };
