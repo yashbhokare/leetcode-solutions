@@ -19,10 +19,8 @@ public:
     }
     
     string dfs(TreeNode* root){
-        // cout<<root->val<<endl;
         if(root==NULL) return "";
         string val=to_string(root->val)+","+dfs(root->left)+","+dfs(root->right);
-        cout<<val<<endl;
         mapper[val]++;
         if(mapper[val]==2)
             result.push_back(root);
