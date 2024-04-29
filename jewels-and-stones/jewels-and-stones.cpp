@@ -1,12 +1,11 @@
 class Solution {
 public:
     int numJewelsInStones(string jewels, string stones) {
-        unordered_set<char> uSet(jewels.begin(),jewels.end());
-        int count = 0;
-        for(auto ch:stones){
-            if(uSet.find(ch)!=uSet.end()){
-                count++;
-            }
+        unordered_set<char> set;
+        int count=0;
+        for(char ch:jewels) set.insert(ch);
+        for(char s:stones){
+            if(set.count(s)>0) count++;
         }
         return count;
     }
