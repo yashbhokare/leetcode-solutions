@@ -45,7 +45,7 @@ public:
     }
     
     bool isEmpty() {
-        if(head==-1 && tail==-1) return true;
+        if(head==-1) return true;
         return false;
     }
     
