@@ -1,45 +1,56 @@
 class Solution {
+    vector<vector<int>> dir = {
+        {0,1},{1,0},{-1,0},{0,-1}
+    };
 public:
+    int rMax;
+    int cMax;
     int numIslands(vector<vector<char>>& grid) {
-        int m=grid.size();
-        int n=grid[0].size();
-        int count=0;
-        for(int r=0;r<m;r++){
-            for(int c=0;c<n;c++){
+        int count = 0;
+        rMax = grid.size();
+        cMax = grid[0].size();
+        for(int r=0;r<rMax;r++){
+            for(int c=0;c<cMax;c++){
                 if(grid[r][c]=='1'){
+                    // dfs(grid,r,c);
+                    bfs(grid,r,c);
                     count++;
-                    bfs(grid,r,c,m,n);
                 }
             }
         }
         return count;
     }
     
-    void bfs(vector<vector<char>>& grid, int r, int c, int m, int n){
-        queue<pair<int,int>> q;
+    
+    void dfs(vector<vector<char>>& grid,int r,int c){
         grid[r][c]='0';
+        
+        for(int i=0;i<4;i++){
+            int newR = r + dir[i][0];
+            int newC = c + dir[i][1];
+            if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && grid[newR][newC]=='1'){
+                dfs(grid,newR,newC);
+            }
+        }
+    }
+    
+    void bfs(vector<vector<char>>& grid,int r,int c){
+        queue<pair<int,int>> q;
+        grid[r][c] = '0';
         q.push({r,c});
         while(!q.empty()){
-            int row=q.front().first;
-            int col=q.front().second;
+            r = q.front().first;
+            c = q.front().second;
             q.pop();
-            if(row+1<m && grid[row+1][col]=='1'){
-                    grid[row+1][col]='0';
-                    q.push({row+1,col});
+            for(int i=0;i<4;i++){
+                int newR = r + dir[i][0];
+                int newC = c + dir[i][1];
+                if(newR>=0 && newR<rMax && newC>=0 && newC<cMax && grid[newR][newC]=='1'){
+                    grid[newR][newC] = '0';
+                    q.push({newR,newC});
+
+                }
             }
-            if(row-1>=0 && grid[row-1][col]=='1'){
-                    grid[row-1][col]='0';
-                    q.push({row-1,col});
-            }            
-            if(col+1<n && grid[row][col+1]=='1'){
-                    grid[row][col+1]='0';
-                    q.push({row,col+1});
-            }            
-            if(col-1>=0 && grid[row][col-1]=='1'){
-                    grid[row][col-1]='0';
-                    q.push({row,col-1});
-            }
-            
         }
     }
 };
