@@ -1,33 +1,45 @@
 class Solution {
 public:
-    
-    vector<vector<int>> dir={{1,0},{0,1},{-1,0},{0,-1}};
-    int maxX,maxY;
     int numIslands(vector<vector<char>>& grid) {
-        maxX = grid.size();
-        maxY = grid[0].size();
-        int result=0;
-        for(int i=0;i<maxX;i++){
-            for(int j=0;j<maxY;j++){
-                if(grid[i][j]=='1'){
-                    dfs(i,j,grid);
-                    result++;
+        int m=grid.size();
+        int n=grid[0].size();
+        int count=0;
+        for(int r=0;r<m;r++){
+            for(int c=0;c<n;c++){
+                if(grid[r][c]=='1'){
+                    count++;
+                    bfs(grid,r,c,m,n);
                 }
             }
         }
-        return result;
+        return count;
     }
     
-    
-    void dfs(int x,int y,vector<vector<char>>& grid){
-        grid[x][y]='0';
-        for(int i=0;i<dir.size();i++){
-            int newX = x+dir[i][0];
-            int newY = y + dir[i][1];
-            if(newX>=0 && newX<maxX && newY>=0 && newY<maxY && grid[newX][newY]=='1'){
-                dfs(newX,newY,grid);
+    void bfs(vector<vector<char>>& grid, int r, int c, int m, int n){
+        queue<pair<int,int>> q;
+        grid[r][c]='0';
+        q.push({r,c});
+        while(!q.empty()){
+            int row=q.front().first;
+            int col=q.front().second;
+            q.pop();
+            if(row+1<m && grid[row+1][col]=='1'){
+                    grid[row+1][col]='0';
+                    q.push({row+1,col});
             }
+            if(row-1>=0 && grid[row-1][col]=='1'){
+                    grid[row-1][col]='0';
+                    q.push({row-1,col});
+            }            
+            if(col+1<n && grid[row][col+1]=='1'){
+                    grid[row][col+1]='0';
+                    q.push({row,col+1});
+            }            
+            if(col-1>=0 && grid[row][col-1]=='1'){
+                    grid[row][col-1]='0';
+                    q.push({row,col-1});
+            }
+            
         }
-        
     }
 };
