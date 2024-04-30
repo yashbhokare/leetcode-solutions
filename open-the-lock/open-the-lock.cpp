@@ -22,22 +22,20 @@ public:
                 if(curr==target) return steps;
                 q.pop();
                 for(int j=0;j<4;j++){
-                    string newString=curr;
-                    newString[j]=newString[j]=='9'? '0' : newString[j]+1;
-                    if(deadendset.find(newString)==deadendset.end() && visited.find(newString)==deadendset.end()){
-                         // cout<<newString<<endl;
-                        q.push(newString);
-                        visited.insert(newString);
+                    string downTurn=curr;
+                    string upTurn=curr;
+                    downTurn[j]=downTurn[j]=='9'? '0' : downTurn[j]+1;
+                    upTurn[j]=upTurn[j]=='0'? '9' : upTurn[j]-1;
+                    
+                    if(deadendset.find(downTurn)==deadendset.end() && 
+                       visited.find(downTurn)==deadendset.end()){
+                        q.push(downTurn);
+                        visited.insert(downTurn);
                     }
-                }
-                for(int j=0;j<4;j++){
-                    string newString=curr;
-                    newString[j]=newString[j]=='0'? '9' : newString[j]-1;
-                   
-                    if(deadendset.find(newString)==deadendset.end() && visited.find(newString)==deadendset.end()){
-                        // cout<<newString<<endl;
-                        q.push(newString);
-                        visited.insert(newString);
+                    if(deadendset.find(upTurn)==deadendset.end() && 
+                       visited.find(upTurn)==deadendset.end()){
+                        q.push(upTurn);
+                        visited.insert(upTurn);
                     }
                 }
             }
