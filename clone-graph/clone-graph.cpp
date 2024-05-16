@@ -21,23 +21,22 @@ public:
 
 class Solution {
 public:
-    unordered_map<int,Node*> mapper;
-    Node* recCloneGraph(Node* node){
-        if(node==NULL) return node;
-        auto it= mapper.find(node->val);
-        if(it!=mapper.end()){
-            return it->second;
+    unordered_map<int,Node*> map;
+    
+    Node* recursion(Node* node ){
+        if(node==NULL) return NULL;
+        if(map.find(node->val)!=map.end()){
+            return map[node->val];
         }
         Node* newNode=new Node(node->val);
-        mapper[node->val]=newNode;
-        
-        for(auto& neighbor:node->neighbors){
-            newNode->neighbors.push_back(recCloneGraph(neighbor));
+        map.insert({node->val,newNode});
+        for(auto child:node->neighbors){
+            newNode->neighbors.push_back(recursion(child));
         }
         return newNode;
     }
     
     Node* cloneGraph(Node* node) {
-        return recCloneGraph(node);
+        return recursion(node);
     }
 };
