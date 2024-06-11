@@ -13,28 +13,15 @@ class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> result;
-        // preorderTraversalRec(root,result);
-        preorderTraversalIterative(root,result);
+        recursion(root,result);
         return result;
     }
     
-    void preorderTraversalRec(TreeNode* root,vector<int>& result) {
-        if(root==NULL) return ;
+    void recursion(TreeNode* root, vector<int>& result){
+        if(root==NULL) return;
         result.push_back(root->val);
-        preorderTraversalRec(root->left,result);
-        preorderTraversalRec(root->right,result);
+        recursion(root->left,result);
+        recursion(root->right,result);
     }
     
-    void preorderTraversalIterative(TreeNode* root,vector<int>& result) {
-        if(root==NULL) return ;
-        stack<TreeNode*> stk;
-        stk.push(root);
-        while(!stk.empty()){
-            TreeNode* node = stk.top();
-            stk.pop();
-            result.push_back(node->val);
-            if(node->right) stk.push(node->right);
-            if(node->left) stk.push(node->left);
-        }
-    }
 };
