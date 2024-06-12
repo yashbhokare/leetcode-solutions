@@ -30,7 +30,7 @@ public:
     
       vector<int> postorderTraversalWithStack(TreeNode* root,vector<int>& ans) {
         stack<TreeNode*> stk;
-        if(root)stk.push(root);
+        if(root) stk.push(root);
         while(stk.size())
         {
             auto p = stk.top();
