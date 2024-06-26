@@ -1,12 +1,13 @@
 class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
-        unordered_set<int> set;
-        for(auto& num:arr){
-            if(set.find(num*2)!=set.end() || ( num%2==0 && (set.find(num/2)!=set.end()))){
+        unordered_map<int,int> map;
+        for(int i=0;i<arr.size();i++) map.insert({arr[i],i});
+        
+        for(int i=0;i<arr.size();i++){
+            if(map.find(arr[i]*2)!=map.end() && map[arr[i]*2]!=i){
                 return true;
             }
-            set.insert(num);
         }
         return false;
     }
