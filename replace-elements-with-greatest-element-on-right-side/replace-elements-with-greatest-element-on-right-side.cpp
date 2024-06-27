@@ -1,25 +1,14 @@
 class Solution {
 public:
     vector<int> replaceElements(vector<int>& arr) {
-        // return replaceElementsWithNewArray(arr);
-        
-        // Replace inside same array
-        int prev=arr[arr.size()-1];
-        arr[arr.size()-1]=-1;
-        for(int i=arr.size()-2;i>=0;i--){
-            int temp = max(arr[i+1],prev);
-            prev= arr[i];
-            arr[i] = temp;
+        int last=arr.size()-1;
+        int maxElement = -1;
+        while(last>=0){
+            int num=arr[last];
+            arr[last] = maxElement;
+            maxElement = max(num,maxElement);
+            last--;
         }
         return arr;
-    }
-    
-    vector<int> replaceElementsWithNewArray(vector<int>& arr){
-        vector<int> result(arr.size());
-        result[arr.size()-1]=-1;
-        for(int i=arr.size()-2;i>=0;i--){
-            result[i]=max(arr[i+1],result[i+1]);
-        }
-        return result;
     }
 };
